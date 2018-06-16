@@ -20,10 +20,10 @@ A prioridade no jogo é definido em uma escala de níveis entre 1 e 9, vamos cla
 - Média: Mínimo (0) quando o nível é 1, máximo (1) quando o nível é 5, e então decai para o mínimo (0) novamente quando o nível de prioridade é 9;
 - Muitos: Mínimo (0) desde quando o nível é 1 até 5, então máximo (1) quando a quantidade é 9;
 
-<b> Observação: Todas variações são lineares.
+<b> Observação:<b> Todas variações são lineares.
   
-  ### Regras Fuzzy
+  ### Regras Difusas
   Vamos definir relações difusas entre as entradas e saídas:
   1 - Se o estoque é vazio OU os famintos são muitos, então a prioridade é alta;
   2 - Se o estoque é medio então a prioridade é média;
-  4 - Se o Estoque é cheio OU os famintos são poucos, então a prioridade é baixa;
+  4 - Se o Estoque é cheio OU os famintos são poucos, então a prioridade é baixa.
