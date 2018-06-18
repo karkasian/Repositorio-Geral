@@ -12,8 +12,8 @@ Sobre o projeto:		https://github.com/SapoGitHub/Repositorio-Geral/wiki/Projeto-F
 int main ()
 {
    char arq[10];					//Variável pra ler o arquivo
-   int x[100];						//As posições
-   int t[100];						//Respectivos tempos
+   int x[100000];						//As posições
+   int t[100000];						//Respectivos tempos
    int c,k;   						//Variáveis auxiliares
    
    //Vamos ler o arquivo com os dados para treinamento

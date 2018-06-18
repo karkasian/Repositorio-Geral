@@ -12,16 +12,21 @@ Sobre o projeto:		https://github.com/SapoGitHub/Repositorio-Geral/wiki/Projeto-F
 int main ()
 {
    FILE * f;						//Declara arquivo
-   int t,vel,quant,x;
+   int vel,x,c;
+   long int t,quant;
    vel=10;							//Velocidade
-   quant=100;//000					//Quantidade de dados a serem gerados
+   quant=100000;					//Quantidade de dados a serem gerados
    f = fopen ("dados.txt","w");		//Abre arquivo
-   for (t=100;t<(100+quant);t++)	//Vamos gerar dados
+	c=0;
+   for (t=101;t<101+quant;t++)	//Vamos gerar dados
    {
-   	x=vel*t;						//Função do MRU
-   	fprintf(f,"%d\n%d\n",x,t);		//Salvar no arquivo
-   	//printf("%d\n%d\n",x,t);
+  	x=vel*t;						//Função do MRU
+ 	  	fprintf(f,"%d\n%d",x,t);		//Salvar no arquivo
+   	if (t!=101+quant-1){
+   		fprintf(f,"\n");
+	   }
    }
+   
    fclose (f);						//Fechar o arquivo
    return 0;
 }
