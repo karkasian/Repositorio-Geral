@@ -64,6 +64,8 @@ Nosso próximo passo é ligar efetivamente as regras a nossa saída. Fazemos iss
 
 ## Regra da agregação
 Agora então vamos combinar os resultados obtidos anteriormente para cada variável de saída, isso é feito tipicamente somando os gráficos.
+
+
 ![Gráfico após as somas](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Projeto%20Difuso/imagens/combinado.png)
 
 ## Desfuzzificação
