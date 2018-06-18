@@ -6,7 +6,7 @@
 
 A equação de MRUV para o movimento vertical da física para um corpo inicialmente em uma posição <code>(0,0)</code> é <code>y=v.sen(θ)+g.t²/2</code>. Então o tempo que um corpo leva para cair é dado por <code>t=-2.v.sen(θ)/g</code>. Substituindo esse tempo na equação de MRU do movimento horizontal <code>x=v.cos(θ).t</code> temos então a distância em que o corpo atingiu o chão <code> x= -2.v².cos(θ).sen(θ)/g</code>.
 
-De acordo a [Overwatch Wiki](https://overwatch.gamepedia.com/Junkrat) a velocidade do projétil do Junkrat é de <code>17,5m/s</code>. Utilizando um ângulo de <code>45°</code> (máximo alcance para um lançamento oblíquo simples), se utilizarmos um valor real para a gravidade (<code>9.81m/s²</code>) temos um alcance máximo de <code>31.22m</code>.
+De acordo a [Overwatch Wiki](https://overwatch.gamepedia.com/Junkrat) a velocidade do projétil do Junkrat é de <code>17,5m/s</code>. Utilizando um ângulo de <code>45°</code> (máximo alcance para um lançamento oblíquo simples), se utilizarmos um valor real para a gravidade (<code>-9.81m/s²</code>) temos um alcance máximo de <code>31.22m</code>.
 
 ### Entradas e saídas
 
