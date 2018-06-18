@@ -18,7 +18,7 @@ Mantenho um máximo de 10 colonos ao mesmo tempo em cada colônio, acredito que 
 A prioridade no jogo é definido em uma escala de níveis entre 1 e 9, vamos classificar como:
 - Baixa: Máximo (1) quando o nível é 1 e mínima (0) quando a quantidade é 5, daí em diante se mantém como 0;
 - Média: Mínimo (0) quando o nível é 1, máximo (1) quando o nível é 5, e então decai para o mínimo (0) novamente quando o nível de prioridade é 9;
-- Muitos: Mínimo (0) desde quando o nível é 1 até 5, então máximo (1) quando a quantidade é 9;
+- Alta: Mínimo (0) desde quando o nível é 1 até 5, então máximo (1) quando a quantidade é 9;
 
 <b> Observação:</b> Todas variações são lineares.
   
