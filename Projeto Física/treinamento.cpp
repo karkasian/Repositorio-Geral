@@ -68,10 +68,12 @@ float fcusto (float saida, float p3[],float p2[][2],float l2[],float l3,float en
 	//ent2[]	- Entrada dos neurônios da segunda camada 	[entrada]
 	//ent3[]	- Entrada dos neurônios da terceira camada 	[entrada]
 	//red[]		- Configuração da rede						[camada]
+	
 
 	float custo, atual;							
-	atual=rede(p3,p2 ,l2,l3,ent2,ent3,red);			//Valor atual fornecido pela rede
+	atual=rede(p3,p2 ,l2,l3,ent2,ent3,cam);			//Valor atual fornecido pela rede
 	custo= pow( saida - atual, 2)/2; 			//Função custo
+	printf("%f - %f\n",saida,atual);
 	return custo;
 }
 
@@ -125,7 +127,7 @@ int main ()
   	//Configuração da Segunda camada--------------------------------------------------------------------------------------------------------------------
    	//Vamos definir o tamanho da segunda camada
    	int cam;
-   	cam=3
+   	cam=3;
   
    	// Chamando a quantidade de neurônios da primeira cmaada de n1 e da segunda camada de n2
    	float p2[cam][2]; 	 //Pesos das entradas do da segunda camada  //  n2 neurônios com n1  valores devido a ter n1 neurônios na primeira camada
@@ -160,20 +162,22 @@ int main ()
 	l3=1;
   
   	//RODANDO AS CAMADAS###############################################################################################################################
-  	float saida;
+  	int saida;
+  	int linhas;
   	m=0;
-  	for (n=0;n<9001;n++)
+  	linhas=1000;
+  	for (n=0;n<linhas;n++)
 		{
 	  	ent2[0]=dist[n];
 	  	ent2[1]=theta[n];
 	  	saida=res[n];   
 	  
  		//Atualizar os valores###############################################################################
-	 	float custovelho,custonovo,temp,h,taxa;
-	 	h=0.0001;
-	 	taxa=0.001;
-	  	//precisamos agora aplicar um método numérico para encontrar o gradiente da função custo
-  	 	//f'(x)=[f(x+h)-f(x)]/h  
+	 	float custovelho,custo1,custo2,temp,h,taxa;
+	 	h=0.00001;
+	 	taxa=0.0001;
+	  	//precisamos agora aplicar um método numérico para encontrar o gradiente da função custo usando o método da diferença central
+  	 	//f'(x)=[f(x+h)-f(x-h)]/2h  
   	  
 	  	custovelho=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);	  
 
@@ -182,11 +186,14 @@ int main ()
 	 	for (c=0;c<cam;c++)
 			{
 	  		//Terceira camada
-	  		temp=p3[c];
-	  		p3[c]=p3[c]+h;
-	  		custonovo=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
-	  		p3[c]=temp;
-	  		p3[c]=p3[c]-taxa*(custonovo-custovelho)/h;
+	  		temp=p3[c];											//Guardar o valor
+	  		p3[c]=p3[c]+h;										//x+h
+	  		custo1=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);	//f(x+h)
+	  		p3[c]=temp;											//x
+	  		p3[c]=p3[c]-h;										//x-h
+	  		custo2=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);	//f(x-h)
+	  		p3[c]=temp;											//x
+	  		p3[c]=p3[c]-taxa*(custo1-custo2)/(2*h);				////f'(x)=[f(x+h)-f(x-h)]/2h  
 	  
 	  		//Segunda camada
 	  		//Pesos
@@ -194,47 +201,59 @@ int main ()
 	 			{
 	 			temp=p2[c][k];
 				p2[c][k]=p2[c][k]+h;
-				custonovo=fcusto(saida, p3,p2,l2,l3,ent2,ent3,red);
+				custo1=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
 				p2[c][k]=temp;
-				p2[c][k]=p2[c][k]-taxa*(custonovo-custovelho)/h;
+				p2[c][k]=p2[c][k]-h;
+				custo2=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
+				p2[c][k]=temp;
+				p2[c][k]=p2[c][k]-taxa*(custo1-custo2)/(2*h);
 		 		}		
 		 	//Limiar
 	  		temp=l2[c];
 	  		l2[c]=l2[c]+h;
-	  		custonovo=fcusto(saida, p3,p2,l2,l3,ent2,ent3,red);
+	  		custo1=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
 	  		l2[c]=temp;
-	  		l2[c]=l2[c]-taxa*(custonovo-custovelho)/h;
+	  		l2[c]=l2[c]-h;
+	  		custo2=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
+	  		l2[c]=temp;
+	  		l2[c]=l2[c]-taxa*(custo1-custo2)/(2*h);
 	 		}	
 	  
 		//Limiar da terceira camada
 	  	temp=l3;
 	  	l3=l3+h;
-	  	custonovo=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
+	  	custo1=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
 	  	l3=temp;
-	  	l3=l3-taxa*(custonovo-custovelho)/h;
+	  	l3=l3-h;
+	  	custo2=fcusto(saida, p3,p2,l2,l3,ent2,ent3,cam);
+	  	l3=temp;
+	  	l3=l3-taxa*(custo1-custo2)/(2*h);
 
-	  	if(n==9000)
+	  	if(n==linhas-1)
 	   		{
 	   		if (m<10000)
 	   			{
 	   			n=0;
-	   			m=m+1;
-	   			printf("%f \n",custovelho);
-	   			
-	   			//Escrever no arquivo
-	   			FILE * s;
-				s = fopen ("Treino.txt","w");
-				for (c=0;c<red[1];c++)
-					{
-				 	fprintf(s,"p3[ %d ]: %f\n",c,p3[c]);
-				  	fprintf(s,"l2 [ %d ]: %f\n",c,l2[c]);
-				  	for (k=0;k<red[0];k++)
-				  		{
-				  		fprintf(s,"p2[%d][%d]: %f\n",c,k,p2[k][c]);
-						}
-				  	}		
-				fprintf(s,"l3: %f\n",l3);
-				fclose (s);		
+	   			printf("%f \n",custovelho);				
+				if(custovelho<0.001)
+				{
+					n=10000;
+		   			//Escrever no arquivo
+		   			FILE * s;
+					s = fopen ("Treino.txt","w");
+					for (c=0;c<cam;c++)
+						{
+					 	fprintf(s,"p3[%d]=%f;\n",c,p3[c]);
+					  	fprintf(s,"l2[%d]=%f;\n",c,l2[c]);
+					  	for (k=0;k<2;k++)
+					  		{
+					  		fprintf(s,"p2[%d][%d]=%f;\n",c,k,p2[k][c]);
+							}
+					  	}		
+					fprintf(s,"l3=%f;\n",l3);
+					fclose (s);		
+
+				}
 			   }   	
 	   	}	
 	}
