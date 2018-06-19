@@ -33,5 +33,6 @@ A primeira cada de uma rede neural é considerada as entradas, sendo cada entrad
 - A segunda camada, a do meio, tem 3 neurônios e cada neurônio tem como entrada os 2 neurônios da primeira camada, isto é a própria distância e ângulo;
 - Por fim, na terceira camada, chamada de camada de saída, temos um único neurônio, que vai nos dar a saída que diz se atingiu o alvo (1) ou não (0); como entrada, ela tem os três valores gerados pelos 3 neurônios da camada anterior.
 
+![Ilustração da rede neural](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Projeto%20F%C3%ADsica/imagens/rede.png)
 
-
+## Função custo e gradiente descendente
