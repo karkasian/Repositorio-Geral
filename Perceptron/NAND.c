@@ -12,7 +12,7 @@ PERCEPTRON: Porta NAND
 #include <time.h>       //Biblioteca relacionada a data, utilizada para time
 #include <math.h>		//Biblioteca com funções matemáticas
 
-
+//Nosso neurônio
 int perceptron(float *peso,float limiar,int entradaA,int entradaB){
 	//peso		- Array com os pesos das entradas do neurônio
 	//limiar 	- Limiar de saída do neurônio
@@ -32,6 +32,7 @@ int perceptron(float *peso,float limiar,int entradaA,int entradaB){
 	}
 }
 
+//Função custo
 float custo_nand (int *saida, float *peso,float limiar,int *entradaA,int *entradaB){
 	//saida		- Array com as saidas corretas
 	//peso		- Array com os pesos das entradas do neurônio
