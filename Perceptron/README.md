@@ -40,3 +40,27 @@ Limiar: 0.030003
 
 ## Porta OR
 
+Apesar de não podermos treinar uma rede com perceptron com mais de uma camada, podemos combinar as redes treinadas individualmente para termos como resultado, uma rede mais complexa. Se com nossa rede anterior construímos uma porta NAND, podemos a partir de diferentes combinações obtermos toda a lógica NAND então.
+
+Como por exemplo a porta OR, pode ser construída com 3 portas NAND com o seguinte esquema:
+<pre>
+Entrada A=O
+	   \
+	    O-Saída
+	   /
+Entrada B=O
+</pre>
+Onde cada <code>O</code> representa uma porta NAND. Ou seja, primeiro temos duas portas lógicas NAND que recebem uma entrada cada, mas duplamente. Então a saída de cada uma das portas NAND anteriores é a entrada para uma nova porta NAND, ou se.
+
+Por exemplo,Então se nossa entrada da porta OR é 10, uma porta lógica NAND recebe 11 (retorna 0) e a outra porta recebe 00 (retorna 1). Então a última porta NAND recebe 01 e retorna 1.
+
+A tabela verdade da porta OR é a seguinte:
+<pre>
+Entrada A	Entrada B	Saída
+0		0		0
+0		1		1
+1		0		1
+1		1		1
+</pre>
+
+## Projeto final
