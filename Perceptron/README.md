@@ -54,6 +54,8 @@ Onde cada <code>O</code> representa uma porta NAND. Ou seja, primeiro temos duas
 
 Por exemplo,Então se nossa entrada da porta OR é 10, uma porta lógica NAND recebe 11 (retorna 0) e a outra porta recebe 00 (retorna 1). Então a última porta NAND recebe 01 e retorna 1.
 
+Nossa rede pode seguir exatamente o mesmo esquema, substituindo onde temos uma porta lógica, por um neurônio treinado na etapa anterior.
+
 A tabela verdade da porta OR é a seguinte:
 <pre>
 Entrada A	Entrada B	Saída
