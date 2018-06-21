@@ -24,5 +24,11 @@ Algumas observações importantes:
 - O limiar é tratada como um peso de uma entrada que vale 1, então sua fórmula é simplesmente <code>L=L+d.n</code>;
 - <code>n</code> é a taxa de aprendizagem, deve ser um valor real positivo de tal modo que não seja grande o suficiente pra impedir que o resultado seja atingido, nem pequeno o suficiente pra que se torne muito lento o processo.
 
+Rodando meu código, obtive os seguintes valores:
+
+Peso A: -0.02036
+Peso B: -0.01036
+Limiar: 0.030003
+
 ## Porta OR
 
