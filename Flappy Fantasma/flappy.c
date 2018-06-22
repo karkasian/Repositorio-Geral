@@ -67,8 +67,8 @@ float treinamento_nand(float *peso, float limiar){	//Função para treinar a rede
 	int atu[100];				//Saidas atuais
 	
 	n=0;								//Contador
-	for (cf=0;cf<1;cf+=0.1){			//Vamos variar a altura do fantasma de 0 a 1, com intervalos de 0.1
-		for (kf=0;kf<1;kf+=0.1){		//Vamos variar a altura do obstáculo de 0 a 1, com intervalos de 0.1
+	for (cf=0;cf<5;cf+=0.5){			//Vamos variar a altura do fantasma de 0 a 1, com intervalos de 0.1
+		for (kf=0;kf<5;kf+=0.5){		//Vamos variar a altura do obstáculo de 0 a 1, com intervalos de 0.1
 			entradaA[n]=cf;				//Salvamos a entrada A
 			entradaB[n]=kf;				//Salvamos a entrada B
 			if (cf<kf){saida[n]=1;}		//Se o fantasma está abaixo do obstáculo, voa (1)
@@ -120,7 +120,6 @@ float treinamento_nand(float *peso, float limiar){	//Função para treinar a rede
 			c=0;														//Zeramos novamente c
 		}																//Adicionamos valor ao contador			
 	}
-	
 	//Fechamos os arquivos
 	fclose(p1);
 	fclose(p2);
@@ -156,7 +155,7 @@ int main (){								//Função principal
 	//Interação	
 	while(1){	
 	system("cls");										//Limpamos a tela
-	printf( "PORTA NAND\n\n");
+	printf( "FLAPPY FANTASMA\n\n");
     printf( "Altura do fantasma:");
     scanf("%f",&ent[0]);								//Recebemos a entrada A
     printf( "Altura do obstáculo:");					//Recebemos a entrada B
