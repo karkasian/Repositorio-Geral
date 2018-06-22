@@ -203,13 +203,16 @@ int main (){
 		system("cls");												//Limpamos a tela
 		printf( "PROJETO FINAL PT I\n");
 		printf("Entre com 999 como entrada para avançar\n\n");
-		printf( "Porcentagem de aliemnto:");
+		printf( "Porcentagem de alimento:");
 	    scanf("%d",&ent[0]);										//Recebemos a entrada A
 	    printf( "Quantidade de famintos:");								
 	    scanf("%d",&ent[1]);										//Recebemos a entrada B
 		res[0]=perceptron(peso[0],limiar[0],ent[0],ent[1]);			//Recebemos o primeiro valor de saída atual	
 		res[1]=perceptron(peso[1],limiar[1],ent[0],ent[1]);			//Recebemos o segundo valor de saída atual	
-		printf("Saida: %d %d\n\n",res[0],res[1]);
+		if (res[0]==-1){ printf("Alimento: Tranquilo\n");}
+		else { printf("Alimento: Atenção\n");}
+		if (res[1]==-1){ printf("Colonos: Tranquilo\n\n");}
+		else { printf("Colonos: Atenção\n\n");}
 		printf("Pressione qualquer tecla para continuar");
 		getchar();													//Consome a quebra de linha que sobrou do scanf
 		getchar();													//Aguarda o pressionamento de uma tecla para continnuar
