@@ -67,13 +67,13 @@ float treinamento_nand(float *peso, float limiar){	//Função para treinar a rede
 	int atu[100];				//Saidas atuais
 	
 	n=0;								//Contador
-	for (cf=0;cf<5;cf+=0.5){			//Vamos variar a altura do fantasma de 0 a 1, com intervalos de 0.1
-		for (kf=0;kf<5;kf+=0.5){		//Vamos variar a altura do obstáculo de 0 a 1, com intervalos de 0.1
+	for (cf=0;cf<1;cf+=0.1){			//Vamos variar a altura do fantasma de 0 a 1, com intervalos de 0.1
+		for (kf=0;kf<1;kf+=0.1){		//Vamos variar a altura do obstáculo de 0 a 1, com intervalos de 0.1
 			entradaA[n]=cf;				//Salvamos a entrada A
 			entradaB[n]=kf;				//Salvamos a entrada B
 			if (cf<kf){saida[n]=1;}		//Se o fantasma está abaixo do obstáculo, voa (1)
 			else {saida[n]=-1;}			//Se não, não (-1)
-		n++;
+		n++;							//Aumentamos o contador
 		}
 	}
 
