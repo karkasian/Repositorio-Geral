@@ -1,9 +1,9 @@
 /*
-PERCEPTRON: Porta NAND
+Flappy Fantasma
 ##Desenvolvido por:     Jhordan Silveira de Borba
 ##E-mail:               jhordandecacapava@gmail.com
 ##Website:              https://sapogithub.github.io
-##Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/wiki/Perceptron
+##Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/wiki/Flappy-Fantasma
 ##2018
 */
 
@@ -11,9 +11,10 @@ PERCEPTRON: Porta NAND
 #include <stdlib.h>     //Biblioteca genérica, utilizada para srand, rand
 #include <time.h>       //Biblioteca relacionada a data, utilizada para time
 #include <math.h>		//Biblioteca com funções matemáticas
+#include <locale.h>		//Biblioteca relacionada a localização
 
 //Nosso neurônio
-int perceptron(float *peso,float limiar,int entradaA,int entradaB){
+int perceptron(float *peso,float limiar,float entradaA,float entradaB){
 	//peso		- Array com os pesos das entradas do neurônio
 	//limiar 	- Limiar de saída do neurônio
 	//entradaA	- Primeira entrada
@@ -33,22 +34,19 @@ int perceptron(float *peso,float limiar,int entradaA,int entradaB){
 }
 
 //Função custo
-float custo_nand (int *saida, float *peso,float limiar,int *entradaA,int *entradaB){
+float custo_nand (int *saida, int *atu){
 	//saida		- Array com as saidas corretas
 	//peso		- Array com os pesos das entradas do neurônio
 	//limiar 	- Limiar de saída do neurônio
 	//entradaA	- Primeira entrada
 	//entradaB	- Segunda entrada
 
-	int res[4];		//Variável pra armazenar as respostas calculadas
-	int c;			//Variável de controle
+	int c;			//Variávei auxiliar
 	float custo;	//Onde vamos armazenar o resultado da função custo
 	
-	for (c=0;c<4;c++){
-		res[c]=perceptron(peso,limiar,entradaA[c],entradaB[c]);					//Calculamos todas saídas
-	}
+	custo=0;
 	
-	custo= pow(res[0]-saida[0], 2)+pow(res[1]-saida[1],2)+pow(res[2]-saida[2],2)+pow(res[3]-saida[3],2);	//Função custo
+	for (c=0;c<100;c++){custo=custo+pow(atu[c]-saida[c], 2);	}	//Função custo
 	
 	return custo;	//Retornamos o resultado
 }
@@ -57,61 +55,97 @@ float treinamento_nand(float *peso, float limiar){	//Função para treinar a rede
 	//peso		- Array com os pesos das entradas do neurônio
 	//limiar 	- Limiar de saída do neurônio
 
-	int c,k;				//Variávelis auxiliares
-	int res;				//Resultado de saida
+	int c,k,n;				//Variávelis int auxiliares
+	float cf,kf;			//Variáveis float auxiliares
 	float taxa;				//Nossa taxa de aprendizado
 	float cust;				//Vamos guardar o custo
 	
 	//Vamos gerar os dados de treinamento
-	int entradaA[4];		//Entrada A
-	int entradaB[4];		//Entrada B
-	int saida[4];			//Saida
+	float entradaA[100];		//Altura do fantasma
+	float entradaB[100];		//Altura do obstáculo
+	int saida[100];				//Saida esperada
+	int atu[100];				//Saidas atuais
 	
-	//TABELA VERDADE
-	entradaA[0]=0;	entradaB[0]=0;	saida[0]=1;
-	entradaA[1]=0;	entradaB[1]=1;	saida[1]=1;
-	entradaA[2]=1;	entradaB[2]=0;	saida[2]=1;
-	entradaA[3]=1;	entradaB[3]=1;	saida[3]=-1; 						//Nossa saída é apenas 1 e -1, então vamos converter 0 para -1
-	
+	n=0;								//Contador
+	for (cf=0;cf<1;cf+=0.1){			//Vamos variar a altura do fantasma de 0 a 1, com intervalos de 0.1
+		for (kf=0;kf<1;kf+=0.1){		//Vamos variar a altura do obstáculo de 0 a 1, com intervalos de 0.1
+			entradaA[n]=cf;				//Salvamos a entrada A
+			entradaB[n]=kf;				//Salvamos a entrada B
+			if (cf<kf){saida[n]=1;}		//Se o fantasma está abaixo do obstáculo, voa (1)
+			else {saida[n]=-1;}			//Se não, não (-1)
+		n++;
+		}
+	}
+
 	//Colocamos valores iniciais
 	peso[0]=20;
 	peso[1]=20;
 	limiar=3;
 	taxa=0.01;
 	
+	//Rodamos uma vez a rede para todas entradas para ver como está com os valores atuais
+	for (c=0;c<100;c++){
+	atu[c]=perceptron(peso,limiar,entradaA[c],entradaB[c]);
+	}
+	
     srand(time(NULL)); //  Gera uma semente para os números aleatórios (srand) baseados no s segundos passados desde 01/01/1970 (time(NULL))
 	
-	//E então 
-	for (c=0;c<11;c++){													//Vamos adicionar uma contagem
+	//Declaramos os arquivos
+	FILE *p1;
+	FILE *p2;
+	FILE *L;					
+	//Abrimos os arquivos		
+    p1 = fopen("Peso1.txt", "w");
+    p2 = fopen("Peso2.txt", "w");
+    L = fopen("Limiar.txt", "w");
+
 	
-		k =rand() % 4;													//Sorteio um número entre 0 e 3
-		res=perceptron(peso,limiar,entradaA[k],entradaB[k]);			//Recebemos o valor de saída atual	
-		if(res-saida[k]!=0){											//Checamos se a saída está errada											
+	//E então 																//Contador
+	for (c=0;c<5000;c++){												//Vamos adicionar uma contagem
+		k =rand() % 100;												//Sorteio um número entre 0 e 99
+		atu[k]=perceptron(peso,limiar,entradaA[k],entradaB[k]);			//Recebemos o valor de saída atual	
+		if(atu[k]-saida[k]!=0){											//Checamos se a saída está errada											
 			peso[0]=peso[0]+taxa*saida[k]*entradaA[k];					//Se estiver atualizamos o primeiro peso
 			peso[1]=peso[1]+taxa*saida[k]*entradaB[k];					//O segundo peso
 			limiar=limiar+taxa*saida[k];								//E o limiar
 		}
 		
-		if (c==10){														//A  cada 10 cálculos
-			cust = custo_nand (saida,peso,limiar,entradaA,entradaB);	//Calculamos o custo
+		if (c==4000){													//A  cada 4000 cálculos
+			//Salvamos nos arquivos
+			fprintf(p1, "%f\n",peso[0]);
+			fprintf(p2, "%f\n",peso[1]);
+			fprintf(L, "%f\n",limiar);									
+			cust = custo_nand (saida,atu);								//Calculamos o custo
 			if (cust<0.1){break;}										//Se temos um erro abaixo de um valor, saímos do loop
-			//Apenas um erro significa (1-(-1))²=2²=4, então qualquer valor abaixo de 4 satisfaz o que queremos
 			c=0;														//Zeramos novamente c
-		}				
+		}																//Adicionamos valor ao contador			
 	}
+	
+	//Fechamos os arquivos
+	fclose(p1);
+	fclose(p2);
+	fclose(L);
 	return limiar;														//Retornamos apenas o limiar, o peso é um ponteiro, já foi alterado
 }
 
 
 int main (){								//Função principal
+	 setlocale(LC_ALL, "Portuguese");		//Define o idioma como português para funcionar a acentuação
 	float peso[2];							//Peso das duas entradas 
 	float limiar;							//Limiar do neurônio
-	int ent[2],res;							//entradas
+	float ent[2],res[2];					//entradas
+	float peso_ale[2];						//Os pesos rede do Alexandre
+	float limiar_ale;						//Limiar da rede do Alexandre
+	
+	//Pesos e limiares informados pelo Alexandre
+	peso_ale[0]=-1;						
+	peso_ale[1]=0.9316424;
+	limiar_ale= -0.7005109;
 		
 	limiar = treinamento_nand(peso,limiar);		//Vamos primeiro treinar a rede do NAND
 	
 	//Exibir os pesos e limiares calculados
-	printf("PERCEPTRON\n\n");
+	printf("NEURÔNIO\n\n");
 	printf("Peso A: %f\n",peso[0]);
 	printf("Peso B: %f\n",peso[1]);
 	printf("Limiar: %f\n",limiar);
@@ -120,27 +154,21 @@ int main (){								//Função principal
 	getchar();											//Aguarda o pressionamento de uma tecla para continuar
 	
 	//Interação	
-	while(0){					//Para sair basta entrar com 99 em qualquer entrada
+	while(1){	
 	system("cls");										//Limpamos a tela
 	printf( "PORTA NAND\n\n");
-    printf( "Entrada A:");
-    scanf("%d",&ent[0]);								//Recebemos a entrada A
-    printf( "Entrada B:");								//Recebemos a entrada B
-    scanf("%d",&ent[1]);
-    res=perceptron(peso,limiar,ent[0],ent[1]); 			//Calculamos então a saída de nossa rede
-    if (res==-1){res=0;}					  			//Se for o caso, convertemos a nossa saída de -1 para 0
-	printf("Saida: %d\n\n",res);
+    printf( "Altura do fantasma:");
+    scanf("%f",&ent[0]);								//Recebemos a entrada A
+    printf( "Altura do obstáculo:");					//Recebemos a entrada B
+    scanf("%f",&ent[1]);
+    res[0]=perceptron(peso,limiar,ent[0],ent[1]); 					//Calculamos então a saída de nossa rede
+    if (res[0]==-1){printf("Saida desta rede: Não voa\n");}			
+    else {printf("Saida desta rede: Voa\n")	;}
+    res[1]=perceptron(peso_ale,limiar_ale,ent[0],ent[1]); 			//Calculamos então a saída da outra rede
+    if (res[0]==-1){printf("Saida da outra rede: Não voa\n\n");}			
+    else {printf("Saida da outra rede: Voa\n\n")	;}
 	printf("Pressione qualquer tecla para continuar");
 	getchar();											//Consome a quebra de linha que sobrou do scanf
 	getchar();											//Aguarda o pressionamento de uma tecla para continnuar
 	}	
-	
-	FILE *f;
-    f = fopen("teste.txt", "w");
-
-    fprintf(f, "teste\n\n");
-    fclose(f);
 }
-
-//-1 | 0.9316424 | -0.7005109
-//Input 0 | Input 1 | Bias
