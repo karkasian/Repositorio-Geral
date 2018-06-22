@@ -1,5 +1,5 @@
 /*
-PERCEPTRON: Porta OR
+PERCEPTRON: Projeto final
 ##Desenvolvido por:     Jhordan Silveira de Borba
 ##E-mail:               jhordandecacapava@gmail.com
 ##Website:              https://sapogithub.github.io
@@ -69,14 +69,12 @@ float custo (int saida[2][250],int saida_atu[2][250]){
 	
 }
 
-
-
-float treinamento(float peso[][2], float *limiar){	//Função para treinar a rede
-	//peso		- Matriz com os pesos das entradas do neurônio
-	//limiar 	- Limiar de saída do neurônio
-	printf("%f",peso[0][0]);
+//Função para treinar a rede
+float treinamento(float peso[][2], float *limiar){	
+	//peso		- Matriz com os pesos das entradas dos neurônios
+	//limiar 	- Limiar de saída dos neurônios
+	
 	int c,k,n;				//Variávelis auxiliares
-	int res;				//Resultado de saida
 	float taxa;				//Nossa taxa de aprendizado
 	float cust;				//Vamos guardar o custo
 	int s_esp[2][250];		//Saidas esperadas
@@ -85,33 +83,33 @@ float treinamento(float peso[][2], float *limiar){	//Função para treinar a rede
 	float entB[250];		//EntradaB
 	
 	//Vamos gerar os dados de treinamento
-	n=0;							//Contador
-	for (c=1;c<100;c+=2){
-		for (k=1;k<10;k+=2){
-			entA[n]=c;
-			entB[n]=k;
-			if (c>=50){s_esp[0][n]=1;}
-			else {s_esp[0][n]=-1;}
-			if (k>=5){s_esp[1][n]=1;}
-			else {s_esp[1][n]=-1;}
-			n++;
+	n=0;									//Contador
+	for (c=1;c<100;c+=2){					//Variar a porcentagem de comida de 1 até 100%, avançando de 2 em 2
+		for (k=1;k<10;k+=2){				//Variar o número de famintos 1 até 10, avançando de 2 em 2
+			entA[n]=c;						//Guardamos a porcentagem atual na entrada A
+			entB[n]=k;						//E o número de famintos na entada B
+			if (c>=50){s_esp[0][n]=1;}		//Se a porcentagem for maior ou igual a 50, a saída esperada do primeiro neurônio é 1
+			else {s_esp[0][n]=-1;}			//Se não é -1
+			if (k>=5){s_esp[1][n]=1;}		//Se a quantidade de famintos é maior ou igual a 5, a saída esperada do segundo neurônio é 1
+			else {s_esp[1][n]=-1;}			//Se não é -1
+			n++;							//Aumentamos o contador
 		}	
 	}
 
-	//Colocamos valores iniciais
+	//Colocamos valores iniciais para limiares e pesos
 	for (c=0;c<2;c++){
 		limiar[c]=1;
 		for (k=0;k<2;k++){peso[c][k]=1;}
 	}
 
-	taxa=0.1;
+	taxa=0.1;				//Definimos a taxa de aprendizado
 	
-    srand(time(NULL)); //  Gera uma semente para os números aleatórios (srand) baseados no s segundos passados desde 01/01/1970 (time(NULL))
+    srand(time(NULL)); 		// Gera uma semente para os números aleatórios (srand) baseados no s segundos passados desde 01/01/1970 (time(NULL))
 	
-	//Vamos rodar uma vez todos os dados:
+	//Vamos rodar uma vez todos os dados para obtermos a saída atual com estas entradas e pesos
 	for (c=0;c<250;c++){													//Vamos adicionar uma contagem
-		s_atu[0][c]=perceptron(peso[0],limiar[0],entA[c],entB[c]);			//Recebemos o valor de saída atual	
-		s_atu[1][c]=perceptron(peso[1],limiar[1],entA[c],entB[c]);			//Recebemos o valor de saída atual	
+		s_atu[0][c]=perceptron(peso[0],limiar[0],entA[c],entB[c]);			//Recebemos o valor de saída atual para o primeiro neurônio	
+		s_atu[1][c]=perceptron(peso[1],limiar[1],entA[c],entB[c]);			//Recebemos o valor de saída atual para o segundo neurônio
 	}
 	
 	//E então 
@@ -135,7 +133,6 @@ float treinamento(float peso[][2], float *limiar){	//Função para treinar a rede
 		
 		if (k==1000){														//A  cada 10 cálculos
 			cust = custo (s_esp,s_atu);	//Calculamos o custo
-			printf("custo: %f\n",cust);
 			if (abs(cust)<0.1){break;}										//Se temos um erro abaixo de um valor, saímos do loop
 			k=0;														//Zeramos novamente c
 		}				
@@ -143,31 +140,55 @@ float treinamento(float peso[][2], float *limiar){	//Função para treinar a rede
 	return 0;//limiar;														//Retornamos apenas o limiar, o peso é um ponteiro, já foi alterado
 }
 
-
-
-int main (){								//Função principal
+//Função principal
+int main (){								
+	//Pesos e limiares das portas lógicas
 	float peso_or[2];						//Peso das duas entradas na porta NAND 
 	float limiar_or;						//Limiar do neurônio na porta NAND
-	float peso[2][2];						//Pesos das duas entradas nos dois neurônios
+	//Pesos e limiares de nossa nova rede
+	float peso[2][2];						//Pesos das duas entradas nos dois neurônios de nossa rede
 	float limiar[2];						//Limiar dos dois neurônios
-	int ent[2],res[2];							//entradas
+	
+	int ent[2],res[2];						//entradas e saídas
 	
 	//Valores calculados em nosso outro código	
 	peso_or[0]=-0.02036;
 	peso_or[1]=-0.01036;
 	limiar_or= 0.030003;
-	peso[0][0]=1;
-	treinamento (peso,limiar);
-	while(1){
-
-	printf( "\nEntrada A:");
-    scanf("%d",&ent[0]);								//Recebemos a entrada A
-    printf( "Entrada B:");								//Recebemos a entrada B
-    scanf("%d",&ent[1]);
-
-	res[0]=perceptron(peso[0],limiar[0],ent[0],ent[1]);			//Recebemos o valor de saída atual	
-	res[1]=perceptron(peso[1],limiar[1],ent[0],ent[1]);			//Recebemos o valor de saída atual	
-	printf("Saida: %d %d\n\n",res[0],res[1]);
-	}
 	
+	//Vamos treinar nossa nova rede
+	treinamento (peso,limiar);
+	
+	//Exibir os pesos e limiares calculados
+	printf("NEURONOIO 1\n\n");
+	printf("Peso A: %f\n",peso[0][0]);
+	printf("Peso B: %f\n",peso[0][1]);
+	printf("Limiar: %f\n",limiar[0]);
+	printf("\n");
+	printf("NEURONOIO 2\n\n");
+	printf("Peso A: %f\n",peso[1][0]);
+	printf("Peso B: %f\n",peso[1][1]);
+	printf("Limiar: %f\n",limiar[1]);
+	printf("\n");
+	printf("Pressione qualquer tecla para continuar");
+	getchar();											//Aguarda o pressionamento de uma tecla para continuar
+	
+	//Vamos interagir com o resultado de nossa nova rede
+	ent[0]=1;
+	ent[1]=0;
+	while(ent[0]!=999 && ent[1]!=999){
+		system("cls");												//Limpamos a tela
+		printf( "PROJETO FINAL\n");
+		printf("Entre com 999 como entrada para avançar\n\n");
+		printf( "Entrada A:");
+	    scanf("%d",&ent[0]);										//Recebemos a entrada A
+	    printf( "Entrada B:");								
+	    scanf("%d",&ent[1]);										//Recebemos a entrada B
+		res[0]=perceptron(peso[0],limiar[0],ent[0],ent[1]);			//Recebemos o primeiro valor de saída atual	
+		res[1]=perceptron(peso[1],limiar[1],ent[0],ent[1]);			//Recebemos o segundo valor de saída atual	
+		printf("Saida: %d %d\n\n",res[0],res[1]);
+		printf("Pressione qualquer tecla para continuar");
+		getchar();													//Consome a quebra de linha que sobrou do scanf
+		getchar();													//Aguarda o pressionamento de uma tecla para continnuar
+	}
 }

@@ -110,12 +110,12 @@ int main (){								//Função principal
 		
 	limiar = treinamento_nand(peso,limiar);		//Vamos primeiro treinar a rede do NAND
 	
-	//Os pesos e limiares calculados
+	//Exibir os pesos e limiares calculados
 	printf("PERCEPTRON\n\n");
 	printf("Peso A: %f\n",peso[0]);
 	printf("Peso B: %f\n",peso[1]);
 	printf("Limiar: %f\n",limiar);
-	printf("\n\n",limiar);
+	printf("\n\n");
 	printf("Pressione qualquer tecla para continuar");
 	getchar();											//Aguarda o pressionamento de uma tecla para continuar
 	
