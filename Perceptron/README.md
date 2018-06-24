@@ -38,6 +38,22 @@ Peso A: -0.02036<br>
 Peso B: -0.01036<br>
 Limiar: 0.030003
 
+## Flappy Fantasma
+
+Podemos visualizar graficamente a aprendizagem de uma rede, visualizando a reta formada a partir da equação que compõem a função de ativação igualda a zero, isto é, para nosso exemplo de duas entradas: <code>e<sub>1</sub>*p<sub>1</sub>+e<sub>2</sub>*p<sub>2</sub>+L=0</code>. Essa é uma equação da reta, e para uma rede bem treinada, deve separar perfeitamente os dois conjuntos de pontos, então podemos visualizar como a rede vai ajustando a reta conforme é treinada.
+
+Com essa ideia em mente, vamos treinar uma rede para jogar Flappy Fantasma. Os dados de treinamento são todas as combinações possíveis para as posições do fantasma e do obstáculo entre 0 e 1, com uma variação de 0,1. Temos então 10 alturas possíveis para o fantasma, com 10 alturas possíveis pro obstáculo, ficamos com um total de 100 dados de treinamento.
+
+E como condição de saída, vamos usar simplesmene que se a altura do fantasma é maior ou igual a do obstáculo, a saída é -1 (não voa), caso contrário, temos 1 (voa). Durante o processo de aprendizagem, vamos guardar os pesos e limiares.
+
+E então escrevemos outro código para ler os valores e então manipulando nossa equação podemos obter os pontos Y a partir dos X. Considerando a entrada 1 como X, então a entrada 2 como Y, ficamos com <code>e<sub>2</sub>=-(e<sub>1</sub>*p<sub>1</sub>+L)/p<sub>2</sub></code>. A partir disso podemos pegar dois pontos e traçar uma reta entre eles.
+
+A partir desse método, obtemos a seguinte imagem:
+
+![Gráfico do Flappy Fantasma](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Perceptron/imagens/animacao.gif)
+
+Podemos observar que o fato de termos treinado somente com valores entre 0 e 1, fez com que a rede mesmo apresentando uma taxa de acerto de 100% nessa faixa de valores, quando subimos para valores próximos a 5, começa a apresentar erros cada vez maiores. Se queremos utilizar nossa rede para valores nesta faixa maior, precisaríamos que os dados de treinamento fossem mais bem distribuídos durante toda a faixa.
+
 ## Porta OR
 
 Apesar de não podermos treinar uma rede com perceptron com mais de uma camada, podemos combinar as redes treinadas individualmente para termos como resultado, uma rede mais complexa. Se com nossa rede anterior construímos uma porta NAND, podemos a partir de diferentes combinações obtermos toda a lógica NAND então.
