@@ -4,18 +4,18 @@
 ## Mundo
 
 Para começar nosso projeto, vamos configurar nosso mundo. Os lutadores inicialmente possuem o seguinte perfil:
-
+<pre>
 Dano: 	 1	Força:		0
 Vida: 	 10	Constituiçao:	0
 Evasão:  0%	Agilidade:	0
 Crítico: 0%	Destreza:	0
-
+</pre>
 Então para cada nível novo nos atributos, nossas habilidades variam conforme os valores a seguir:
 
-Força:		+ 1 Dano
-Constituição:	+ 10 Vida
-Agilidade	+ 0.1% Evasão
-Destreza:	+ 0.1% Crítico
+- Força:		+ 1 Dano
+- Constituição:	+ 10 Vida
+- Agilidade	+ 0.1% Evasão
+- Destreza:	+ 0.1% Crítico
 
 Os ataques de ambos os lutadores acontecem simultâneamente, e a luta se encerra quando um dos lutadores fica com vida abaixo de 0. Em caso de ambos os lutadores ficarem com vida negativa, vence aquele com a vida mais próxima de 0.
 
@@ -52,9 +52,9 @@ Como consequência, geramos descedentes mais fortes que os pais, acima das nossa
 
 Rodando nosso código, obtivemos os seguintes valores:
 
-Força: 46
-Constituição: 36
-Agilidade:  18
-Destreza:  0
+- Força: 46
+- Constituição: 36
+- Agilidade:  18
+- Destreza:  0
 
 E testando contra 1000 inimigos aleatórios obtivemos uma taxa de 89.0% de vitória.
