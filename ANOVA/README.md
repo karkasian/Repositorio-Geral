@@ -36,11 +36,13 @@ Onde B é uma função beta, para valores inteiros toma a forma:
 
 ![Função beta para inteiros](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/ANOVA/imagens/beta.png)
 
-A função de distribuição cumulativa  (<abbr title="cumulative distribution function">CDF</abbr>) avalia a probabilidade de uma variável aleatória assumir um valor igual ou menor a X. Ela pode ser expressada como uma a integral da função densidade de probabilidade de infinito negativo a x.
+A função de distribuição cumulativa  (<abbr title="cumulative distribution function">CDF</abbr>) avalia a probabilidade de uma variável aleatória assumir um valor igual ou menor a X. Ela pode ser expressada como uma a integral da função densidade de probabilidade de infinito negativo a X.
 
 A distribuição F surge como a distribuição nula da estatística de um teste. Nessa etapa determinamos o nível de significância que vamos aceitar, um valor típico é a=0.05. Então se definimos um a=0.05, significa que definimos um intervalo de 5% no extremo direito da função de distribuição em que se o nosso valor F cair dentro desta faixa, rejeitamos a hipótese 0.
 
 Isto se deve quanto mais a direita de nossa função de distribuição, menor a probabilidade que uma variável aleatória assuma esse valor para uma distribuição nula, então maior a probabilidade que nossa função F calculada a partir de nossos dados, não pertence a uma distribuição nula, consequentemente, maior a segurança para rejeitar nossa hipótese nula.
+
+Então se nossa CDF nos retorna a probabilidade obtermos um valor X ou menor, <code>(1-CDF)</code> vai nos retornar a probabilidade de obtermos um valor X ou maior. Portanto se definimos a=0.05, queremos que o valor de nossa função F nos retorne um valor maior ou igual a 99.5% na CDF, ou então menor que 5% se utilizarmos <code>(1-CDF)</code>.
 
 ## Passo 4: Cálculo
 
