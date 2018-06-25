@@ -29,11 +29,13 @@ A função densidade de probabilidade (<abbr title="probability density function
 
 Se uma variável aleatória X tem uma função distribuição F, a função densidade de probabilidade dada para X é dado por:
 
-IMG#1: PDF.png
+![PDF de uma distribuição F](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/ANOVA/imagens/PDF.png)
 
 Onde B é uma função beta, para valores inteiros toma a forma:
 
-IMG#2: beta.png
+![Função beta para inteiros](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/ANOVA/imagens/beta.png)
+
+A função de distribuição cumulativa  (<abbr title="cumulative distribution function">CDF</abbr>) avalia a probabilidade de uma variável aleatória assumir um valor igual ou menor a X. Ela pode ser expressada uma a integral da função densidade de probabilidade.
 
 ## Passo 4: Cálculo
 
