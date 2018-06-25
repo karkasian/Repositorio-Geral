@@ -23,13 +23,18 @@ Os ataques de ambos os lutadores acontecem simultâneamente, e a luta se encerra
 
 Nossa 1ª geração vai ser composta por 8 indivíduos com 100 pontos distribuídos de forma aleatória.
 
+
+## Aptidão
+
+Com uma população em mãos, devemos então descobrir o quão aptos eles são, isto é, o quão se aproximam do nosso objetivo. Como noss objetivo é distribuir os pontos da melhor forma possível, significa vencer a maior porcentagem das lutas possíveis. Como vamos colocar todos indivíduos para lutar contra todos, todos terão o mesmo número de lutas, e vamos nos preocupar com o número inteiro de lutas de cada indivíduo.
+
+O indivíduo mais apto para nós, é aquele que mais vence lutas.
+
 ## Seleção
 
-A próxima etapa é selecionarmos os indivíduos mais aptos. Isso significa, selecionar aqueles que mais se adequaram, que melhor resolveram o problema com que estamos lidando. 
+Tendo então uma medida de aptidão de cada indivíduo, devemos então ter uma forma de selecionar aqueles que se mostraram mais aptos para resolver nosso problema. No nosso caso, como dissemos antes, vamos utilizar o número de vitórias de cada indivíduo.
 
-No nosso caso, significa selecionar aqueles que melhor desempenho tiveram em combate. Para medir isso, vamos colocar todos indivíduos para lutarem contra todos os outros, e vamos utilizar a quantidade de vitórias que cada indivíduo teve.
-
-Esse valor ainda pode ser utilizado de diferentes formas. Por exemplo atribuindo uma porcentagem de chance de ser selecionado proporcional a quantidade de vitórias que o indíviduo teve, e então sorteando os indidíviduos que vão passar para a próxima fase. Mas nós vamos utilizar um método mais simples, vamos simplesmente passar a metade dos indivíduos com mais vitórias.
+Esse valor pode ser utilizado de diferentes formas. Por exemplo atribuindo uma porcentagem de chance de ser selecionado proporcional a quantidade de vitórias que o indíviduo teve, e então sorteando os indidíviduos que vão passar para a próxima fase. Mas nós vamos utilizar um método mais simples, vamos simplesmente passar a metade dos indivíduos com mais vitórias.
 
 ## Cruzamento
 
@@ -45,12 +50,14 @@ E por fim, para garantir uma diversidade ao longo de nossas gerações, contamos
 
 ## Resultado
 
-Na verdade, se nossa intenção era analisar a distribuição de 100 pontos de atributos, tivemos um tivemos um erro teorico  em nosso projeto. Quando os pais geram um descendente, não há limites para a distribuição de pontos. Isso faz com que, enquanto a primeira geração tinha 100 pontos distribuidos em 4 atributos, a geração seguinte pode ter mais que isso.
+O final de um algoritmo genético pode ser estipulado sob diferentes critérios, entre os principais podemos citar: quando atingir uma geração definida, ou quando algum indivíduo atingir um valor de aptidão estipulado. No nosso caso vamos rodar nosso código até atingir uma certa geração.
+
+Por fim, se nossa intenção era analisar a distribuição de 100 pontos de atributos, tivemos um tivemos um erro teorico  em nosso projeto. Quando os pais geram um descendente, não há limites para a distribuição de pontos. Isso faz com que, enquanto a primeira geração tinha 100 pontos distribuidos em 4 atributos, a geração seguinte pode ter mais que isso.
 
 
 Como consequência, geramos descedentes mais fortes que os pais, acima das nossas regras iniciais. Então vamos adicionar uma limitação, se os atributos de um indivíduo ultrapassar 100, perde a luta, se dos dois ultrapassar, ganha quem ficou mais próximo do 100.
 
-Rodando nosso código, obtivemos os seguintes valores:
+Rodando nosso código, obtivemos os seguintes valores para o indivíduo com o maior nível de aptidão da última geração:
 
 - Força: 46
 - Constituição: 36
