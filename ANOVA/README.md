@@ -25,7 +25,15 @@ O valor crítico é obtido pela distribuição F.
 
 ### Distribuição F
 
-Uma variável aleatória tem uma distribuição F que pode ser escrita como uma razão entre duas variáveis aleatórias qui-quadrado dividida por seus graus de liberdade: <code>X=(Y<sub>1</sub>/n<sub>1</sub>)/(Y<sub>2</sub>/n<sub>2</sub>)</code>. Onde <code>Y<sub>i</sub></code> é uma variável aleatória qui-quadrado com <code>n<sub>i</sub></code> graus de liberdade.
+A função densidade de probabilidade (<abbr title="probability density function">PDF</abbr>) descreve a probabilidade de uma variável tomar um valor dado. 
+
+Se uma variável aleatória X tem uma função distribuição F, a função densidade de probabilidade dada para X é dado por:
+
+IMG#1: PDF.png
+
+Onde B é uma função beta, para valores inteiros toma a forma:
+
+IMG#2: beta.png
 
 ## Passo 4: Cálculo
 
