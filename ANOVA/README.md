@@ -35,12 +35,13 @@ Onde B é uma função beta, para valores inteiros toma a forma:
 
 ![Função beta para inteiros](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/ANOVA/imagens/beta.png)
 
-A função de distribuição cumulativa  (<abbr title="cumulative distribution function">CDF</abbr>) avalia a probabilidade de uma variável aleatória assumir um valor igual ou menor a X. Ela pode ser expressada uma a integral da função densidade de probabilidade de infinito negativo a x.
+Uma variável aleatória de uma distribuição F surge como uma razão duas distribuições qui-quadradas divididas por seus graus de liberdade: <code>X=(U<sub>1</sub>/d<sub>1</sub>)/(U<sub>2</sub>/d<sub>2</sub>)</code>, onde <code>U<sub>i</sub></code> é uma distribuição qui-quadrado com <code>n<sub>i</sub></code> graus de liberdade.
+
+A função de distribuição cumulativa  (<abbr title="cumulative distribution function">CDF</abbr>) avalia a probabilidade de uma variável aleatória assumir um valor igual ou menor a X. Ela pode ser expressada como uma a integral da função densidade de probabilidade de infinito negativo a x.
 
 ## Passo 4: Cálculo
 
 ## Passo 5: Conclusão
-
 
 ANOVA 1 fator: https://edisciplinas.usp.br/pluginfile.php/3260534/mod_resource/content/1/T%C3%B3pico_13.pdf
 Passo a passo: http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_HypothesisTesting-ANOVA/BS704_HypothesisTesting-Anova_print.html
