@@ -9,7 +9,6 @@ Primeiro passo, é determinar quais as hipóteses que queremos checar. Para apli
 - Hipótese nula (H0): não há diferença entre os valores médios dos grupos: o fator não tem efeito.
 - Hipótese alternativa (H1): nem todas as médias são iguais: o fator tem efeito.
 
-Também nessa etapa determinamos o nível de significância que vamos aceitar, isto é "o quão incerto" vamos aceitar que nossa resposta seja. Um valor típico é utilizar a=0.05, isto é aceitamos uma probabilidade 5% de estar errado.
 
 ## Passo 2: Estatística de teste
 
@@ -25,7 +24,9 @@ O valor crítico é obtido pela distribuição F.
 
 ### Distribuição F
 
-A função densidade de probabilidade (<abbr title="probability density function">PDF</abbr>) descreve a probabilidade de uma variável tomar um valor dado. 
+Uma variável aleatória de uma distribuição F surge como uma razão entre duas distribuições qui-quadradas divididas por seus graus de liberdade: <code>X=(U<sub>1</sub>/d<sub>1</sub>)/(U<sub>2</sub>/d<sub>2</sub>)</code>, onde <code>U<sub>i</sub></code> é uma distribuição qui-quadrado com <code>n<sub>i</sub></code> graus de liberdade.
+
+A sua função densidade de probabilidade (<abbr title="probability density function">PDF</abbr>) descreve a probabilidade de uma variável tomar um valor dado. 
 
 Se uma variável aleatória X tem uma função distribuição F, a função densidade de probabilidade dada para X é dado por:
 
@@ -35,9 +36,11 @@ Onde B é uma função beta, para valores inteiros toma a forma:
 
 ![Função beta para inteiros](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/ANOVA/imagens/beta.png)
 
-Uma variável aleatória de uma distribuição F surge como uma razão duas distribuições qui-quadradas divididas por seus graus de liberdade: <code>X=(U<sub>1</sub>/d<sub>1</sub>)/(U<sub>2</sub>/d<sub>2</sub>)</code>, onde <code>U<sub>i</sub></code> é uma distribuição qui-quadrado com <code>n<sub>i</sub></code> graus de liberdade.
-
 A função de distribuição cumulativa  (<abbr title="cumulative distribution function">CDF</abbr>) avalia a probabilidade de uma variável aleatória assumir um valor igual ou menor a X. Ela pode ser expressada como uma a integral da função densidade de probabilidade de infinito negativo a x.
+
+A distribuição F surge como a distribuição nula da estatística de um teste. Nessa etapa determinamos o nível de significância que vamos aceitar, um valor típico é a=0.05. Então se definimos um a=0.05, significa que definimos um intervalo de 5% no extremo direito da função de distribuição em que se o nosso valor F cair dentro desta faixa, rejeitamos a hipótese 0.
+
+Isto se deve quanto mais a direita de nossa função de distribuição, menor a probabilidade que uma variável aleatória assuma esse valor para uma distribuição nula, então maior a probabilidade que nossa função F calculada a partir de nossos dados, não pertence a uma distribuição nula, consequentemente, maior a segurança para rejeitar nossa hipótese nula.
 
 ## Passo 4: Cálculo
 
