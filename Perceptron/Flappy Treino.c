@@ -1,5 +1,5 @@
 /*
-Flappy Fantasma
+PERCEPTRON: Flappy Fantasma - Treinamento
 ##Desenvolvido por:     Jhordan Silveira de Borba
 ##E-mail:               jhordandecacapava@gmail.com
 ##Website:              https://sapogithub.github.io

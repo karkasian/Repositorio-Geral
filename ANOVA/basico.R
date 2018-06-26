@@ -1,4 +1,4 @@
-#ANOVA
+#ANOVA: Estatística Básica
 #Desenvolvido por:     Jhordan Silveira de Borba
 #E-mail:               jhordandecacapava@gmail.com
 #Website:              https://sapogithub.github.io
@@ -131,10 +131,39 @@ moda <- function(v){
 #Equivalente: max()-min()
 amp <-function(v){
 	#v	- Conjunto de dados
-	ord=sort(v)		#ordenamos o valor
-	tam=length(ord)		#O tamanho do vetor
+	ord<-sort(v)		#ordenamos o valor
+	tam<-length(ord)		#O tamanho do vetor
 	return (ord[tam]-ord[1])#Retornamos o maior valor, menos o menor
 }
+
+#Função para calcular a variância
+#Equivalente: var()
+vari<-function(v){
+	#v	- Conjunto de dados
+	tam<-length(v)		#Quantidade de dados em nosso vetor
+	medi<-mean(v)		#Media de nossa medida
+	som<-0			#Somatório
+	for (x in v){
+		som<-som+(x-medi)^2
+	}
+	return (som/(tam-1))	#Retornamos dividindo (n-1)
+
+}
+
+#Função para calcular o desvio padrão
+#Equivalente: sd()
+dv<-function(v){
+	va<-var(v)		#Calculamos a variância
+	return (va^(1/2))	#Retornamos a raiz quadrada
+}
+
+#Função para calcular o coeficiente de variação
+cv<-function(v){
+	desvio<-sd(v)		#Calculamos o desvio-padrão
+	media<-mean(v)		#Calculamos a média
+	return ((desvio/media)*100)	#Retornamos a divisão multiplicada por 100
+}
+
 
 #Vamos definir nosso vetor com as vitórias por estágio do NYE
 ve<-c(21,25,22,15)
@@ -164,4 +193,13 @@ print(moda(ve))
 #Printamos a amplitude
 cat ("Amplitude: ",amp(ve))
 
-cat/("\n")
+#Printamos a variância
+cat ("\nVariância: ",vari(ve))
+
+#Printamos a variância
+cat ("\nDesio-padrão: ",dv(ve))
+
+#Printamos o coeficiente de variação
+cat ("\nCoeficiente de variação: ",cv(ve),"%")
+
+cat("\n")

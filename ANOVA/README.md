@@ -44,5 +44,21 @@ Sua fórmula é então o somatório dos desvios individuais divido pelos graus d
 
 Então, temos que <code>(n-1)</code> é o grau de liberdade da amostra. Graus de liberdade indicam os espaços entre os dados, portanto para <code>n</code> amostras, temos <code>(n-1)</code> graus de liberdade. Uma forma de interpretar os graus de liberdade, é tendo então um conjunto de <code>n</code> observações, e tendo ua média fixa, podeos escolher os valores numéricos de <code>(n-1)</code> observações, e o valor da última observação é determinado pelo valor da média fixada, ou seja, é o necessário para que tenhamos a média definida.
 
+Calculamos uma variância de 17.58
+
+### Desvio-padrão (S)
+
+Para aproximar a variância da medida da variável original, tiramos a raiz quadrada da variância. Temos então que <code>S=√(S²)</code>.
+
+No nosso caso, temos um desvio padrão de 4.193.
+
+### Coeficiente de variação
+
+É uma medida relativa da dispersão, fazemos a razão entre o desvio padrão e a média, e multiplicalmos por 100: <code>CV=(S/x̄)*100%</code>
+
 Mais informações sobre estatística básica pode ser lida no [Minicurso de Estatística Básica: Minicurso de Estatística Básica:
 Introdução ao software R](http://www.uft.edu.br/engambiental/prof/catalunha/arquivos/r/r_bruno.pdf), oferecido pela <abbr title="Universidade Federal de Santa Maria">UFSM</abbr>.
+
+# Distribuições
+
+## Distribuição qui-quadrado
