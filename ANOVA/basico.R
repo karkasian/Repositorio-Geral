@@ -166,7 +166,7 @@ cv<-function(v){
 
 
 #Vamos definir nosso vetor com as vitórias por estágio do NYE
-ve<-c(21,25,22,15)
+ve<-c(2,-2,2,2,3,4,-1,1,4,2,3,1,-1,2,-1,4,4,2,4,1,4,1,4,1,4,4,-1,1,1,1,2,4,4,2,3,3,3,2,4,4,4,-1,-1,1,-2,1,1,-2)
 
 Sys.setlocale(category="LC_ALL", locale = "Portuguese")		#Configura o idioma e acentos, o arquivo .R deve ser salvo com a mesma condificação
 
