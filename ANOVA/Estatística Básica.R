@@ -188,10 +188,10 @@ cat("\nMediana: ",medi(ve))
 
 #Printamos as modas:
 cat("\nModa: ")
-print(moda(ve))
+cat(moda(ve))
 
 #Printamos a amplitude
-cat ("Amplitude: ",amp(ve))
+cat ("\nAmplitude: ",amp(ve))
 
 #Printamos a variância
 cat ("\nVariância: ",vari(ve))

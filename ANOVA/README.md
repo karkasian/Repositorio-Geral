@@ -72,7 +72,7 @@ Trabalhamos com duas hipóteses:
 - Hipótese nula (H0): as frequências observadas não são diferentes das frequências esperadas.
 - Hipótese alternativa: as frequências observadas são diferentes das frequências esperadas.
 
-É simbolizado pela letra grega qui elevada ao quadrado, pela semelhança com X iremos adotar X. Karl Pearson propôs que para medir as possíveis discrepâncias entre as proporções observadas e esperadas, deviamos fazer o somatório do quadrado da diferença entre a frequência observada e a esperada para classe, dividida pela esperada. Ou seja, chamando de <code>o</code> de frequência observada e <code>e</code> de frequência esperada: <code>X²=Σ[(o-e)²/e]</code>. Em 1900 Person mostrou que em um limite com observações suficientes X² segue uma distribuição qui-quadrado com um grau de liberdade <code>quantidade de classes - 1</code>.
+É simbolizado pela letra grega qui elevada ao quadrado, pela semelhança com X iremos adotar X. Karl Pearson propôs que para medir as possíveis discrepâncias entre as proporções observadas e esperadas, deviamos fazer o somatório do quadrado da diferença entre a frequência observada e a esperada para classe, dividida pela esperada. Ou seja, chamando de <code>o</code> de frequência observada e <code>e</code> de frequência esperada: <code>X²=Σ[(o-e)²/e]</code>. Em 1900 Person mostrou que em um limite com suficientes observações, X² segue uma distribuição qui-quadrado com um grau de liberdade igual a <code>quantidade de classes - 1</code>.
 
 Chamamos de classe os  valores que podem ser assumidos. Por exemplo se lidarmos com as probabilidades relacionadas a jogar uma moeda, podemos ter cara ou coroa, 2 classes. Se jogarmos 100 vezes a moeda, temos 100 medidas, mas 2 classes.
 
