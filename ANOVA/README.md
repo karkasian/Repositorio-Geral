@@ -72,7 +72,7 @@ Trabalhamos com duas hipóteses:
 - Hipótese nula (H0): as frequências observadas não são diferentes das frequências esperadas.
 - Hipótese alternativa: as frequências observadas são diferentes das frequências esperadas.
 
-É simbolizado pela letra grega qui elevada ao quadrado, pela semelhança com X iremos adotar X. Karl Pearson propôs que para medir as possíveis discrepâncias entre as proporções observadas e esperadas, deviamos fazer o somatório do quadrado da diferença entre a frequência observada e a esperada para classe, dividida pela esperada. Ou seja, chamando de <code>o</code> de frequência observada e <code>e</code> de frequência esperada: <code>X²=Σ[(o-e)²/e]</code>. Em 1900 Person mostrou que em um limite com suficientes observações, X² segue uma distribuição qui-quadrado com um grau de liberdade igual a <code>quantidade de classes - 1</code>.
+É simbolizado pela letra grega qui (chi) elevada ao quadrado, pela semelhança com X iremos adotar X. Karl Pearson propôs que para medir as possíveis discrepâncias entre as proporções observadas e esperadas, deviamos fazer o somatório do quadrado da diferença entre a frequência observada e a esperada para classe, dividida pela esperada. Ou seja, chamando de <code>o</code> de frequência observada e <code>e</code> de frequência esperada: <code>X²=Σ[(o-e)²/e]</code>. Em 1900 Person mostrou que em um limite com suficientes observações, X² segue uma distribuição qui-quadrado com um grau de liberdade igual a <code>quantidade de classes - 1</code>.
 
 Chamamos de classe os  valores que podem ser assumidos. Por exemplo se lidarmos com as probabilidades relacionadas a jogar uma moeda, podemos ter cara ou coroa, 2 classes. Se jogarmos 100 vezes a moeda, temos 100 medidas, mas 2 classes.
 
@@ -88,7 +88,6 @@ Por sua vez, o nível de significância (normalmente representado pela letra gre
 
 Portanto a distribuição X² que correponde aos nossos valores tabelados, corresponde a hipótese nula. Se o valor de X² calculado, apresentar uma baixa probabilidade de ocorrência pra distribuição da hipótese nula, rejeitamos a hipótese nula.
 
-
 ### Distribuição X²
 
 A tabela depende do grau de liberdade e do nível de significância. Primeiro, o grau de liberdade é utilizado para a construção da função probabilidade. Ela determina a probabilidade da função X² retornar um determinado valor, para aquele grau de liberdade. 
@@ -103,7 +102,7 @@ A análise do qui quadrado, serve para comparar frequências. Então vamos imagi
 
 Como hipóteses temos:
 
-- H0: as frequências observadas não são diferentes das frequências esperadas: Shangai teve um desempenho esperado.
+- H0: as frequências observadas não são diferentes das frequências esperadas: Florida teve o desempenho esperado.
 - H1: as frequências observadas são diferentes das frequências esperadas: nossa teoria estava errada.
 
 Como nossos valores podem assumir 2 valores (vitória e derrota), temos então 1 grau de liberdade. Vamos definir um nível de significância padrão de 5% (a=0,05). 
@@ -118,4 +117,10 @@ Uma leitura interessante sobre o assunto pode ser conferido no texto [Qui Quadra
 
 ## Distribuição F
 
+A distribuição F de Snedecor com <code>d<sub>1</sub></code>  graus de liberdade no numerador e <code>d<sub>2</sub></code> graus de liberdade no denomidador é dado por: <code>F=(Q<sub>1</sub>/d<sub>1</sub>)/(Q<sub>2</sub>/d<sub>2</sub>)</code>, onde <code>Q<sub>i</sub></code> é uma distribuição qui-quadrado com <code>d<sub>i</sub></code> graus de liberdade.
 
+Portanto pegamos duas distribuições qui-quadrado da seção anterior, pegamos então um elemento de cada e dividimos pelo grau de liberdade da distribuição a que pertence, e então fazemos a razão entre os dois valores resultantes, assim temos um valor de F. A distribuição destes valores calculados, nos dá a distribuição F de Snedecor. 
+
+([Neste texto]http://www.de.ufpb.br/~tarciana/Probabilidade2/Aula16.pdf() ) da <abbr title="Universidade Federal da Paraíba">UFPB</abbr> você encontra mais informações sobre a distribuição F. 
+
+# ANOVA
