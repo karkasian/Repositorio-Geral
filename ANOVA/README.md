@@ -90,24 +90,28 @@ Portanto a distribuição X² que correponde aos nossos valores tabelados, corre
 
 ### Projeto
 
-Vamos descobrir se eu sei exatamente o que vai acontecer nos jogos do NYE. Para isso, vamos comparar os meus palpites no bolão com os resultados verdadeiros. Para simplificar vamos denotar 1 para uma vitória do NYE, e -1 para uma derrota, e vamos utilizar apenas os jogos do último estágio da liga deste ano (2018).
-
-Então minhas apostas foram: (-1,1,1,-1,-1,1,-1,1,1,-1) e o resultado na verdade foi (1,1,1,1,1,-1,-1,1,-1,1). 
-
+A análise do qui quadrado, serve para comparar frequências. Então vamos imaginar que antes de começar a Overwatch League, eu tivesse expectivas humildes que o Shangai Dragons fosse vencer metade das partidas, isto é 20 vitórias e 20 derrotas. Vamos comparar com a frequência real de 0 vitórias e 
 Como hipóteses temos:
 
-- H0: as frequências observadas não são diferentes das frequências esperadas, eu sou um bom apostador.
-- H1: as frequências observadas são diferentes das frequências esperadas, eu errei as apostas.
+- H0: as frequências observadas não são diferentes das frequências esperadas: Shangai teve um desempenho esperado.
+- H1: as frequências observadas são diferentes das frequências esperadas: nossa teoria estava errada.
 
-Como nossos valores podem assumir 2 valores, temos então 1 grau de liberdade. Vamos definir um nível de significância de 10% (a=0,1). 
+Como nossos valores podem assumir 2 valores (vitória e derrota), temos então 1 grau de liberdade. Vamos definir um nível de significância padrão de 5% (a=0,05). 
 
-Calculando o X² temos um valor de 0.5261. O próximo passo, seria consultar a tabela,mas ao invés disso, vamos construir esta tabela.
+Calculando o X² temos um valor de 8. O próximo passo, seria consultar a tabela,mas ao invés disso, vamos construir esta tabela.
 
-A tabela depende do grau de liberdade e do nível de significância. Primeiro, o grau de liberdade é utilizado para a construção da função probabilidade. Ela determina a probabilidade da função X² retornar um determinado valor, para aquele grau de liberdade. Ao invés de utilizarmos a função probabilidade, vamos calcular.
+A tabela depende do grau de liberdade e do nível de significância. Primeiro, o grau de liberdade é utilizado para a construção da função probabilidade. Ela determina a probabilidade da função X² retornar um determinado valor, para aquele grau de liberdade. 
 
-A distribuição qui quadrado é uma soma dos quadrados de amostras de uma distribuição normal. Isto é, se pegamos amostras de uma distribuição normal, a distribuição qui-quadrado é a distribuição soma desses valores ao quadrado, e os graus de liberdade é sua média, e também a quantidade de amostras sendo somadas. Por exemplo, no nosso caso, queremos uma distribuição com 1 grau de liberdade, então só precisamos pegar uma amostra aleatória com uma distribuição normal e elevarmos seus valores ao quadrado, a distribuição final, é nossa distribuição X². Se tivessemos dois grausde liberdade, somariamos um elemento elevado ao quadrado de cada amostra para termos cada X², e esses valores seriam nossa distribuição.
+A distribuição qui quadrado é uma soma dos quadrados de amostras de uma distribuição normal. Isto é, se pegamos <code>N</code> amostras de uma distribuição normal, a distribuição qui-quadrado é a distribuição da soma desses valores ao quadrado, e os graus de liberdade é sua média (os graus de liberdade também são quantidade de amostras sendo somadas). Para nosso caso por exemplo, queremos uma distribuição com 1 grau de liberdade, então só precisamos pegar uma amostra aleatória com uma distribuição normal e elevarmos seus valores ao quadrado, a distribuição final, é nossa distribuição X². Se tivessemos dois grausde liberdade, somariamos um elemento elevado ao quadrado de cada uma das duas amostras, então calcularíamos o X², e a distribuição destes valores finais calculados seriam nossa distribuição.
 
-O nível de significância nos indica onde está nosso ponto crítico. Um nível de significância comum de a=0.05, significa que ele é o ponto em que tem 95% de chance de termos um valor menor, isto é, a probabilidade acumulada até imediatamente antes a aquele ponto é de 95%. Então há apenas 5% de chance da função assumir aquele valor, ou mesmo, algum valor maior.
+O nível de significância nos indica onde está nosso ponto crítico. Um nível de significância comum de a=0.05, significa que o ponto está em uma posição em que que tem 5% de chance da função assumir um valor igual ou maior que aquele. 
+
+Para nossa aproximação, vamos simplesmente gerar uma distribuição normal de pontos, agrupar eles em faixas de valores. Teremos então uma quantidade de colunas equivalente a quantidade a quantidade de faixas de valores, onde a área da coluna é dada pelo produto de sua altura(quantidade de pontos dentro da faixa) pela largura (tamanho da faixa). Então só precisamos normalizar para que o total da soma da área de todas as colunas seja igual 1. Então só precisamos ir somando as áreas de todas as colunas da extrema direita em direção a origem, quando tivermos uma probabilidade igual ou maior a somada de a, checamos qual o valor do eixo x (valor X²) correspondente. Com esse método obtemos um valor arredondadp para 3.84, bate com o valor que consta em tabelas.
+
+Portanto, rejeitamos nossa hipótese nula a admitimos que nossa teoria inicial que o Shangai seria um time mediano, estava errada.
+
+Obs.: Se não quiséssemos aproximar usaríamos a função densidadede de probabilidade, dela poderíamos obter a função cumulativa de densidade, e a inversa da função cumulativa de densidade, que deveria nos retornar o valor indicado.
 
 Uma leitura interessante sobre o assunto pode ser conferido no texto [Qui Quadrado](http://www.ufpa.br/dicas/biome/biopdf/bioqui.pdf), disponibilizado pela <abbr title="Universidade Federal do Pará">UFPA</abbr>.
 
+## Distribuição F
