@@ -64,7 +64,7 @@ Introdução ao software R](http://www.uft.edu.br/engambiental/prof/catalunha/ar
 
 # Distribuições
 
-## Distribuição qui-quadrado
+## Teste qui-quadrado
 
 Qui Quadrado é um teste não paramétrico, isto é, não depende de parâmetros populacionais como média e variância, que serve para avaliar quantitativamente a relação entre o resultado de um experimento e a distribuição esperada para o fenômeno.
 
@@ -72,7 +72,7 @@ Trabalhamos com duas hipóteses:
 - Hipótese nula (H0): as frequências observadas não são diferentes das frequências esperadas.
 - Hipótese alternativa: as frequências observadas são diferentes das frequências esperadas.
 
-É simbolizado pela letra grega qui elevada ao quadrado, pela semelhança com X iremos adotar X. Karl Pearson propôs que para medir as possíveis discrepâncias entre as proporções observadas e esperadas, deviamos fazer o somatório do quadrado da diferença entre a frequência observada e a esperada para classe, dividida pela esperada. Ou seja, chamando de <code>o</code> de frequência observada e <code>e</code> de frequência esperada: <code>X²=Σ[(o-e)²/e]</code>. 
+É simbolizado pela letra grega qui elevada ao quadrado, pela semelhança com X iremos adotar X. Karl Pearson propôs que para medir as possíveis discrepâncias entre as proporções observadas e esperadas, deviamos fazer o somatório do quadrado da diferença entre a frequência observada e a esperada para classe, dividida pela esperada. Ou seja, chamando de <code>o</code> de frequência observada e <code>e</code> de frequência esperada: <code>X²=Σ[(o-e)²/e]</code>. Em 1900 Person mostrou que em um limite com observações suficientes X² segue uma distribuição qui-quadrado com um grau de liberdade <code>quantidade de classes - 1</code>.
 
 Chamamos de classe os  valores que podem ser assumidos. Por exemplo se lidarmos com as probabilidades relacionadas a jogar uma moeda, podemos ter cara ou coroa, 2 classes. Se jogarmos 100 vezes a moeda, temos 100 medidas, mas 2 classes.
 
@@ -88,9 +88,19 @@ Por sua vez, o nível de significância (normalmente representado pela letra gre
 
 Portanto a distribuição X² que correponde aos nossos valores tabelados, corresponde a hipótese nula. Se o valor de X² calculado, apresentar uma baixa probabilidade de ocorrência pra distribuição da hipótese nula, rejeitamos a hipótese nula.
 
+
+### Distribuição X²
+
+A tabela depende do grau de liberdade e do nível de significância. Primeiro, o grau de liberdade é utilizado para a construção da função probabilidade. Ela determina a probabilidade da função X² retornar um determinado valor, para aquele grau de liberdade. 
+
+A distribuição qui quadrado é uma soma dos quadrados de amostras de uma distribuição normal. Isto é, se pegamos <code>N</code> amostras de uma distribuição normal, a distribuição qui-quadrado é a distribuição da soma desses valores ao quadrado, e os graus de liberdade é sua média (os graus de liberdade também são quantidade de amostras sendo somadas). Para uma distribuição com 1 grau de liberdade, por exemplo, então só precisamos pegar uma amostra aleatória com uma distribuição normal e elevarmos seus valores ao quadrado, a distribuição final, é nossa distribuição X². Se tivessemos dois grausde liberdade, somariamos um elemento elevado ao quadrado de cada uma das duas amostras, então calcularíamos o X², e a distribuição destes valores finais calculados seriam nossa distribuição.
+
+O nível de significância nos indica onde está nosso ponto crítico. Um nível de significância comum de a=0.05, significa que o ponto está em uma posição em que que tem 5% de chance da função assumir um valor igual ou maior que aquele. 
+
 ### Projeto
 
-A análise do qui quadrado, serve para comparar frequências. Então vamos imaginar que antes de começar a Overwatch League, eu tivesse expectivas humildes que o Shangai Dragons fosse vencer metade das partidas, isto é 20 vitórias e 20 derrotas. Vamos comparar com a frequência real de 0 vitórias e 
+A análise do qui quadrado, serve para comparar frequências. Então vamos imaginar que antes de começar a Overwatch League, eu tivesse expectivas humildes que o Florida Mayhem fosse vencer metade das partidas, isto é 20 vitórias e 20 derrotas. Vamos comparar com a frequência real de 7 vitórias e 33 derrotas.
+
 Como hipóteses temos:
 
 - H0: as frequências observadas não são diferentes das frequências esperadas: Shangai teve um desempenho esperado.
@@ -98,20 +108,14 @@ Como hipóteses temos:
 
 Como nossos valores podem assumir 2 valores (vitória e derrota), temos então 1 grau de liberdade. Vamos definir um nível de significância padrão de 5% (a=0,05). 
 
-Calculando o X² temos um valor de 8. O próximo passo, seria consultar a tabela,mas ao invés disso, vamos construir esta tabela.
-
-A tabela depende do grau de liberdade e do nível de significância. Primeiro, o grau de liberdade é utilizado para a construção da função probabilidade. Ela determina a probabilidade da função X² retornar um determinado valor, para aquele grau de liberdade. 
-
-A distribuição qui quadrado é uma soma dos quadrados de amostras de uma distribuição normal. Isto é, se pegamos <code>N</code> amostras de uma distribuição normal, a distribuição qui-quadrado é a distribuição da soma desses valores ao quadrado, e os graus de liberdade é sua média (os graus de liberdade também são quantidade de amostras sendo somadas). Para nosso caso por exemplo, queremos uma distribuição com 1 grau de liberdade, então só precisamos pegar uma amostra aleatória com uma distribuição normal e elevarmos seus valores ao quadrado, a distribuição final, é nossa distribuição X². Se tivessemos dois grausde liberdade, somariamos um elemento elevado ao quadrado de cada uma das duas amostras, então calcularíamos o X², e a distribuição destes valores finais calculados seriam nossa distribuição.
-
-O nível de significância nos indica onde está nosso ponto crítico. Um nível de significância comum de a=0.05, significa que o ponto está em uma posição em que que tem 5% de chance da função assumir um valor igual ou maior que aquele. 
+Calculando o X² temos um valor de 16,9. O próximo passo, seria consultar a tabela,mas ao invés disso, vamos construir esta tabela.
 
 Para nossa aproximação, vamos simplesmente gerar uma distribuição normal de pontos, agrupar eles em faixas de valores. Teremos então uma quantidade de colunas equivalente a quantidade a quantidade de faixas de valores, onde a área da coluna é dada pelo produto de sua altura(quantidade de pontos dentro da faixa) pela largura (tamanho da faixa). Então só precisamos normalizar para que o total da soma da área de todas as colunas seja igual 1. Então só precisamos ir somando as áreas de todas as colunas da extrema direita em direção a origem, quando tivermos uma probabilidade igual ou maior a somada de a, checamos qual o valor do eixo x (valor X²) correspondente. Com esse método obtemos um valor arredondadp para 3.84, bate com o valor que consta em tabelas.
 
-Portanto, rejeitamos nossa hipótese nula a admitimos que nossa teoria inicial que o Shangai seria um time mediano, estava errada.
-
-Obs.: Se não quiséssemos aproximar usaríamos a função densidadede de probabilidade, dela poderíamos obter a função cumulativa de densidade, e a inversa da função cumulativa de densidade, que deveria nos retornar o valor indicado.
+Portanto, rejeitamos nossa hipótese nula a admitimos que nossa teoria inicial que o Mayhem seria um time mediano, estava errada.
 
 Uma leitura interessante sobre o assunto pode ser conferido no texto [Qui Quadrado](http://www.ufpa.br/dicas/biome/biopdf/bioqui.pdf), disponibilizado pela <abbr title="Universidade Federal do Pará">UFPA</abbr>.
 
 ## Distribuição F
+
+

@@ -1,4 +1,4 @@
-#ANOVA: Distribuições - Qui-Quadrado
+#ANOVA: Distribuições - Teste Qui-Quadrado
 #Desenvolvido por:     Jhordan Silveira de Borba
 #E-mail:               jhordandecacapava@gmail.com
 #Website:              https://sapogithub.github.io
@@ -10,10 +10,10 @@ distribuicao<-function(a){
 	#a	- Nivel de significância
 
 
-	dist<-rnorm(10000000)^2			#Pegamos uma amostra de distribuição normal com 1000 elementos elevados ao quadrado
-	hist<-hist(dist,breaks=1000000, plot=FALSE)		#Mais importante que plotar, isso cria uma classe em R com os pontos. 
+	dist<-(rnorm(100000)^2)			#Pegamos uma amostra de distribuição normal com 1000 elementos elevados ao quadrado
+	hist<-hist(dist,breaks=1000, plot=FALSE)		#Mais importante que plotar, isso cria uma classe em R com os pontos. 
 	#Em hist contém a largura, altura,ponto médio e densidade das colunas
-	hist(dist,breaks=100,xlim=c(0,11))	#Mas também podemos plotar
+	hist(dist,breaks=1000,xlim=c(0,4))	#Mas também podemos plotar
 	delta<-hist$breaks[2]			#Nosso delta
 	pa<-0					#Probabilidade acumulada
 	for (k in length(hist$density):1){	#Vamos percorrer da extrema direita pra esquerda
@@ -40,16 +40,16 @@ qui<-function(e,o){
 }
 
 esp<-c(20,20)				#Vetor as frequências de Vitórias/Derrotas esperadas
-obs<-c(0,20)				#Vetor com as frequências de Vitórias/Derrotas esperadas
+obs<-c(7,33)				#Vetor com as frequências de Vitórias/Derrotas esperadas
 
-meu<-qui(res,apo)			#Retornamos o valor X² de nossa função
+meu<-qui(esp,obs)			#Retornamos o valor X² de nossa função
 cat("X² da minha aposta: ",meu)
 tab<-distribuicao(0.05)			#Retornamos o valor tabelado
 cat("\nX² crítico: ",tab)
 if(meu>=tab){				#Se o valor da nossa função é maior ou igual
 	cat("\nH0 rejeitada.")		#Rejeitamos a hipótese nula
+} else {
+	cat("\nH1 Validada.")		#Não rejeitamos a hipótese nula
 }
-else {
-	cat("\nH0 validada.")		#Se não, não
-}
+
 cat("\n")
