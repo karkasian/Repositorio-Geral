@@ -5,8 +5,29 @@
 #Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/wiki/ANOVA
 #2018
 
-#Equivalente: chisq.test()
+#Função para gerar a distribuição X² para 1 grau de liberdade
+distribuicao<-function(a){
+	#a	- Nivel de significância
 
+
+	dist<-rnorm(10000000)^2			#Pegamos uma amostra de distribuição normal com 1000 elementos elevados ao quadrado
+	hist<-hist(dist,breaks=1000000)		#Mais importante que plotar, isso cria uma classe com os 10.000 pontos, dividido com largura das colunas, altura das colunas, ponto médio das colunas, e densidade
+	delta<-hist$breaks[2]			#Nosso delta
+	p<-1-a					#Valor que vamos procurar
+	pa<-0					#Probabilidade acumulada
+	for (k in 1:length(hist$density)){
+		pa<-pa+hist$density[k]*delta
+		if (pa>p){
+		crit<-hist$breaks[k-1]		#Como isso retorna a probabilidade de termos ESSE valor ou menor, e só queremos menor, pegamos o anterior imediatamente
+		break
+		}
+	}
+
+	return(crit)
+}
+
+
+#Equivalente: chisq.test()
 qui<-function(e,o){
 	#e	- Vetor com os valores esperados
 	#o	- Vetor com os valores observados
@@ -21,36 +42,9 @@ qui<-function(e,o){
 	return (som)
 }
 
-apo<-c(-1,1,1,-1,-1,1,-1,1,1,-1)	#Vetor com minhas apostas
-res<-c(1,1,1,1,1,-1,-1,1,-1,1)	
+apo<-c(-1,1,1,-1,-1, 1,-1,1, 1,-1)	#Vetor com minhas apostas
+res<-c( 1,1,1, 1, 1,-1,-1,1,-1, 1)	
 
 cat("X² da minha aposta: ",qui(res,apo))
 
-#Vamos gerar a distribuição X
-
-vet<-c()				#Vetor onde vamos guardar os X
-for (x in 1:10000){
-	num1<-sample(2:20,1)		#Tamanho do vetore de resultados esperados
-	num2<-sample(2:20,1)		#Tamanho do vetore de resultados observados	
-	num3<-sample(1:2, num1, replace=T)	#Resultados esperados
-	num4<-sample(1:2, num2, replace=T)	#Resultados observados
-	vet<-c(vet,qui(num3,num4))
-}
-fin <-vet [! vet %in% NA]			#Retira os NA (Eles surgem porque se nos dados esperados obtermos só um tipo de valor, teremos uma divisão por 0
-div<-100					#Tamanho que vamos dividir os dados
-#hist(fin,breaks=div,xlim=c(0,20))		#Histograma dividindo em 100 partes
-cort<-cut(fin, div)				#Dividimos em 100 partes
-maxi<-max(fin)					#O valor máximo
-mini<-min(fin)					#O valor mínimo
-delta<-(maxi-mini)/div				#A variação
-freq<-table(cort)				#A tabela de frequências		
-y<-as.vector(freq)				#A frequência de cada valor
-x<-c()						#Onde vamos guardar os X²
-k<-0						#Nosso x inicial
-for (k in 1:div){
-	k<-k+delta				#Variamso x de acordo com o delta
-	x<-c(x,k)				#Salvamos
-}
-#plot(x,y,type="l")				#Plotamos como linha
-
-#Vamos normalizar o resultado
+cat("\nX² crítico: ",distribuicao(0.05))
