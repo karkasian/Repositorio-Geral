@@ -109,7 +109,7 @@ Como nossos valores podem assumir 2 valores (vitória e derrota), temos então 1
 
 Calculando o X² temos um valor de 16,9. O próximo passo, seria consultar a tabela,mas ao invés disso, vamos construir esta tabela.
 
-Para nossa aproximação, vamos simplesmente gerar uma distribuição normal de pontos, agrupar eles em faixas de valores. Teremos então uma quantidade de colunas equivalente a quantidade a quantidade de faixas de valores, onde a área da coluna é dada pelo produto de sua altura(quantidade de pontos dentro da faixa) pela largura (tamanho da faixa). Então só precisamos normalizar para que o total da soma da área de todas as colunas seja igual 1. Então só precisamos ir somando as áreas de todas as colunas da extrema direita em direção a origem, quando tivermos uma probabilidade igual ou maior a somada de a, checamos qual o valor do eixo x (valor X²) correspondente. Com esse método obtemos um valor arredondadp para 3.84, bate com o valor que consta em tabelas.
+Para nossa aproximação, vamos simplesmente gerar uma distribuição normal de pontos, agrupar eles em faixas de valores. Teremos então uma quantidade de colunas equivalente a quantidade a quantidade de faixas de valores, onde a área da coluna é dada pelo produto de sua altura(quantidade de pontos dentro da faixa) pela largura (tamanho da faixa). Então só precisamos normalizar para que o total da soma da área de todas as colunas seja igual 1. Então só precisamos ir somando as áreas de todas as colunas da extrema direita em direção a origem, quando tivermos uma probabilidade igual ou maior a somada de a, checamos qual o valor do eixo x (valor X²) correspondente. Com esse método, dependendo dos parâmetros que definirmos (como quantidade de pontos e quantidade de faixas de valores), conseguimos obtee um valor arredondado para 3.84, que é o valor tabelado.
 
 Portanto, rejeitamos nossa hipótese nula a admitimos que nossa teoria inicial que o Mayhem seria um time mediano, estava errada.
 
@@ -125,46 +125,54 @@ Portanto pegamos duas distribuições qui-quadrado da seção anterior, pegamos 
 
 # ANOVA
 
-# ANOVA
+ANOVA,abreviação em inglês para Análise da Variância (Analysis of variance), é um método para testar a igualdade duas ou mais médias populacionais baseado na análise fas variâncias amostrais. Normalmente citado para testar três ou mais, pois se quisermos testar apenas 2, podemos analisar a viabilidade de utilizar um teste T.
 
-A fim de descobrirmos se temos diferenças entre nossos três grupos devido a algum fator que controlamos, podemos seguir alguns passos:
+Os dados primeiros devem ser separados em grupos segundo uma característica (também chamado de fator), que nada mais é que  alguma característica que permite distinguir diferentes populações uma das outras. Então cada fator contém dois ou mais grupos (também chamados de classificações).
+
+Foi o estatístico E.P. Box que mostrou que os resultados são confiáveis se cumprido alguns critérios. 
+
+Nós vamos querer descobrir se houve mudanças significativas de desempenho na atuação do New York Excelsior nas últimas 15 partidas (desconsideando os playoff) analisando o saldo de mapas em cada partida. Vamos ter grupos, com um único fator: o período liga.
+
+- Período 1 - Final do terceiro estágio:(1,2,4,4,2).
+- Período 2 - Começo do quarto estágio, novo meta: (3,2,4,4,4).
+- Período 3 - Final do quarto estágio, já classificado: (-1,-1,1,-2,1).
+
+A fim de descobrirmos se temos diferenças entre nossos três grupos, podemos seguir alguns passos:
 
 ## Passo 1: Hipóteses
 
 Primeiro passo, é determinar quais as hipóteses que queremos checar. Para aplicar o método ANOVA com 1 fator, temos as seguintes hipóteses:
 
-- Hipótese nula (H0): não há diferença entre os valores médios dos grupos: o fator não tem efeito.
+- Hipótese nula (H0): não há diferença entre os valores médios dos grupos: o fator não tem efeito. 
 - Hipótese alternativa (H1): nem todas as médias são iguais: o fator tem efeito.
 
-Também nessa etapa determinamos o nível de significância que vamos aceitar, isto é "o quão incerto" vamos aceitar que nossa resposta seja. Um valor típico é utilizar a=0.05, isto é aceitamos uma probabilidade 5% de estar errado.
+Para nós, estas hipóteses podem ser "traduzidas" como:
+- H0: Não houve mudança no desempenho do NYE ao longo da liga.
+- H0: Houve mudanças de desempenho entre um período e outro.
+
+Também nessa etapa determinamos o nível de significância, exatamente como pro teste de qui quadrado, vamos adotar a=0.05.
 
 ## Passo 2: Estatística de teste
 
 O valor da estatística de teste é usado para decidir se podemos ou não rejeitar a hipótese nula, este é um valor calculado a partir de nossa amostra de dados.
 
-Para o ANOVA, a estatística de teste utilizada é o teste f: a razão entre a variância entre amostras e a variância dentro das amostras: <code>F=S²<sub>entre</sub>/S²<sub>dentro</sub></code>
+Para o ANOVA, a estatística de teste utilizada é a estatística F: a razão entre a variância entre amostras e a variância dentro das amostras: <code>F=S²<sub>entre</sub>/S²<sub>dentro</sub></code>
 
 ## Passo 3: Regras de decisão
 
 Precisamos estabelecer agora as regras que irão determinar se rejeitamos a hipótese nula ou não. Então aqui precisamos calcular o F Crítico (Fc) e então determinamos se nosso valor calculado peça estatística de teste for maior ou igual que o F crítico, rejeitamos nossa hipótese nula.
 
-O valor crítico é obtido pela distribuição F.
+O valor crítico é obtido pela distribuição F. Para o grau de liberdade do numerador da distribuição, é relacionado com a variância entre os grupos, então vai ser a <code>quantidade de grupos-1<code>, e para o denominador, sob a variância dentro dos grupos, vamos ter então a <code>quantidade de elementos - quantidade de grupos<code>.
 
-### Distribuição F
-
-A função densidade de probabilidade (<abbr title="probability density function">PDF</abbr>) descreve a probabilidade de uma variável tomar um valor dado. 
-
-Se uma variável aleatória X tem uma função distribuição F, a função densidade de probabilidade dada para X é dado por:
-
-IMG#1: PDF.png
-
-Onde B é uma função beta, para valores inteiros toma a forma:
-
-IMG#2: beta.png
+No próximo item essa relação vai ficar mais clara, por agora, vamos encontrar nosso Fc. Como temos 3 grupos, temos um grau de liberdade no numerador<code>gl<sub>n</sub>=3-1=2</code>, e como temos 15 valores no total (5 em cada grupo), vamos ter então para o denominador um grau de liberdade de <code>gl<sub>n</sub>=15-3=12</code>. Utilizando o mesmo processo de aproximação do teste anterior, conseguimos atingir um valor arrendado de Fc=3.89, que é o valor tabelado.
 
 ## Passo 4: Cálculo
 
+...
+
 ## Passo 5: Conclusão
+
+...
 
 Dois textos eu tenho para recomendar sobre o método ANOVA:
 - [Análise da Variância (ANOVA)](http://www.de.ufpb.br/~tarciana/Probabilidade2/Aula16.pdf): Sobre a ANOVa 1-fator e ANOVA 2-fator, divulgado pela <abbr title="Universidade de São Paulo">USP</abbr>.

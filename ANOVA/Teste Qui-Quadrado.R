@@ -8,10 +8,12 @@
 #Função para gerar a distribuição X² para 1 grau de liberdade
 distribuicao<-function(a){
 	#a	- Nivel de significância
+	#Podemos confirar algumas coisas pra definir a exatidão
+	pt<-100000	#Quantidade de pontos gerados
+	fx<-1000	#Quantidade de faixas de valores gerados
 
-
-	dist<-(rnorm(100000)^2)			#Pegamos uma amostra de distribuição normal com 1000 elementos elevados ao quadrado
-	hist<-hist(dist,breaks=1000, plot=FALSE)		#Mais importante que plotar, isso cria uma classe em R com os pontos. 
+	dist<-(rnorm(pt)^2)			#Pegamos uma amostra de distribuição normal com 1000 elementos elevados ao quadrado
+	hist<-hist(dist,breaks=fx, plot=FALSE)#Mais importante que plotar, isso cria uma classe em R com os pontos. 
 	#Em hist contém a largura, altura,ponto médio e densidade das colunas
 	hist(dist,breaks=1000,xlim=c(0,4))	#Mas também podemos plotar
 	delta<-hist$breaks[2]			#Nosso delta
