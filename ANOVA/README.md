@@ -125,7 +125,7 @@ Portanto pegamos duas distribuições qui-quadrado da seção anterior, pegamos 
 
 # ANOVA
 
-ANOVA,abreviação em inglês para Análise da Variância (Analysis of variance), é um método para testar a igualdade duas ou mais médias populacionais baseado na análise fas variâncias amostrais. Normalmente citado para testar três ou mais, pois se quisermos testar apenas 2, podemos analisar a viabilidade de utilizar um teste T.
+ANOVA, abreviação em inglês para Análise da Variância (Analysis of variance), é um método para testar a igualdade duas ou mais médias populacionais baseado na análise fas variâncias amostrais. Normalmente citado para testar três ou mais, pois se quisermos testar apenas 2, podemos analisar a viabilidade de utilizar um teste T.
 
 Os dados primeiros devem ser separados em grupos segundo uma característica (também chamado de fator), que nada mais é que  alguma característica que permite distinguir diferentes populações uma das outras. Então cada fator contém dois ou mais grupos (também chamados de classificações).
 
@@ -241,7 +241,7 @@ Com esta fórmula, calculamos os seguintes valores para comaparação:
 Agora nos resta apenas concluir baseado nos valores calculados, lembrando que se a diferença absoluta entre as médias de dois grupos for maior que o valor para comparação, consideramos que são estatisticamente diferentes. Temos como resultado então que:
 
 - Os grupos 1 e 2: não são estatisticamente diferente
-- Os grupos 1 e 3: não são estatisticamente diferente
+- Os grupos 1 e 3: são estatisticamente diferente
 - Os grupos 2 e 3: são estatisticamente diferente
 
 Então podemos confirmar que não houve mudança de desempenho entre o final do terceiro estágio e começo do último, ou seja, a mudança de meta não causou uma mudança de desempenho. Porém os dois períodos são estatisticamente diferente do último: a última metade do último estágio.
