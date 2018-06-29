@@ -162,13 +162,15 @@ Para o ANOVA, a estatística de teste utilizada é a estatística F: a razão en
 
 Precisamos estabelecer agora as regras que irão determinar se rejeitamos a hipótese nula ou não. Então aqui precisamos calcular o F Crítico (Fc) e então determinamos se nosso valor calculado peça estatística de teste for maior ou igual que o F crítico, rejeitamos nossa hipótese nula.
 
-O valor crítico é obtido pela distribuição F. Para o grau de liberdade do numerador da distribuição, é relacionado com a variância entre os grupos, então vai ser a <code>quantidade de grupos-1<code>, e para o denominador, sob a variância dentro dos grupos, vamos ter então a <code>quantidade de elementos - quantidade de grupos<code>.
+O valor crítico é obtido pela distribuição F. Para o grau de liberdade do numerador da distribuição, é relacionado com a variância entre os grupos, então vai ser a <code>quantidade de grupos-1</code>, e para o denominador, sob a variância dentro dos grupos, vamos ter então a <code>quantidade de elementos - quantidade de grupos</code>.
 
 No próximo item essa relação vai ficar mais clara, por agora, vamos encontrar nosso Fc. Como temos 3 grupos, temos um grau de liberdade no numerador<code>gl<sub>n</sub>=3-1=2</code>, e como temos 15 valores no total (5 em cada grupo), vamos ter então para o denominador um grau de liberdade de <code>gl<sub>n</sub>=15-3=12</code>. Utilizando o mesmo processo de aproximação do teste anterior, conseguimos atingir um valor arrendado de Fc=3.89, que é o valor tabelado.
 
 ## Passo 4: Cálculo
 
-...
+Agora precisamos então calcular de fato a variação entre e dentro dos grupos. Primeiro precisamos calcular o valor médio de cada grupo e a média destes valores (grande média).
+
+Então, para calcular primeiro a variância entre as amostras, nós cálculamos a variância com a fórmula normal de variância: <code>S²= Σ<sub>i</sub>(x<sub>i</sub>-x̄)²/(n-1)</code>. Apenas com a diferença que agora <code>(x<sub>i</sub></code> são as médias de cada grupo, <code>x̄</code> é a grande média, e nosso grau de liberdade vai se manter como <code>(n-1)</code>, onde <code>n</code> é nossa quantidade de grupos, portante é o grau de liberdade do numerador da nossa distribuição F.
 
 ## Passo 5: Conclusão
 
