@@ -168,7 +168,7 @@ No próximo item essa relação vai ficar mais clara, por agora, vamos encontrar
 
 ## Passo 4: Cálculo
 
-Consideramos que a variação total é a soma entre a variação entre e a variação dentro das amostras. Então agora precisamos calcular de fato a variação entre e dentro dos grupos. Primeiro precisamos calcular o valor médio de cada grupo e a média destes valores (grande média normalmente é representado por um x com duas barras, pela dificuldade de escrita aqui, utilizaremos a letra grega μ).
+Consideramos que a variação total é a soma entre a variação entre e a variação dentro das amostras. Então agora precisamos calcular de fato a variação entre e dentro dos grupos. Primeiro precisamos calcular o valor médio de cada grupo e a média de todos os elementos de todos os grupos (chamada também de grande média, normalmente é representado por um x com duas barras, pela dificuldade de escrita aqui, utilizaremos a letra grega μ).
 
 Para a variância total, teríamos o padrão visto anteriormente: <code>S²= Σ<sub>i</sub>(x<sub>i</sub>-μ)²/(n-1)</code>, onde <code>μ</code> é a média entre todos os elementos, então também é a grande média. Também podemos escrever como um somatório duplo: <code>S²= Σ<sub>j</sub>Σ<sub>i</sub>(x<sub>ji</sub>-μ)²/(n-1)</code>, onde nosso <code>j</code> indica o grupo e <code>i</code> o elemento dentro do grupo.
 
@@ -191,10 +191,61 @@ Nossa variância dentro dos grupos ficou em 1,47. Então fazendo a divisão entr
 
 ## Passo 5: Conclusão
 
-Nosso F calculado (13.68) é  maior que nosso Fc (3.89), portanto rejeitamos nossa hipótese nula. Nossa hipótese alternativa nos diz que há diferenças entre os períodos, isto é, houve mudanças de desempenho ao longo dos períodos. Mas, não sabemos qual período que é diferente, isto nos leva ao último passo: Teste de Tukey.
+Nosso F calculado (13.68) é  maior que nosso Fc (3.89), portanto rejeitamos nossa hipótese nula. Nossa hipótese alternativa nos diz que há diferenças entre os períodos, isto é, houve mudanças de desempenho ao longo dos períodos. Mas, não sabemos qual período que é diferente, isto nos leva ao último passo: Teste de Scheffe.
 
 Dois textos eu tenho para recomendar sobre o método ANOVA:
-- [Análise da Variância (ANOVA)](http://www.de.ufpb.br/~tarciana/Probabilidade2/Aula16.pdf): Sobre a ANOVa 1-fator e ANOVA 2-fator, divulgado pela <abbr title="Universidade de São Paulo">USP</abbr>.
+- [Análise da Variância (ANOVA)](https://edisciplinas.usp.br/pluginfile.php/3260534/mod_resource/content/1/Tópico_13.pdf): Sobre a ANOVa 1-fator e ANOVA 2-fator, divulgado pela <abbr title="Universidade de São Paulo">USP</abbr>.
 - [Hypothesis Testing - Analysis of Variance (ANOVA)](http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_HypothesisTesting-ANOVA/BS704_HypothesisTesting-Anova_print.html): Sobre o método de 5 passos, texto fornecido pela Universidade de Boston.
 
-# Teste de Tukey
+# Teste de Scheffe
+
+O teste de Scheffe é um teste de comparação de médias. Se não rejeitássemos a hipótese nula no ANOVA nenhum procedimento adicional seria necessário, mas como não rejeitamos, preciamos fazer uma análise para determinar quais médias são diferentes dads outras.
+
+Vamos utilizar o teste de Scheffe, pode ser dividido em três etapas principais:
+
+- Obter as diferenças absultas entre as médias dos grupos;
+- Obter os valores nos quais devemos comparar nossas diferenças absolutas, para identificar diferenças estatísticamente significantes;
+- Comparar os resultados.
+
+## Passo 0: Resultados do ANOVA
+
+Antes de começarmos o teste de Scheffe de fato, precisamos de alguns resultados obtidos quando aplicamos o método ANOVA:
+
+- Variância dentro dos grupos: 1.47;
+- F crítico: 3.89
+
+## Passo 1: Diferenças absolutas
+
+Primeiro passo é obtermos as diferenças absolutas entre as médias dos grupos:
+- Entre grupo 1 e 2: 0.8
+- Entre grupo 1 e 3: 3
+- Entre grupo 2 e 3: 3.8
+
+## Passo 2: 
+
+O próximo passo é então obter os valores com os quais as diferenças absolutas devem ser comparados. Para isso utilizamos uma fórmula: <code>√((k-1).Fc.S²<sub>entre</sub>.(1/m<sub>i</sub>+1/m<sub>j</sub>))</code>, onde:
+
+- <code>(k-1)</code>:grau de liberdade do numerador da função F, ou seja a quantidade de grupos menos um;
+- <code>Fc</code>: F crítico calculado com os mesmo os graus de liberdade utilizado no método ANOVA, aqui podemos definir um novo nível de significância para este teste, mas vamos utilizar o mesmo, logo temos exatamente o mesmo valor: 3.89;
+- <code>S²<sub>entre</sub></code>: variância entre os grupos;
+- <code>(1/m<sub>i</sub>+1/m<sub>j</sub>))</code>: <code>m<sub>i</sub></code> e <code>m<sub>j</sub></code> são as quantidades de elementos em cada um dos dois grupos que estamos comparando.
+
+Com esta fórmula, calculamos os seguintes valores para comaparação:
+
+- Entre grupo 1 e 2: 2.62
+- Entre grupo 1 e 3: 2.62
+- Entre grupo 2 e 3: 2.62
+
+## Passo 3:
+
+Agora nos resta apenas concluir baseado nos valores calculados, lembrando que se a diferença absoluta entre as médias de dois grupos for maior que o valor para comparação, consideramos que são estatisticamente diferentes. Temos como resultado então que:
+
+- Os grupos 1 e 2: não são estatisticamente diferente
+- Os grupos 1 e 3: não são estatisticamente diferente
+- Os grupos 2 e 3: são estatisticamente diferente
+
+Então podemos confirmar que não houve mudança de desempenho entre o final do terceiro estágio e começo do último, ou seja, a mudança de meta não causou uma mudança de desempenho. Porém os dois períodos são estatisticamente diferente do último: a última metade do último estágio.
+
+Com isso podemos afirmar estatisticamente que a garantia da vaga causou uma mudança de desempenho no NYE.
+
+Sobre este último teste, eu recomendo um texto do Lycoming College, intitulado [Scheffe’s Pair Wise Comparison of Means ](http://lycofs01.lycoming.edu/~sprgene/M123/Text/UNIT_28.pdf).
