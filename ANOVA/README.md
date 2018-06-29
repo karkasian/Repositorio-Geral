@@ -221,7 +221,7 @@ Primeiro passo é obtermos as diferenças absolutas entre as médias dos grupos:
 - Entre grupo 1 e 3: 3
 - Entre grupo 2 e 3: 3.8
 
-## Passo 2: 
+## Passo 2:  Valores para comparação
 
 O próximo passo é então obter os valores com os quais as diferenças absolutas devem ser comparados. Para isso utilizamos uma fórmula: <code>√((k-1).Fc.S²<sub>entre</sub>.(1/m<sub>i</sub>+1/m<sub>j</sub>))</code>, onde:
 
@@ -236,7 +236,7 @@ Com esta fórmula, calculamos os seguintes valores para comaparação:
 - Entre grupo 1 e 3: 2.62
 - Entre grupo 2 e 3: 2.62
 
-## Passo 3:
+## Passo 3: Conclusão
 
 Agora nos resta apenas concluir baseado nos valores calculados, lembrando que se a diferença absoluta entre as médias de dois grupos for maior que o valor para comparação, consideramos que são estatisticamente diferentes. Temos como resultado então que:
 
