@@ -168,9 +168,19 @@ No próximo item essa relação vai ficar mais clara, por agora, vamos encontrar
 
 ## Passo 4: Cálculo
 
-Agora precisamos então calcular de fato a variação entre e dentro dos grupos. Primeiro precisamos calcular o valor médio de cada grupo e a média destes valores (grande média).
+Consideramos que a variação total é a soma entre a variação entre e a variação dentro das amostras. Então agora precisamos calcular de fato a variação entre e dentro dos grupos. Primeiro precisamos calcular o valor médio de cada grupo e a média destes valores (grande média normalmente é representado por um x com duas barras, pela dificuldade de escrita aqui, utilizaremos a letra grega μ).
 
-Então, para calcular primeiro a variância entre as amostras, nós cálculamos a variância com a fórmula normal de variância: <code>S²= Σ<sub>i</sub>(x<sub>i</sub>-x̄)²/(n-1)</code>. Apenas com a diferença que agora <code>(x<sub>i</sub></code> são as médias de cada grupo, <code>x̄</code> é a grande média, e nosso grau de liberdade vai se manter como <code>(n-1)</code>, onde <code>n</code> é nossa quantidade de grupos, portante é o grau de liberdade do numerador da nossa distribuição F.
+Para a variância total, teríamos o padrão visto anteriormente: <code>S²= Σ<sub>i</sub>(x<sub>i</sub>-μ)²/(n-1)</code>, onde <code>μ</code> é a média entre todos os elementos, então também é a grande média. Também podemos escrever como um somatório duplo: <code>S²= Σ<sub>i</sub>Σ<sub>j</sub>(x<sub>ij</sub>-μ)²/(n-1)</code>, onde nosso <code>j</code> indica o grupo e <code>i</code> o elemento dentro do grupo.
+
+Então, para calcular primeiro a variância entre os grupos, nós cálculamos a variância da seguinte forma: <code>S²= Σ<sub>j</sub>n<sub>j</sub>(x̄<sub>j</sub>-μ)²/(k-1)</code>. Só que agora:
+
+- <code>x̄<sub>i</sub></code> é a média do grupo <code>i</code>;
+- <code>μ</code> é a grande média;
+- nosso grau de liberdade é dado por <code>(k-1)</code>, onde <code>k</code> é nossa quantidade de grupos, portanto é o grau de liberdade do numerador da nossa distribuição F;
+- <code>n<sub>j</sub></code> é a quantidade de valores no grupo <code>j</code>, também dito como a frequência do elemento <code>x̄<sub>j</sub></code>.
+
+Agora para calcular a variância dentro dos grupos
+ 
 
 ## Passo 5: Conclusão
 

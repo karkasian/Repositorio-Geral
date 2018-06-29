@@ -5,6 +5,8 @@
 #Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/wiki/ANOVA
 #2018
 
+#Equivalente em R para realizar o teste qui-quadrado: chisq.test()
+
 #Função para gerar a distribuição X² para 1 grau de liberdade
 distribuicao<-function(a){
 	#a	- Nivel de significância
@@ -29,8 +31,7 @@ distribuicao<-function(a){
 	return(crit)
 }
 
-
-#Equivalente: chisq.test()
+#Função para retornar X² das amostras
 qui<-function(e,o){
 	#e	- Vetor com as frequências esperadas
 	#o	- Vetor com as frequências observadas
