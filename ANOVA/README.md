@@ -148,7 +148,7 @@ Primeiro passo, é determinar quais as hipóteses que queremos checar. Para apli
 
 Para nós, estas hipóteses podem ser "traduzidas" como:
 - H0: Não houve mudança no desempenho do NYE ao longo da liga.
-- H0: Houve mudanças de desempenho entre um período e outro.
+- H1: Houve mudanças de desempenho entre algum período e outro.
 
 Também nessa etapa determinamos o nível de significância, exatamente como pro teste de qui quadrado, vamos adotar a=0.05.
 
@@ -179,18 +179,22 @@ Então, para calcular primeiro a variância entre os grupos, nós cálculamos a 
 - nosso grau de liberdade é dado por <code>(k-1)</code>, onde <code>k</code> é nossa quantidade de grupos, portanto é o grau de liberdade do numerador da nossa distribuição F;
 - <code>n<sub>j</sub></code> é a quantidade de valores no grupo <code>j</code>, também dito como a frequência do elemento <code>x̄<sub>j</sub></code>.
 
+Calculamos uma variância entre os grupos de 20.07.
+
 Agora para calcular a variância dentro dos grupos, semelhante ao total temos: <code>S²<sub>dentro</sub>= Σ<sub>j</sub>Σ<sub>i</sub>(x<sub>ji</sub>-x̄)²/(n-k)</code>, como podemos ver as diferenças são que:
 - Utilizamos a média do grupo a que pertence a amostra ao invés da média total;
 - Nosso grau de liberdade é <code>(n-k)</code>, este é o grau de liberdade do denominador de nossa distribuição F.
 
 Lembrando o que são os graus de liberdade, para nosso caso por exemplo, temos três grupos, aqui estamos lidando as médias dos três grupos. Quando tínhamos só a média total, tínhamos apenas uma média (fixada), então podíamos escolher <code>(n-1)</code> livremente, agora temos três médias, sendo que cada grupo tem  <code>m</code> elementos, em cada um podemos escolher aleatóriamente <code>(m-1)</code> elementos, então no total podemos escolher <code>(m-1)+(m-1)+(m-1)</code>, e sendo <code>n=m+m+m</code> nossa quantidade de elementos totais, temos um grau de liberdade de <code>n-3</code>, para o caso de 3 grupos.
  
-Fazendo a razão entre as duas variâncias, calculamos um valor de .
+Nossa variância dentro dos grupos ficou em 1,47. Então fazendo a divisão entre as duas obtemos um valor para F de 13.68.
 
 ## Passo 5: Conclusão
 
-...
+Nosso F calculado (13.68) é  maior que nosso Fc (3.89), portanto rejeitamos nossa hipótese nula. Nossa hipótese alternativa nos diz que há diferenças entre os períodos, isto é, houve mudanças de desempenho ao longo dos períodos. Mas, não sabemos qual período que é diferente, isto nos leva ao último passo: Teste de Tukey.
 
 Dois textos eu tenho para recomendar sobre o método ANOVA:
 - [Análise da Variância (ANOVA)](http://www.de.ufpb.br/~tarciana/Probabilidade2/Aula16.pdf): Sobre a ANOVa 1-fator e ANOVA 2-fator, divulgado pela <abbr title="Universidade de São Paulo">USP</abbr>.
 - [Hypothesis Testing - Analysis of Variance (ANOVA)](http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_HypothesisTesting-ANOVA/BS704_HypothesisTesting-Anova_print.html): Sobre o método de 5 passos, texto fornecido pela Universidade de Boston.
+
+# Teste de Tukey
