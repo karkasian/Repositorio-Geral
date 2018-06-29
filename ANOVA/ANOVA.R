@@ -26,8 +26,11 @@ m3<-mean(per3)			#Média do grupo 3
 m<-c(m1,m2,m3)			#Vetor com as médias
 gm<-mean(m)			#Grande média
 
+#Calcular o valor entre os grupos
 som<-0				#Somatório
 for (x in m){
 	som<-som+5*(x-gm)^2	#Todos nossos grupos tem o mesmo tamanho: 5
 }
 entre=som/2
+
+

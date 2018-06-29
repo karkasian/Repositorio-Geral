@@ -170,17 +170,22 @@ No próximo item essa relação vai ficar mais clara, por agora, vamos encontrar
 
 Consideramos que a variação total é a soma entre a variação entre e a variação dentro das amostras. Então agora precisamos calcular de fato a variação entre e dentro dos grupos. Primeiro precisamos calcular o valor médio de cada grupo e a média destes valores (grande média normalmente é representado por um x com duas barras, pela dificuldade de escrita aqui, utilizaremos a letra grega μ).
 
-Para a variância total, teríamos o padrão visto anteriormente: <code>S²= Σ<sub>i</sub>(x<sub>i</sub>-μ)²/(n-1)</code>, onde <code>μ</code> é a média entre todos os elementos, então também é a grande média. Também podemos escrever como um somatório duplo: <code>S²= Σ<sub>i</sub>Σ<sub>j</sub>(x<sub>ij</sub>-μ)²/(n-1)</code>, onde nosso <code>j</code> indica o grupo e <code>i</code> o elemento dentro do grupo.
+Para a variância total, teríamos o padrão visto anteriormente: <code>S²= Σ<sub>i</sub>(x<sub>i</sub>-μ)²/(n-1)</code>, onde <code>μ</code> é a média entre todos os elementos, então também é a grande média. Também podemos escrever como um somatório duplo: <code>S²= Σ<sub>j</sub>Σ<sub>i</sub>(x<sub>ji</sub>-μ)²/(n-1)</code>, onde nosso <code>j</code> indica o grupo e <code>i</code> o elemento dentro do grupo.
 
-Então, para calcular primeiro a variância entre os grupos, nós cálculamos a variância da seguinte forma: <code>S²= Σ<sub>j</sub>n<sub>j</sub>(x̄<sub>j</sub>-μ)²/(k-1)</code>. Só que agora:
+Então, para calcular primeiro a variância entre os grupos, nós cálculamos a variância da seguinte forma: <code>S²<sub>entre</sub>= Σ<sub>j</sub>n<sub>j</sub>(x̄<sub>j</sub>-μ)²/(k-1)</code>. Só que agora:
 
-- <code>x̄<sub>i</sub></code> é a média do grupo <code>i</code>;
+- <code>x̄<sub>j</sub></code> é a média do grupo <code>j</code>;
 - <code>μ</code> é a grande média;
 - nosso grau de liberdade é dado por <code>(k-1)</code>, onde <code>k</code> é nossa quantidade de grupos, portanto é o grau de liberdade do numerador da nossa distribuição F;
 - <code>n<sub>j</sub></code> é a quantidade de valores no grupo <code>j</code>, também dito como a frequência do elemento <code>x̄<sub>j</sub></code>.
 
-Agora para calcular a variância dentro dos grupos
+Agora para calcular a variância dentro dos grupos, semelhante ao total temos: <code>S²<sub>dentro</sub>= Σ<sub>j</sub>Σ<sub>i</sub>(x<sub>ji</sub>-x̄)²/(n-k)</code>, como podemos ver as diferenças são que:
+- Utilizamos a média do grupo a que pertence a amostra ao invés da média total;
+- Nosso grau de liberdade é <code>(n-k)</code>, este é o grau de liberdade do denominador de nossa distribuição F.
+
+Lembrando o que são os graus de liberdade, para nosso caso por exemplo, temos três grupos, aqui estamos lidando as médias dos três grupos. Quando tínhamos só a média total, tínhamos apenas uma média (fixada), então podíamos escolher <code>(n-1)</code> livremente, agora temos três médias, sendo que cada grupo tem  <code>m</code> elementos, em cada um podemos escolher aleatóriamente <code>(m-1)</code> elementos, então no total podemos escolher <code>(m-1)+(m-1)+(m-1)</code>, e sendo <code>n=m+m+m</code> nossa quantidade de elementos totais, temos um grau de liberdade de <code>n-3</code>, para o caso de 3 grupos.
  
+Fazendo a razão entre as duas variâncias, calculamos um valor de .
 
 ## Passo 5: Conclusão
 
