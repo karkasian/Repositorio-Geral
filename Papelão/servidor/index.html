@@ -1,0 +1,60 @@
+<!--
+PAPELÃO: Servidor
+##Desenvolvido por:     Jhordan Silveira de Borba
+##E-mail:               jhordandecacapava@gmail.com
+##Website:              https://sapogithub.github.io
+##Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/wiki/Papelão
+##2018
+-->
+
+<!doctype html>
+<html>
+  <head>
+    <title>Papelão</title>
+  </head>
+  <body>
+    <!--Funções do socket.io-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();      //Conectamos
+
+        //Função para quando pressionamos a tecla
+        function tecladown(e) {
+        //e       - Eventos passados pela função addEventListener
+        	if (e.which==68){ 	        //Se foi a tecla d
+        		socket.emit('d', true);   //Enviamos d==true para o servidor
+        		}
+        	if (e.which==65){ 	         //Se foi a tecla a
+            socket.emit('a', true);   //Enviamos a==true para o servidor
+        		}
+        	if (e.which==83){ 	        //Se foi a tecla s
+            socket.emit('s', true);   //Enviamos s==true para o servidor
+        		}
+        	if (e.which==87){ 	        //Se foi a tecla w
+            socket.emit('w', true);   //Enviamos w==true para o servidor
+          }
+        }
+
+        //Função para quando soltamos a tecla
+        function teclaup(e) {
+        //e       - Eventos passados pela função addEventListener
+          if (e.which==68){ 	        //Se foi a tecla d
+            socket.emit('d', false);   //Enviamos d==true para o servidor
+            }
+          if (e.which==65){ 	         //Se foi a tecla a
+            socket.emit('a', false);   //Enviamos a==true para o servidor
+            }
+          if (e.which==83){ 	        //Se foi a tecla s
+            socket.emit('s', false);   //Enviamos s==true para o servidor
+            }
+          if (e.which==87){ 	        //Se foi a tecla w
+            socket.emit('w', false);   //Enviamos w==true para o servidor
+          }
+        }
+
+        window.addEventListener('keyup',teclaup, false);   // Vamos monitorar teclas soltadas
+        window.addEventListener('keydown',tecladown, false); // Vamos monitorar teclas apertadas
+
+    </script>
+  </body>
+</html>
