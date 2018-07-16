@@ -9,7 +9,7 @@ PAPELÃO: Servidor
 
 var app = require('express')();         //Framework web minimalista
 var http = require('http').Server(app); //Permite transferir dados via HTTP
-var io = require('socket.io')(http);    //Permite comunicação bi-direcional
+var io = require('socket.io')(http)     //Permite comunicação bi-direcional
 
 //Redirecionamos o cliente que conectar nosso servidor pra pagina index.html
 app.get('/', function(req, res){
@@ -21,26 +21,26 @@ io.on('connection', function(socket){
   //Informamos o usuário se conectou
   console.log('Usuário conectado.');
 
-  //Recebemos o estado das estados
+  //Recebemos o estado das teclas
   socket.on('w', function(estado){
     console.log('w: ',estado);
     //E emitimos pra todos clientes
-    io.emit('w', estado);
+    io.emit('w',{ "estado":estado} );
     });
 
   socket.on('a', function(estado){
     console.log('a: ',estado);
-    io.emit('a', estado);
+    io.emit('a', { "estado":estado});
     });
 
   socket.on('s', function(estado){
     console.log('s: ',estado);
-    io.emit('s', estado);
+    io.emit('s', { "estado":estado});
     });
 
   socket.on('d', function(estado){
     console.log('d: ',estado);
-    io.emit('d', estado);
+    io.emit('d', { "estado":estado});
     });
 
 });

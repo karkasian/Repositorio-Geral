@@ -10,18 +10,29 @@ PAPELÃO: Controle do personagem
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SocketIO;                         //Vamos usar nosso asset do Socket
 
 public class controle : MonoBehaviour {
 
     public float velocidade;            //Controlar a velocidade de movimento
     public bool w, d, a, s;             //Se as teclas estão sendo pressionadas
     private int ww, dd, aa, ss;         //Variáveis pra ajudar no movimento
+    private SocketIOComponent socket;   //Vamos criar o componente
 
     // Use isso para inicialização
     void Start()
     {
         velocidade = 10f;               //Velocidade de movimento
         w = d = a = s = false;          //Declaramos que inicialmente as teclas não estão sendo pressionadas
+
+        GameObject go = GameObject.Find("SocketIO");            //Buscamos nosso GameObject que é responsável pela conexão com o server
+        socket = go.GetComponent<SocketIOComponent>();          //Criamos nosso comomente
+
+        //Vamos escutar nossas tecla          // E salvar o estado
+        socket.On("w", (SocketIOEvent e) => { w = e.data["estado"]; });
+        socket.On("a", (SocketIOEvent e) => { a = e.data["estado"]; });
+        socket.On("s", (SocketIOEvent e) => { s = e.data["estado"]; });
+        socket.On("d", (SocketIOEvent e) => { d = e.data["estado"]; });
     }
 
     // Update é chamado uma vez por frame
@@ -29,22 +40,9 @@ public class controle : MonoBehaviour {
     {
         ww = dd = aa = ss = 0;                     //Assumimos valores nulos a princípio
 
-        if (Input.GetKeyDown("w")) { w = true; }    //Se a tecla 'w' foi pressionada, salvamos true
-        if (Input.GetKeyDown("d")) { d = true; }    //Idem com a tecla d
-        if (Input.GetKeyDown("a")) { a = true; }    //Idem com a tecla a
-        if (Input.GetKeyDown("s")) { s = true; }    //Idem com a tecla s
-
-        if (Input.GetKeyUp("w")) { w = false; }   //Se a tecla 'w' foi solta, salvamos false
-        if (Input.GetKeyUp("d")) { d = false; }    //Idem com a tecla d
-        if (Input.GetKeyUp("a")) { a = false; }    //Idem com a tecla a
-        if (Input.GetKeyUp("s")) { s = false; }    //Idem com a tecla s
-
         //Se alguma tecla está sendo pressionada, vamos mover
         if (w == true || d == true || a == true || s == true)
         {
-            //Movimentação sem relação com a câmera
-            //transform.Translate(velocidade * Time.deltaTime * Input.GetAxis("Horizontal"), 0f,velocidade*Time.deltaTime);
-
             //Assumindo que estamos usando apenas uma câmera:
             var camera = Camera.main;
 
@@ -57,11 +55,11 @@ public class controle : MonoBehaviour {
             direita.y = 0f;
             frente.Normalize();
             direita.Normalize();
-            //Se vamos ter movimento, assumimos um valor de deslocamento
-            if (w == true) { ww = 1; }
-            if (d == true) { dd = 1; }
-            if (a == true) { aa = 1; }
-            if (s == true) { ss = 1; }
+            //Se vamos ter movimento, assumimos um valor de deslocamento e consideramos falso
+            if (w == true) { ww = 1; w = false; }
+            if (d == true) { dd = 1; d = false; }
+            if (a == true) { aa = 1; a = false; }
+            if (s == true) { ss = 1; s = false; }
             //Isso é a direção no mundo em que queremos nos mover:
             var direcao = frente * (ww - ss) + direita * (dd - aa);
 
