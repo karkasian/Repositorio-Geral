@@ -8,7 +8,9 @@
 import random                       #Biblioteca para comandos aleatorios
 import discord                      #Biblioteca para trabalhar com o discord
 from discord.ext import commands
-import tweepy                       #Biblioteca de interação com o Twitter
+import tweepy   #Biblioteca para lidar com o Twitter
+import json     #Biblioteca para lidar com o JSON
+import sys      #Módulo que prove recursos relacionados ao interpretador
 
 #CREDENCIAIS----------------------------------------------------------------------------------------------------------------
 
@@ -19,8 +21,7 @@ access_token=           ''                #Access Token
 access_token_secret=    ''                     #Access Token Secret
 
 #COFIGURAÇÃO DISCORD---------------------------------------------------------------------------------------------------------
-help_attrs = dict(hidden=True)
-bot = commands.Bot(command_prefix='!', description='Vamo esculachar!!!', help_attrs=help_attrs)
+bot = commands.Bot(command_prefix='!', description='Vamo esculachar!!!')
 
 #Vamos printar quando conectar ao discord
 @bot.event
@@ -41,21 +42,57 @@ api = tweepy.API(auth)
                 aliases=['bola_oito', 'bolaoito'], #Outras formas de chamar a mesma função
                 pass_context=True)  #Se vai passar o contexto
 async def ball(context):
+    #context    - Informações sobre a mensagem que foi enviada.
+    
     respostas=['sim','não']
     await bot.say(context.message.author.mention+': a resposta para sua pergunta é ... '+random.choice(respostas)+'!')
 
-#Comando do Twitter
+#Comando para twittar
 @bot.command(name='Twite',
                 description="Twite qualquer coisa.",
                 brief="Twite qualquer coisa.",
                 aliases=['twite','tw'],
                 pass_context=False)
 async def tweet(*frase):
+    #frase      - Lista de palavras que foi enviada pelo usuário, ou uma fras se colocada entre aspas.
+    
     tweet=''                            #Variável pra guardar a frase que vai twitar
-    for palavra in frase:                      
-        tweet=tweet+' '+x
+    for palavra in frase:               #Vamos montar a frase, o discord pega as palavras separadas como argumentos       
+        tweet=tweet+' '+palavra
     api.update_status(status=tweet)     #Twitamos a frase
     await bot.say('Twitado!')
+
+#Comando para buscar um tweet
+@bot.command(name='Opinião',
+                description="Opinião esclarecida formada no Twitter.",
+                brief="Pergunte pro zé sobre algum tema",
+                aliases=['opinião','opiniao','opinie'],
+                pass_context=False)
+async def opina(*assunto):
+    #assunto    - Sobre o que a pessoa quer saber a opinião
+    
+    busca=''                            
+    for palavra in assunto:                      
+        busca=busca+' ' + palavra
+
+    #Vamos checar se temos buscas disponíveis
+    if (api.rate_limit_status()['resources']['search']['/search/tweets']['remaining']>0):
+        tweets = tweepy.Cursor(api.search, q= busca, result_type="recent", tweet_mode='extended').items(1)
+        #count      - número de tweets por página
+        #lang="pt"  - Restringir a algum idioma
+        
+        non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
+        #Emojis não suportados são convertidos para caracteres suportados.
+
+        opiniao='Não tenho opinião, ninguém fala disso.'
+        for tweet in tweets:
+            opiniao=(tweet.full_text).translate(non_bmp_map)
+            
+    else:
+        opiniao='Estou cansado, me pergunte mais tarde.'
+        
+    await bot.say(opiniao)
+    
 
 #Criamos uma categoria de comandos
 class Informativo:
@@ -72,8 +109,9 @@ class Informativo:
 #Adicionamos os comandos da categora informativo
 bot.add_cog(Informativo())
 
+#ZONA DE TESTES FORA DO DISCORD---------------------------------------------------------------------------------------------
+
 #RODAR O BOT----------------------------------------------------------------------------------------------------------------
 bot.run(token)
 
-#ZONA DE TESTES FORA DO DISCORD---------------------------------------------------------------------------------------------
-api.update_status(status=tweet)
+
