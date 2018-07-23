@@ -54,8 +54,41 @@ def enviar_msg(destinatario,msg):
 
 #Função para lermos as ultimas mensagens enviadas de algum contato:
 def ult_msgs(contato):
-        abrir_conversa(contato)
-        return
+        abrir_conversa(contato)     #Abrimos a conversa
+
+        #Checamos se tem mais mensagem ou não
+        cam='//*[@id="main"]/div[2]/div/div/div[2]/div'
+        elemento = driver.find_element_by_xpath(cam)
+        titulo=elemento.get_attribute('title')
+        if (titulo == 'Carregar mensagens recentes'):
+            ide=3
+        else:
+            ide=2
+
+        #Precisamos saber quantas mensagens foram carregadas
+        n=0
+        for x in range(1,2000):
+            cam='//*[@id="main"]/div[2]/div/div/div['+str(ide)+']/div['+str(x)+']'
+            try:
+                elemento = driver.find_element_by_xpath(cam)
+                n=n+1
+            except:
+                break
+        #E então começar a ver da ultima mensagem
+        msg=[]
+        for x in range(n,0,-1):
+            cam='//*[@id="main"]/div[2]/div/div/div['+str(ide)+']/div['+str(x)+']/div'
+            elemento = driver.find_element_by_xpath(cam)
+            classe = elemento.get_attribute('class')
+            if ('message-in' in classe):
+                cam='//*[@id="main"]/div[2]/div/div/div['+str(ide)+']/div['+str(x)+']/div/div/div[1]/div/span'
+                elemento = driver.find_element_by_xpath(cam)
+                texto=elemento.text
+                msg.append(texto)
+            else:
+                break
+
+        return msg
 
 #Função para checar se tem novas mensagens não lidas
 def novas_msgs():
@@ -69,13 +102,11 @@ def novas_msgs():
                         contatos.append(elemento.get_attribute('title'))                                                                #Salvamos o nome
                 except:         #Se não existe o elemento de novas mensagens do contato
                         pass    #Passamos e checamos todas as novas mensagens na lista
-                        #break  #Paramos e pegamos so até ter uma mensagem já lida
-        return contatos
 
-##PROBLEMAS
-##Maximo 16 novas mensagens de conversas diferentes
-##Envia e recebe só textos
-##Só funciona com contatos na agenda
-##Não pode ter contatos com nomes repetidos
-##Não otimizado para grupos
-##Só testado com conversas já existentes
+        nvas_msgs=[]
+        for contato in contatos:
+            msgs=ult_msgs(contato)
+            novas_msgs.append(msgs)
+            
+        driver.get("https://web.whatsapp.com")  #Reabrimos a pagina para não ficar em nenhuma conversa
+        return nvas_msgs
