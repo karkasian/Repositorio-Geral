@@ -86,18 +86,23 @@ def abrir_conversa(contato):
 def enviar_msg(destinatario,msg):
         #destinatario   - Quem vai receber a mensagem
         #msg            - Mensagem a ser enviada
-        global intervalo
-        intervalo=60
-        time.sleep(5)
-        abrir_conversa(destinatario)                                            #Abrimos a conversa de quem vamos enviar
-        caminho='//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'               #Caminho da conversa
-        elemento = driver.find_element_by_xpath(caminho)                        #Selecionamos o campo da mensagem
-        elemento.clear()                                                        #Limpamos caso tenha alguma coisa antiga
-        elemento.send_keys(msg,Keys.ENTER)                                      #Enviamos a mensagem
-        time.sleep( 5 )                                         #Aguardamos enviar
-        driver.get("https://web.whatsapp.com")  #Reabrimos a pagina para não ficar em nenhuma conversa aberta
-        intervalo=1
-        return
+
+        while (True):
+                try:
+                        global intervalo
+                        intervalo=60
+                        time.sleep(5)
+                        abrir_conversa(destinatario)                                            #Abrimos a conversa de quem vamos enviar
+                        caminho='//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'               #Caminho da conversa
+                        elemento = driver.find_element_by_xpath(caminho)                        #Selecionamos o campo da mensagem
+                        elemento.clear()                                                        #Limpamos caso tenha alguma coisa antiga
+                        elemento.send_keys(msg,Keys.ENTER)                                      #Enviamos a mensagem
+                        time.sleep( 5 )                                         #Aguardamos enviar
+                        driver.get("https://web.whatsapp.com")  #Reabrimos a pagina para não ficar em nenhuma conversa aberta
+                        intervalo=1
+                        return
+                except:
+                        print('Tentando enviar novamente.')
 
 #Função para lermos as ultimas mensagens enviadas de algum contato:
 def ult_msgs(contato):
@@ -179,16 +184,19 @@ def novas_msgs():
 
 def checar_msgs():
         while True:
-                (x,y)=novas_msgs()
-                k=0
-                for c in x:
-                        tam=len(y[k])
-                        for m in range(tam-1,-1,-1):
-                                print(c+': '+y[k][m])
-                        print('\n')
-                        k+=1
-#                print(intervalo)
-                time.sleep(intervalo)
+                try:
+                        (x,y)=novas_msgs()
+                        k=0
+                        for c in x:
+                                tam=len(y[k])
+                                for m in range(tam-1,-1,-1):
+                                        print(c+': '+y[k][m])
+                                print('\n')
+                                k+=1
+        #                print(intervalo)
+                        time.sleep(intervalo)
+                except:
+                        print('Checando as mensagens novamente.')
 
 def iniciar_wfapi():
         thread = threading.Thread(target=checar_msgs, args=())
