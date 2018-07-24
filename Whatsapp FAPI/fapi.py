@@ -3,26 +3,30 @@ from selenium.webdriver.common.keys import Keys         #Importa os atalhos de t
 from PIL import Image                                   #Biblioteca para tratamento de imagem
 import time
 
-driver = webdriver.Chrome()
-driver.get("https://web.whatsapp.com")
+driver = webdriver.Chrome()                     #Conectamos no Chrome
+driver.get("https://web.whatsapp.com")          #Abrimos a pagina do WhatsApp Web
 
+#Minha lista de contatos que converso
 agenda=['Vô','Amor','Paloma','Vinicius','Vó','Mãe','Pai','Gra','Bruno',
         'Flanarte','Giovani','Psico Darlen Vaz','Pedro','Zardo','Felipe',
         'Geferson','Juan','Roger','Rafael','André Smaria','mi','Guga']
+
+#Grupos que faço parte
 grupos=['Nossa prole','Ahiba']
 
+#Quantidade máxima de conversas
 tamanho_max=len(agenda)+len(grupos)
 
 #Função para definir o máximo possivel de conversas a serem carregadas
 def tamanho():
         n=0     #Contador
         for x in range(1,(tamanho_max+1)):   
-                caminho='//*[@id="pane-side"]/div/div/div/div['+str(x)+']'      #Caminho para o div mais alto da lista de conversas
-                try:                                                            #Tentamos checar o resultado
-                        elemento = driver.find_element_by_xpath(caminho)        #Checamos se o elemento existe
+                caminho='//*[@id="pane-side"]/div/div/div/div['+str(x)+']'      #Caminho para o div mais alto de um contato na lista de conversas
+                try:                                                            
+                        elemento = driver.find_element_by_xpath(caminho)        #Se o elemento existe
                         n=n+1                                                   #Adicionamos o contador
                 except:                 #Se não existe                                    
-                        return n        #Retornamos n
+                        return n        #Retornamos
         return n
 
 #Função pra gerar o QR  code
@@ -33,12 +37,12 @@ def gerar_qr():
         im.crop((676,152,940,416)).save(nimg)   #Corta a imagem 
         return
 
-#Função para abrir a conversa pela pesquisa
+#Função para abrir a conversa pela pesquisa -- DEPRECIADO
 def abrir_conversa_pesquisa(contato):
         #contato   - Quem vamos abrir as mensagens
 
         caminho='//*[@id="side"]/div[2]/div/label/input'        #Caminho para "Procurar ou começar uma nova conversa"
-        elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento onde procuramos uma nova conversa
+        elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
         elemento.clear()                                        #Limpamos caso tenha alguma pesquisa antiga
         elemento.send_keys(contato)                             #Digitamos o destinatário
         time.sleep( 5 )                                         #Esperamos para fazer a busca
@@ -61,16 +65,17 @@ def abrir_conversa_pesquisa(contato):
 
 #Função para abrir conversa pela busca de contatos
 def abrir_conversa(contato):
-        time.sleep(1)   
         #contato   - Quem vamos abrir as mensagens
+        
+        time.sleep(1)                                           #Aguardar um tempo
         caminho='//*[@id="side"]/header/div[2]/div/span/div[2]' #Caminho para o botão de nova conversa
-        elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento onde procuramos uma nova conversa
+        elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
         elemento.click()                                        #Clicamos
         caminho='//*[@id="app"]/div/div/div[1]/div[1]/span/div/span/div/div[1]/div/label/input'      #Caminho para o campo de digitação
         elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
         elemento.clear()                                        #Limpamos caso tenha alguma pesquisa antiga
         elemento.send_keys(contato)                             #Digitamos o destinatário
-        time.sleep(1)
+        time.sleep(1)                                           #Aguardamos mais um pouco
         caminho='//*[@id="app"]/div/div/div[1]/div[1]/span/div/span/div/div[2]/div'        #Caminho para o primeiro resultado
         elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
         elemento.click()                                        #Clicamos
@@ -144,15 +149,15 @@ def ult_msgs(contato):
 #Função para checar se tem novas mensagens não lidas
 def novas_msgs():
         contatos=[]             #Onde vamos guardar quem nos enviou as mensagens não lidas
-        n=tamanho()                                             #Tamanho max
+        n=tamanho()             #Tamanho max
 
-        for x in range(1,n+1):   #Checar todos contatos carregados na lista de conversa
+        for x in range(1,n+1):  #Checar todos contatos carregados na lista de conversa
                 try:            #Checamos se tem mensagem nova
-                        caminho='//*[@id="pane-side"]/div/div/div/div['+str(x)+']/div/div/div[2]/div[2]/div[2]/span[1]/div'             #Caminho para a quantidade de mensagens novas
-                        elemento = driver.find_element_by_xpath(caminho)                                                                #Verificamos se existe o elemento
-                        caminho='//*[@id="pane-side"]/div/div/div/div['+str(x)+']/div/div/div[2]/div[1]/div[1]/span/span'               #Caminho para o nome do contato
-                        elemento = driver.find_element_by_xpath(caminho)                                                                #Pegamos o elemento
-                        contatos.append(elemento.get_attribute('title'))                                                                #Salvamos o nome
+                        caminho='//*[@id="pane-side"]/div/div/div/div['+str(x)+']/div/div/div[2]/div[2]/div[2]/span[1]/div'     #Caminho para a quantidade de mensagens novas
+                        elemento = driver.find_element_by_xpath(caminho)                                                        #Verificamos se existe o elemento
+                        caminho='//*[@id="pane-side"]/div/div/div/div['+str(x)+']/div/div/div[2]/div[1]/div[1]/span/span'       #Caminho para o nome do contato
+                        elemento = driver.find_element_by_xpath(caminho)                                                        #Pegamos o elemento
+                        contatos.append(elemento.get_attribute('title'))                                                        #Salvamos o nome
                 except:         #Se não existe o elemento de novas mensagens do contato
                         pass    #Passamos e checamos todas as novas mensagens na lista
 
@@ -162,11 +167,11 @@ def novas_msgs():
             msgs=ult_msgs(contato)         
             nvas_msgs.append(msgs)
             
-        driver.get("https://web.whatsapp.com")  #Reabrimos a pagina para não ficar em nenhuma conversa
-        time.sleep(3)
+        driver.get("https://web.whatsapp.com")  #Reabrimos a pagina para não ficar em nenhuma conversa aberta
+        time.sleep(3)                           #Espera
         return (contatos,nvas_msgs)
 
-for n in range(10):
+while(True):
 	(x,y)=novas_msgs()
 	if (len(x)>0):
 		k=0
@@ -177,4 +182,3 @@ for n in range(10):
 			print('\n')
 			k+=1
 		print('\n')
-	n=1
