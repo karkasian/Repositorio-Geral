@@ -2,6 +2,7 @@ from selenium import webdriver                          #Biblioteca de automatiz
 from selenium.webdriver.common.keys import Keys         #Importa os atalhos de teclas do Selenium
 from PIL import Image                                   #Biblioteca para tratamento de imagem
 import time
+import threading
 
 driver = webdriver.Chrome()                     #Conectamos no Chrome
 driver.get("https://web.whatsapp.com")          #Abrimos a pagina do WhatsApp Web
@@ -71,9 +72,9 @@ def abrir_conversa(contato):
         caminho='//*[@id="side"]/header/div[2]/div/span/div[2]' #Caminho para o botão de nova conversa
         elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
         elemento.click()                                        #Clicamos
+        time.sleep(1)
         caminho='//*[@id="app"]/div/div/div[1]/div[1]/span/div/span/div/div[1]/div/label/input'      #Caminho para o campo de digitação
         elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
-        elemento.clear()                                        #Limpamos caso tenha alguma pesquisa antiga
         elemento.send_keys(contato)                             #Digitamos o destinatário
         time.sleep(1)                                           #Aguardamos mais um pouco
         caminho='//*[@id="app"]/div/div/div[1]/div[1]/span/div/span/div/div[2]/div'        #Caminho para o primeiro resultado
@@ -85,19 +86,24 @@ def abrir_conversa(contato):
 def enviar_msg(destinatario,msg):
         #destinatario   - Quem vai receber a mensagem
         #msg            - Mensagem a ser enviada
-
+        global intervalo
+        intervalo=60
+        time.sleep(5)
         abrir_conversa(destinatario)                                            #Abrimos a conversa de quem vamos enviar
         caminho='//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'               #Caminho da conversa
         elemento = driver.find_element_by_xpath(caminho)                        #Selecionamos o campo da mensagem
         elemento.clear()                                                        #Limpamos caso tenha alguma coisa antiga
         elemento.send_keys(msg,Keys.ENTER)                                      #Enviamos a mensagem
+        time.sleep( 5 )                                         #Aguardamos enviar
+        driver.get("https://web.whatsapp.com")  #Reabrimos a pagina para não ficar em nenhuma conversa aberta
+        intervalo=1
         return
 
 #Função para lermos as ultimas mensagens enviadas de algum contato:
 def ult_msgs(contato):
         time.sleep(1)   
         abrir_conversa(contato)     #Abrimos a conversa
-
+        time.sleep(1) 
         #Checamos se tem mais mensagem ou não
         cam='//*[@id="main"]/div[2]/div/div/div[2]/div'
         elemento = driver.find_element_by_xpath(cam)
@@ -127,13 +133,13 @@ def ult_msgs(contato):
                                 msg.append(texto)
                                 classes.append(classe)
                         except:
-                                print('Problemas em pegar o texto.')
+                                #print('Problemas em pegar o texto.')
                                 pass
                 except:
-                        print('Problemas em pegar a classe')
+                        #print('Problemas em pegar a classe')
                         pass
             except:
-                print('Não há mais mensagens novas')
+                #print('Não há mais mensagens novas')
                 break
         qt=len(classes)
         final=[]
@@ -169,16 +175,25 @@ def novas_msgs():
             
         driver.get("https://web.whatsapp.com")  #Reabrimos a pagina para não ficar em nenhuma conversa aberta
         time.sleep(3)                           #Espera
-        return (contatos,nvas_msgs)
+        return(contatos,nvas_msgs)
 
-while(True):
-	(x,y)=novas_msgs()
-	if (len(x)>0):
-		k=0
-		for c in x:
-			tam=len(y[k])
-			for m in range(tam-1,-1,-1):
-				print(c+': '+y[k][m])
-			print('\n')
-			k+=1
-		print('\n')
+def checar_msgs():
+        while True:
+                (x,y)=novas_msgs()
+                k=0
+                for c in x:
+                        tam=len(y[k])
+                        for m in range(tam-1,-1,-1):
+                                print(c+': '+y[k][m])
+                        print('\n')
+                        k+=1
+#                print(intervalo)
+                time.sleep(intervalo)
+
+def iniciar_wfapi():
+        thread = threading.Thread(target=checar_msgs, args=())
+        thread.start()
+        print('WFAPI iniciado!')
+                           
+intervalo=1
+iniciar_wfapi()
