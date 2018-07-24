@@ -10,4 +10,4 @@ Limitações conhecidas:
 - Só funciona com contatos na agenda;
 - Não pode ter dois números com o mesmo nome;
 - Não funciona com grupos;
-- Testado com o meu Whatsapp
+- Demorado
