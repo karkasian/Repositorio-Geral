@@ -68,11 +68,11 @@ def abrir_conversa_pesquisa(contato):
 def abrir_conversa(contato):
         #contato   - Quem vamos abrir as mensagens
         
-        time.sleep(1)                                           #Aguardar um tempo
+        time.sleep(3)                                           #Aguardar um tempo
         caminho='//*[@id="side"]/header/div[2]/div/span/div[2]' #Caminho para o botão de nova conversa
         elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
         elemento.click()                                        #Clicamos
-        time.sleep(1)
+        time.sleep(3)
         caminho='//*[@id="app"]/div/div/div[1]/div[1]/span/div/span/div/div[1]/div/label/input'      #Caminho para o campo de digitação
         elemento = driver.find_element_by_xpath(caminho)        #Pegamos o elemento
         elemento.send_keys(contato)                             #Digitamos o destinatário

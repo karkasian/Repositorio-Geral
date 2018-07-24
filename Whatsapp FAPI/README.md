@@ -13,4 +13,4 @@ Limitações conhecidas:
 - Desenvolvido para contatos na agenda.
 
 Anotações:
-- Revisar a necessidade e valor dos tempos de espera (time.sleep(segundos)).
+- Revisar a necessidade e os tempos de espera (time.sleep(segundos)).
