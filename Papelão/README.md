@@ -37,4 +37,8 @@ Então no objeto SocketIO, é necessário substituir na url o IP do computador e
 
 Então, é necessário que você rode o servidor index.js através do prompt utilizando o comando 'node index.js' no prompt também.
 
-E por fim, a partir de algum navegador, você pode acessar a página localhost:3000. Irá abrir uma página HTML em branco com o título "Papelão". Com esta página aberta, os comandos inseridos no teclado serão enviados para o aplicativo. A princípio, é possível caminhar utilizando as teclas 'w,a,s,d'.
+E por fim, a partir de algum navegador, você pode acessar a página localhost:3000. Irá abrir uma página HTML em branco com o título "Papelão". Com esta página aberta, os comandos inseridos no teclado serão enviados para o aplicativo. 
+
+### Gameplay
+
+A princípio, é possível caminhar utilizando o teclado no notebook (<code>w</code>, <code>a</code>, <code>s</code> e <code>d</code>) e controlar a câmera com a cabeça.
