@@ -13,4 +13,4 @@ Cada projeto está em uma pasta diferente e para mais informações:
 - Papelão: Nossa proposta aqui é utilizar o Unity para desenvolver um aplicativo de realidade virtual para dispositivos Android onde a movimentação do jogador é feita através do teclado de um computador.
 - Perceptron: Para responder uma versão simplificada da questão levantada pelo projeto anterior, exploro funcionamento de redes neurais artificiais utilizando o neurônio do tipo perceptron, também demonstro a possibilidade de simular portas lógicas através destes tipos de redes e ainda como bônus, treinamos uma rede pra jogar Flappy Fantasma.
 - Projeto Difuso: Vamos jogar Oxygen Not Included e então nos deparamos com a seguinte questão: qual a prioridade para a produção de alimento? Neste projeto busco demonstrar o funcionamento da lógica difusa enquanto respondo esta questão.
-- Whatsapp FAPI: Queremos integrar o WhatsApp com nosso bot para o Discord, mas devido a inexistência de um API para o WhatsApp, escrevemos nosso próprio falso API.
+- WFAPI: Queremos integrar o WhatsApp com nosso bot para o Discord, mas devido a inexistência de um API para o WhatsApp, escrevemos nosso próprio falso API.
