@@ -42,3 +42,5 @@ E por fim, a partir de algum navegador, você pode acessar a página localhost:3
 ### Gameplay
 
 A princípio, é possível caminhar utilizando o teclado no notebook (<code>w</code>, <code>a</code>, <code>s</code> e <code>d</code>) e controlar a câmera com a cabeça.
+
+Informações gerais sobre o projeto podem ser lidas na [wiki](https://github.com/SapoGitHub/Repositorio-Geral/wiki/Papel%C3%A3o).
