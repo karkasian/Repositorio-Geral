@@ -9,6 +9,7 @@ Cada projeto está em uma pasta diferente e para mais informações:
 ## Pastas
 
 - ANOVA: Dessa vez nosso objetivo é partirmos da estatística básica até chegarmos na técnica ANOVA e então respondermos algumas questões sobre o Overwatch. Por exemplo: New York Excelsior piorou depois de confirmar a vaga nos playoffs?
+- Assembly: Em breve...
 - Darwin: É melhor investir pontos em força ou constituição? Frequentemente nos deparamos com esta questão em jogos de RPG,e isso nos leva a uma questão mais geral: como distribuir os pontos da melhor forma possível? Para encontrar essa resposta, construímos um algoritmo genético linha a linha do zero.
 - Papelão: Nossa proposta aqui é utilizar o Unity para desenvolver um aplicativo de realidade virtual para dispositivos Android onde a movimentação do jogador é feita através do teclado de um computador.
 - Perceptron: Para responder uma versão simplificada da questão levantada pelo projeto anterior, exploro funcionamento de redes neurais artificiais utilizando o neurônio do tipo perceptron, também demonstro a possibilidade de simular portas lógicas através destes tipos de redes e ainda como bônus, treinamos uma rede pra jogar Flappy Fantasma.
