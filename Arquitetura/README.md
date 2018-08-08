@@ -1,6 +1,6 @@
-﻿# Arquitetura de computadores
+#  Arquitetura de computadores
 
-## 1.1 Organização e arquitetura
+## Introdução
 
 - *Arquitetura de computador*: atributos de um sistema visíveis a um programador;
   - Atributos arquiteturais: conjunto de instruções, número de bits usados para representar os tipos de dados, mecanismos de E/S e técnicas para endereçamento de memória.
@@ -13,7 +13,7 @@
 
 Família de modelos de computador: mesma arquitetura, mas diferentes organizações.
 
-## 1.2 Estrutura e função
+## Estrutura e função
 
 Sistema hierárquico: um conjunto de subsistemas inter-relacionados e cada um destes hierárquico,
 
@@ -47,19 +47,8 @@ Estrutura da CPU:
 - **Registradores**: armazenamento interno à CPU.
 - **Interconexão da CPU**: comunicação entre a unidade de controle, ALU e registradores.
 
-# Capítulo 2: Evolução e desempenho do computador
+## IAS
 
-Evolução dos computadores:
-- Aumento na velocidade do processador;
-- Diminuição no tamanho do componente;
-- Aumento no tamanho da memória;
-- Aumento na capacidade e velocidade de E/S.
-
-Problema: atraso em uma área não prejudicar o ganho em desempenho em outra. Ex.: a velocidade do processador aumento mais rapidamente que o tempo de acesso da memória.
-
-# IAS
-
-*IAS*:
 - Construção de 1946 a 1952;
 - Protótipo de todos os computadores de uso geral;
 - Estrutura geral de um computador IAS:
@@ -98,4 +87,4 @@ O IAS tinha 21 instruções agrupadas da seguinte forma?
 - **Aritméticas**: operações realizadas na ALU;
 - **Modificação de endereço**: permite que os endereços sejam calculados na ALU e depois inseridos em instruções armazenadas na memória.
 
-[imagem]()
+![imagem]()
