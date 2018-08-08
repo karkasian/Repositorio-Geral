@@ -1,15 +1,22 @@
-#Assembly
+# Assembly
 
-sudo apt-get install nasm
+## Terminal
 
-sudo apt-get install binutils
+Comandos no terminal para instalar o necessário:
+- <code> sudo apt-get install nasm</code>
+- <code>sudo apt-get install binutils</code>
+- <code>sudo apt-get install git</code>
 
-git clone link
-gir add *
-git commit -m 'comentario'
-git push origin master
-git pull
+Comandos no GitHub:
+- Para baixar o repositório:
+  - <code>git add remote link</code>
+- Para enviar alterações pro repositório:
+  - <code>gir add .</code>
+  - <code>git commit -m 'comentario'</code>
+  - <code>git push origin master</code>
+- Para baixar alterações:
+  - <code>git pull</code>
 
-nasm -f elf codigo.asm -o objeto.o
-ld objeto.o -o executavel
-./executavel
+Para compilar o código assembly:
+- <code> nasm -f elf codigo.asm -o objeto.o</code>
+- <code>ld objeto.o -o executavel </code>
