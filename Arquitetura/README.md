@@ -1,5 +1,10 @@
 #  Arquitetura de computadores
 
+Estas são algumas notas de estudos e códigos referentes a exercícios desenvolvidos na disciplina de Arquitetura de Computadores. Como bibliografia geral utilizo o livro Arquitetura e Organização de computadores do William Stalling, especificamente sobre a programação do computador IAS o professor Edson Borin disponibiliza um excelente material:
+- Apostia intitulada [Programando o IAS](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/anexos/programando_o_IAS.pdf);
+- Um simulador para rodar o código de máquina: [IAS Simulator](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-sim/);
+- Um assembler para rodarmos o código de montagem: [IAS - Assembler](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-Assembler/assembler.html).
+
 ## Introdução
 
 - *Arquitetura de computador*: atributos de um sistema visíveis a um programador;
@@ -11,31 +16,20 @@
  - Questão da arquitetura: se o computador terá uma instrução de multiplicação.
  - Questão da organização: se a instrução será implementada por uma unidade de multiplicação especial ou por um mecanismo que faça uso repetido da unidade de adição do sistema.
 
-Família de modelos de computador: mesma arquitetura, mas diferentes organizações.
-
 ## Estrutura e função
 
-Sistema hierárquico: um conjunto de subsistemas inter-relacionados e cada um destes hierárquico,
-
-Em cada nível o projetista está interessado em:
 - **Estrutura**: o modo como os componentes são inter-relacionados.
 - **Função**: a operação individual de cada componente como parte da estrutura.
 
-Abordagem *top-down*: começamos de cima e decompomos o sistema em suas subpartes.
-
 ### Função
 
-Funções básicas de um computador:
 - Processamento de dados;
 - Armazenamento de dados;
 - Movimentação de dados;
 - Controle.
 
-- *Periférico*: dispositivo conectado diretamente ao computador que recebe ou entrega dado.
-
 ### Estrutura
 
-Estruturas principais:
 - **Unidade central de processamento (CPU)**: controla a operação do computador e realiza suas funç~eos de processadmento de dados.
 - **Memória principal**: armazena dados.
 - **E/S**: move os dados entre o computador e seu ambiente externo.
@@ -75,10 +69,13 @@ A unidade de controle opera o IAS buscando instruções da memória e executando
 - **Contador de programa (PC)**: contém o endereço do próximo par de instruções a ser apanhado na memória.
 - **Acumulador (AC) e quociente multiplicador(MQ)**: empregado para manter temporariamente operandos e resultados de operações da ALU.
 
-O IAS opera com um ciclo de instrução, e cada ciclo possui dois sub-ciclos:
+O IAS opera realizando repetidamente um ciclo de instrução, e cada ciclo possui dois sub-ciclos:
 - Ciclo de busca (fetch cycle): Pode ser retirada do IBR, ou carregando uma palavra no MBR e depois para o IBR.
   - O opcode da próxima instrução é carregador no IR;
   - O endereço é carregado no MAR;
+- Ciclo de execução.
+
+![ciclo do processador](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/imagens/instrucoes.png)
 
 O IAS tinha 21 instruções agrupadas da seguinte forma?
 - **Transferencia de dados**: movem dados entre memórias e registradores da ALU;
@@ -87,4 +84,16 @@ O IAS tinha 21 instruções agrupadas da seguinte forma?
 - **Aritméticas**: operações realizadas na ALU;
 - **Modificação de endereço**: permite que os endereços sejam calculados na ALU e depois inseridos em instruções armazenadas na memória.
 
-![imagem]()
+![instruções do IAS](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/imagens/instrucoes.png)
+
+## Códigos
+
+### Código 1:
+1. Salvamos o número 25 (Decimal) no endereço 0FA
+2. Copiamos o conteúdo de 0FA para AC
+3. Copiamos o conteúdo de AC para 0FB
+4. Copiamos o conteúdo de 0FA para AC
+5. Se o número for não negativo apanha a próxima instrução da metade esquerda de 08D
+6. Transferimos o valor contido em 0FA com sinal trocado para o AC.
+7. Copiamos o conteúdo do AC para 0FB
+8. Saltamos para uma posição inexistente para encerrar o programa
