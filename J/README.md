@@ -4,18 +4,17 @@
 
 Nosso propósito aqui é desenvolver uma linguagem simples de alto nível para o IAS.
 Nosso código deve ser dividido em duas partes. Uma para a declaração de variáveis:
-´´´
+<code>
 var {
 ...
 }
-´´´
+</code>
 E outro que deve conter os comandos que serão executados:
-´´´
+<code>
 start {
 ...
 }
-´´´
-
+</code>
 A ordem em que é feito a declaração não importa podemos ter tanto <code>var {...} start {...}</code>, quanto <code>start {...} var {...}</code>.
 
 ## var
@@ -26,12 +25,12 @@ Atualmente é suportado:
 - Vetor de inteiros: vet *tipo* [*tamanho*] *nome*;
 
 Ex.:
-´´´
+<code>
 var {
 int inteiro;
 vet int [5] vetor;
 }
-´´´
+</code>
 
 ## Memória
 
@@ -39,3 +38,5 @@ Além das limitações óbvias quanto as instruções que podem ser rodadas nas 
 - Uma variável inteira ocupa um espaço na memória;
 - Um vetor de inteiros, ocupa uma quantidade de espaço armazenadas correspondente ao tamanho do vetor.
 - Uma instrução básica do processador ocupa meia memória, mas nossas funções ocupam mais, conforme a documentação de cada.
+
+## Compilador
