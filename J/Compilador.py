@@ -1,6 +1,9 @@
+from comandos import *          #Vamos importar os comandos
 
 #Lista de palavras reservadas
-reservadas=['int','vet','float','if','else','while','var','start']
+tipos_var=['vet','int']     #Primeiro precisamos ver se é vetor
+lista_com=['=','+']             #Primeiro queremos saber onde salvar o resultado
+reservadas=['start','var']
 
 #Lista de instruções
 instrucoes={'LOAD MQ':          {'binario':'00001010','hexadecimal':'0A','decimal':'10','Descrição':'Transfere o conteudo de MQ para AC'},
@@ -26,13 +29,221 @@ instrucoes={'LOAD MQ':          {'binario':'00001010','hexadecimal':'0A','decima
             'STOR M(X:28:39)':  {'binario':'00010011','hexadecimal':'13','decimal':'19','Descrição':'Substitui o campo de endereço da direita em M(X) por 12 bits mais à direita de AC'}
             }
 
+#Lista de variáveis
+variaveis=[]
+
+#Endereço da proxima variável a ser declarada
+end_var=1023
+
+#Endereço da proxima função a ser declarada
+end_fun=0
+de=0            #Indicando se vamos salvar na esquerda (0) ou direita (1)
+
 arquivo = open("codigo.j","r")  #Vamos abrir o código
 codigo=arquivo.read()           #Ler o arquivo
 arquivo.close()                 #Fechar o arquivo
 codigo=codigo.replace('\n', ' ')#Vamos trocar as quebras de linha por espaço
 
+pos=codigo.find('var')          #Primeiro vamos procurar o nosso bloco de variáveis declaradas:
+if (pos==-1):                   #Se não foi declarado
+    print('Bloco de variáveis não declarado')       #Avisa
 
+#Vamos procurar onde começa o bloco 
+for c in range (pos,len(codigo)):
+    if (codigo[c]=='{'):
+        inicio=c
+        break
+
+#Vamos procurar onde termina o bloco 
+for c in range (inicio,len(codigo)):
+    if (codigo[c]=='}'):
+        fim=c
+        break
+
+#Podemos extrair esse texto
+codigo_var=''
+for c in range (inicio+1,fim):
+    codigo_var=codigo_var+codigo[c]
+
+#E separarmos para cada variavel
+trechos_var=codigo_var.split(';')
+for trecho in trechos_var:
+    for tipo in tipos_var:      #Vamos descobrir o tipo
+        res=trecho.find(tipo)
+        if(res!=-1):            #Se é esse tipo
+            #Com  tipo, vamos dar tratamentos diferentes dependendo do tipo
+            if (tipo=='int'):       #Se é inteiro prosseguimos pegando o nome
+                
+                pos=res+4           #Vamos começar a pegar o nome
+                nome=''
+                for c in range(pos,len(trecho)):
+                    if (trecho[c]==' '):
+                        fim=c
+                        break
+                    else:
+                        nome=nome+trecho[c]
+                        
+                valor=''
+                #Com o nome e o tipo e onde terminou o nome, vamos ver se o proximo item foi o fim, ou atribui valor
+                for c in range (fim,len(trecho)):                    
+                    if (trecho[c]=='='):#Se atribuiu, vamos lidar com isso
+                        inicio=c+1      #Pegamos o primeiro elemento depois da igualdade
+                        for k in range (inicio,len(trecho)):
+                            if (trecho[k]!=' '):        #Se não for espaço, salvamos
+                                valor=valor+trecho[k]
+                              
+                if (valor==''):         #Se o valor permaneceu vazio
+                    valor='0'           #Adicionamos 0
+                valor=int(valor)        #Passamos valor pra inteiro
+                
+                #Com o nome, e o valor, podemos salvar na nossa lista:
+                doc={'nome':nome,'valor':valor,'posicao':end_var,'tipo':tipo}
+                print('Declara inteiro: '+nome+'='+str(valor))
+                end_var=end_var-1       #Próxima variável, adicionamos no elemento da memória anterior
+                variaveis.append(doc)
+                
+            elif (tipo =='vet'):        #Se é vetor
+                
+                pos=res+4           #Vamos começar a pegar o subtipo
+                sub=''
+                for c in range(pos,len(trecho)):
+                    if (trecho[c]==' '):
+                        fim=c
+                        break
+                    else:
+                        sub=sub+trecho[c]
+
+                #agora podemos pegar o tamanho
+                #Vamos definir onde começa
+                for c in range(fim,len(trecho)):
+                    if (trecho[c]=='['):
+                        com=c
+                        break
+                #E onde termina
+                for c in range(com,len(trecho)):
+                    if (trecho[c]==']'):
+                        ter=c
+                        break
+                #Então podemos pegar o tamanho
+                tam=''
+                for c in range (com+1,ter):
+                    tam=tam+trecho[c]
+                tam=int(tam)                #Passamos para inteiro
+
+                # então pegamos o nome:
+                nome=''
+                for c in range(ter+2,len(trecho)):
+                    if (trecho[c]==' '):
+                        fim=c
+                        break
+                    else:
+                        nome=nome+trecho[c]
+
+                #podemos conferir se os valores foram declarados:
+                decl=trecho.find('=')
+                if (decl==-1):      #Se não foi declarado
+                    for x in range(tam):    #Vamos salvar tudo 0
+                        if (sub=='int'):
+                            if (x>0):
+                                nome='vet'
+                            doc={'nome':nome,'valor':0,'posicao':end_var,'tipo':tipo}
+                            print('Declara vetor: '+nome+'['+str(x)+'] =0')
+                            end_var=end_var-1       #Próxima variável, adicionamos no elemento da memória anterior
+                            variaveis.append(doc)
+                else:               #Mas se foi
+                    #Vamos pegar onde começa a declaração
+                    for c in range(decl+1,len(trecho)):
+                        if (trecho[c]=='['):
+                            com=c
+                            break
+                    #E onde termina
+                    for c in range(com,len(trecho)):
+                        if (trecho[c]==']'):
+                            ter=c
+                            break
+                    #Então podemos pegar a declaração inteira
+                    dec=''
+                    for c in range (com+1,ter):
+                        dec=dec+trecho[c]
+                    dec_sep=dec.split(',')      #Separamos os valores
+                    
+                    for x in range(tam):    #Vamos salvar tudo
+                        if (sub=='int'):
+                            if (x>0):
+                                nome='vet'
+                            doc={'nome':nome,'valor':int(dec_sep[x]),'posicao':end_var,'tipo':tipo}
+                            print('Declara vetor: '+nome+'['+str(x)+'] ='+dec_sep[x])
+                            end_var=end_var-1       #Próxima variável, adicionamos no elemento da memória anterior
+                            variaveis.append(doc)
+
+            break
+
+doc_final=''
+#Vamos agora registrar as variáveis
+for v in variaveis:
+    pos=str(hex(v['posicao'])).replace('0x', '')    #Removemos os '0x'
+    val=str(hex(v['valor'])).replace('0x', '')      #Removemos os '0x'
+    linha=pos +' '+val
+    doc_final=doc_final+linha+'\n'
+
+
+#Próximo passo é procurar os comandos
+pos=codigo.find('start')        #Primeiro vamos procurar o nosso bloco de comandos
+if (pos==-1):                   #Se não foi declarado
+    print('Bloco de variáveis não declarado')       #Avisa
+
+#Vamos procurar onde começa o bloco 
+for c in range (pos,len(codigo)):
+    if (codigo[c]=='{'):
+        inicio=c
+        break
+
+#Vamos procurar onde termina o bloco 
+for c in range (inicio,len(codigo)):
+    if (codigo[c]=='}'):
+        fim=c
+        break
+
+#Podemos extrair esse texto
+codigo_com=''
+for c in range (inicio+1,fim):
+    codigo_com=codigo_com+codigo[c]
+
+#E separarmos para cada variavel
+trechos_com=codigo_com.split(';')
+
+#Vamos analisar linha a linha
+for trecho in trechos_com:
+    for comando in lista_com:   #Vamos percorrer nossa lista de comandos
+        res=trecho.find(comando)    #procurar comandos linha
+        if (res!= -1):              #Se encontrouo comando
+            pos=res                 #Vamos guardar onde está o comando
+            if( comando == '='): #Se o comando é de atribuição
+                trecho_dem=trecho.split('=')    #Vamos separar em o valor a ser atribuir, e onde será atribuido
+                atribuicao(trecho_dem[0],trecho_dem[1],variaveis, lista_com)
+                    
+    
 objeto = open('objeto.obj','w')  
-objeto.write('Hello World') 
+objeto.write(doc_final) 
 objeto.close() 
-#hex()print()
+
+memoria=end_fun+(1023-end_var)
+print ("Foi usado "+ str(memoria)+" espaços na memoria")
+#Endereço da proxima função a ser declarada
+end_fun=0
+
+
+#112 - 100
+#120 - 100
+
+#   1,12    -   1,2         =   -0,08
+#   112/100 -   12/10
+#   112/100 -   120/100
+#   8/100
+
+
+#Inteiros
+#vetores
+#= ,+,*,/
+#=while
+#if (<,>,==,!=)
