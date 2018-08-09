@@ -90,18 +90,17 @@ O IAS tinha 21 instruções agrupadas da seguinte forma?
 
 ### Código 1:
 1. Salvamos o número 25 (Decimal) no endereço 0FA
-
 2. Copiamos o conteúdo de 0FA para AC
 3. Copiamos o conteúdo de AC para 0FB
 4. Copiamos o conteúdo de 0FA para AC
 5. Se o número for não negativo:
-
     6. Transferimos o valor contido em 0FA com sinal trocado para o AC.
-
     7. Copiamos o conteúdo do AC para 0FB
-
     8. Saltamos para uma posição inexistente para encerrar o programa
 
 Em [linguagem de máquina](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/codigo_um.obj) e [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/codigo_um.asm).
 
 ### Código 2:
+
+Vamos declarar dois vetores A e B, e somar os elementos deles para construirmos um terceiro vetor C(i)=A(i)+B(i).
+Devido a limitações de comentários no assembler, não foi possível comentar os códigos anteriores, mas devido a maior complexidade deste, vamos salvar duas versões, uma limpa para copiar e colar no assembler e outra comentada. O código em  [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/codigo_dois.asm) pode ser conferido aqui.
