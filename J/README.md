@@ -71,7 +71,7 @@ b [1] = 2 ;
   - Multiplicação:
   - Divisão:
 
-# Condição:
+### Condição:
 - Usamos apenas o IF;
 - Múltiplos IFs não podem ser aninhados;
 - Cada IF comporta uma única condição;
@@ -90,7 +90,7 @@ else { }
 
 ```
 
-#Repetição:
+### Repetição:
 - Usamos apenas o while;
 - Mesmas estruturas condicionais do IF:
   - Maior:
