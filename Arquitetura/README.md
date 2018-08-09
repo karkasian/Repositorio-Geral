@@ -95,10 +95,12 @@ O IAS tinha 21 instruções agrupadas da seguinte forma?
 3. Copiamos o conteúdo de AC para 0FB
 4. Copiamos o conteúdo de 0FA para AC
 5. Se o número for não negativo:
-  6. Transferimos o valor contido em 0FA com sinal trocado para o AC.
-  7. Copiamos o conteúdo do AC para 0FB
 
-  8. Saltamos para uma posição inexistente para encerrar o programa
+    6. Transferimos o valor contido em 0FA com sinal trocado para o AC.
+    
+    7. Copiamos o conteúdo do AC para 0FB
+
+    8. Saltamos para uma posição inexistente para encerrar o programa
 
 Em [linguagem de máquina](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/codigo_um.obj) e [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/codigo_um.asm).
 
