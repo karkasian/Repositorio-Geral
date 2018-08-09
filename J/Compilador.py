@@ -1,8 +1,8 @@
 from comandos import *          #Vamos importar os comandos
 
 #Lista de palavras reservadas
-tipos_var=['vet','int']     #Primeiro precisamos ver se é vetor
-lista_com=['=','+']             #Primeiro queremos saber onde salvar o resultado
+tipos_var=['vet','int']         #Primeiro precisamos ver se é vetor
+lista_com=['=','+']             #Primeiro queremos saber se é um caso de atribuição
 reservadas=['start','var']
 
 #Lista de instruções
@@ -72,9 +72,9 @@ for trecho in trechos_var:
         res=trecho.find(tipo)
         if(res!=-1):            #Se é esse tipo
             #Com  tipo, vamos dar tratamentos diferentes dependendo do tipo
-            if (tipo=='int'):       #Se é inteiro prosseguimos pegando o nome
+            if (tipo=='int'):   #Se é inteiro prosseguimos pegando o nome
                 
-                pos=res+4           #Vamos começar a pegar o nome
+                pos=res+4       #Vamos começar a pegar o nome
                 nome=''
                 for c in range(pos,len(trecho)):
                     if (trecho[c]==' '):
@@ -104,7 +104,7 @@ for trecho in trechos_var:
                 
             elif (tipo =='vet'):        #Se é vetor
                 
-                pos=res+4           #Vamos começar a pegar o subtipo
+                pos=res+4               #Vamos começar a pegar o subtipo
                 sub=''
                 for c in range(pos,len(trecho)):
                     if (trecho[c]==' '):
@@ -141,16 +141,16 @@ for trecho in trechos_var:
 
                 #podemos conferir se os valores foram declarados:
                 decl=trecho.find('=')
-                if (decl==-1):      #Se não foi declarado
+                if (decl==-1):              #Se não foi declarado
                     for x in range(tam):    #Vamos salvar tudo 0
                         if (sub=='int'):
                             if (x>0):
                                 nome='vet'
-                            doc={'nome':nome,'valor':0,'posicao':end_var,'tipo':tipo}
+                            doc={'nome':nome,'valor':0,'posicao':end_var,'tipo':tipo,'sub-tipo':sub}
                             print('Declara vetor: '+nome+'['+str(x)+'] =0')
                             end_var=end_var-1       #Próxima variável, adicionamos no elemento da memória anterior
                             variaveis.append(doc)
-                else:               #Mas se foi
+                else:                       #Mas se foi
                     #Vamos pegar onde começa a declaração
                     for c in range(decl+1,len(trecho)):
                         if (trecho[c]=='['):
@@ -165,13 +165,13 @@ for trecho in trechos_var:
                     dec=''
                     for c in range (com+1,ter):
                         dec=dec+trecho[c]
-                    dec_sep=dec.split(',')      #Separamos os valores
+                    dec_sep=dec.split(',')  #Separamos os valores
                     
                     for x in range(tam):    #Vamos salvar tudo
                         if (sub=='int'):
                             if (x>0):
                                 nome='vet'
-                            doc={'nome':nome,'valor':int(dec_sep[x]),'posicao':end_var,'tipo':tipo}
+                            doc={'nome':nome,'valor':int(dec_sep[x]),'posicao':end_var,'tipo':tipo,'sub-tipo':sub}
                             print('Declara vetor: '+nome+'['+str(x)+'] ='+dec_sep[x])
                             end_var=end_var-1       #Próxima variável, adicionamos no elemento da memória anterior
                             variaveis.append(doc)
@@ -186,6 +186,7 @@ for v in variaveis:
     linha=pos +' '+val
     doc_final=doc_final+linha+'\n'
 
+print('\n\n')
 
 #Próximo passo é procurar os comandos
 pos=codigo.find('start')        #Primeiro vamos procurar o nosso bloco de comandos
@@ -214,23 +215,32 @@ trechos_com=codigo_com.split(';')
 
 #Vamos analisar linha a linha
 for trecho in trechos_com:
-    for comando in lista_com:   #Vamos percorrer nossa lista de comandos
+    for comando in lista_com:       #Vamos percorrer nossa lista de comandos
         res=trecho.find(comando)    #procurar comandos linha
         if (res!= -1):              #Se encontrouo comando
             pos=res                 #Vamos guardar onde está o comando
-            if( comando == '='): #Se o comando é de atribuição
+            if( comando == '='):    #Se o comando é de atribuição
                 trecho_dem=trecho.split('=')    #Vamos separar em o valor a ser atribuir, e onde será atribuido
-                atribuicao(trecho_dem[0],trecho_dem[1],variaveis, lista_com)
-                    
-    
+                #Chamamos a função de atribuição
+                (instrucoes,doc_final,end_fun,de)=atribuicao(trecho_dem[0],trecho_dem[1],variaveis, lista_com,instrucoes,doc_final,end_fun,de)    
+                
+#Vamos escrever nosso código de máquina em um arquivo    
 objeto = open('objeto.obj','w')  
 objeto.write(doc_final) 
-objeto.close() 
+objeto.close()
 
+#Printamos o código final
+#print('\n\n')
+#print('DOCUMENTO FINAL:')
+#print(doc_final)
+
+#Quanto de memória utilizamos.
+print('\n\n')
 memoria=end_fun+(1023-end_var)
+porcento=(memoria/1024)*100
 print ("Foi usado "+ str(memoria)+" espaços na memoria")
-#Endereço da proxima função a ser declarada
-end_fun=0
+print("Isso é {:,.2f}% da memória total".format(porcento))
+
 
 
 #112 - 100

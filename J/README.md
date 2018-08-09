@@ -57,9 +57,11 @@ if (a>c) {....}
 - Valor direto:
   - Ocupa meio espaço na memória.
   - Vetores iniciam no 0;
+  - Vetores devem ter os valores atribuídos elemento por elemento;
 ```
 a = 1 ;
 b [0] = 1 ;
+b [1] = 2 ;
 ```
 - Outra variável:
 
@@ -114,3 +116,5 @@ Além das limitações óbvias quanto as instruções que podem ser rodadas nas 
 
 - As variáveis são armazenadas do final para o começo da memória do IAS;
 - As instruções são armazenadas do começo pra o final do IAS;
+- Sem sinalizações de erros.
+- Máximo de 756 variáveis.
