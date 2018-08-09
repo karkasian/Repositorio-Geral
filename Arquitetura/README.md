@@ -75,7 +75,7 @@ O IAS opera realizando repetidamente um ciclo de instrução, e cada ciclo possu
   - O endereço é carregado no MAR;
 - Ciclo de execução.
 
-![ciclo do processador](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/imagens/instrucoes.png)
+![ciclo do processador](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/imagens/ciclo.png)
 
 O IAS tinha 21 instruções agrupadas da seguinte forma?
 - **Transferencia de dados**: movem dados entre memórias e registradores da ALU;
@@ -97,7 +97,7 @@ O IAS tinha 21 instruções agrupadas da seguinte forma?
 5. Se o número for não negativo:
 
     6. Transferimos o valor contido em 0FA com sinal trocado para o AC.
-    
+
     7. Copiamos o conteúdo do AC para 0FB
 
     8. Saltamos para uma posição inexistente para encerrar o programa
