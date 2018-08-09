@@ -1,4 +1,4 @@
-#  Arquitetura de computadores
+﻿#  Arquitetura de computadores
 
 Estas são algumas notas de estudos e códigos referentes a exercícios desenvolvidos na disciplina de Arquitetura de Computadores. Como bibliografia geral utilizo o livro Arquitetura e Organização de computadores do William Stalling, especificamente sobre a programação do computador IAS o professor Edson Borin disponibiliza um excelente material:
 - Apostia intitulada [Programando o IAS](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/anexos/programando_o_IAS.pdf);
@@ -104,3 +104,5 @@ Em [linguagem de máquina](https://github.com/SapoGitHub/Repositorio-Geral/blob/
 
 Vamos declarar dois vetores A e B, e somar os elementos deles para construirmos um terceiro vetor C(i)=A(i)+B(i).
 Devido a limitações de comentários no assembler, não foi possível comentar os códigos anteriores, mas devido a maior complexidade deste, vamos salvar duas versões, uma limpa para copiar e colar no assembler e outra comentada. O código em  [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/codigo_dois.asm) pode ser conferido aqui.
+
+Obs.: As instruções de modificações de endereço, são reconhecidas neste assembler como <code>STA M(X,i:j)</code> ao invés de <code>STOR M(X,i:j)</code>,
