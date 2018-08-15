@@ -79,8 +79,8 @@ O IAS opera realizando repetidamente um ciclo de instrução, e cada ciclo possu
 
 O IAS tinha 21 instruções agrupadas da seguinte forma?
 - **Transferencia de dados**: movem dados entre memórias e registradores da ALU;
-- **Desvio incondicional**: a sequência a partir da memória pode ser alterada, facilitando operações repetitivas;
-- **Desvio condicionao**: o desvio pode depender de uma condição;
+- **Desvio inional**: a sequência a partir da memória pode ser alterada, facilitando operações repetitivas;
+- **Desvio condicional**: o desvio pode depender de uma condição;
 - **Aritméticas**: operações realizadas na ALU;
 - **Modificação de endereço**: permite que os endereços sejam calculados na ALU e depois inseridos em instruções armazenadas na memória.
 
