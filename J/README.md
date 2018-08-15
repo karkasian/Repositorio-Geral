@@ -1,6 +1,6 @@
 #  Arquitetura de computadores
 
-Estas são algumas notas de estudos e códigos referentes a exercícios desenvolvidos na disciplina de Arquitetura de Computadores. Como bibliografia geral utilizo o livro Arquitetura e Organização de computadores do William Stalling, especificamente sobre a programação do computador IAS o professor Edson Borin disponibiliza um excelente material:
+Especificamente sobre a programação do computador IAS o professor Edson Borin disponibiliza um excelente material:
 - Apostila intitulada [Programando o IAS](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/anexos/programando_o_IAS.pdf);
 - Um simulador para rodar o código de máquina: [IAS Simulator](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-sim/);
 - Um assembler para rodarmos o código de montagem: [IAS - Assembler](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-Assembler/assembler.html).
