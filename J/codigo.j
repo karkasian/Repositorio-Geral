@@ -6,6 +6,11 @@ vet int [3] maria = [1,2,3] ;
 }
 
 start{
-a = 1 ;
-joao [9]=25 ;
+b = 10;
+a = b ;
+joao [9] = 25 ;
+b = joao [9] ;
+
+maria[0] = a + b ;
+
 }

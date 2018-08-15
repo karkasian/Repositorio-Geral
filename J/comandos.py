@@ -21,6 +21,8 @@ def atribuicao(a,b,variaveis,lista_com,instrucoes,doc_final,end_fun,de):
             if (res!=-1):
                 otra_vari=True
 
+                #Primeiro precisamos descobrir se é um vetor:
+
                 #Primeiro vamos ver de qual variável estamos pegando
                 
                 print('Atribuição por variável: '+ a+' = '+b)

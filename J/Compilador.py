@@ -147,7 +147,7 @@ for trecho in trechos_var:
                             if (x>0):
                                 nome='vet'
                             doc={'nome':nome,'valor':0,'posicao':end_var,'tipo':tipo,'sub-tipo':sub}
-                            print('Declara vetor: '+nome+'['+str(x)+'] =0')
+                            print('Declara vetor:'+nome+'['+str(x)+']=0')
                             end_var=end_var-1       #Próxima variável, adicionamos no elemento da memória anterior
                             variaveis.append(doc)
                 else:                       #Mas se foi
@@ -172,7 +172,7 @@ for trecho in trechos_var:
                             if (x>0):
                                 nome='vet'
                             doc={'nome':nome,'valor':int(dec_sep[x]),'posicao':end_var,'tipo':tipo,'sub-tipo':sub}
-                            print('Declara vetor: '+nome+'['+str(x)+'] ='+dec_sep[x])
+                            print('Declara vetor:'+nome+'['+str(x)+']='+dec_sep[x])
                             end_var=end_var-1       #Próxima variável, adicionamos no elemento da memória anterior
                             variaveis.append(doc)
 
@@ -186,7 +186,7 @@ for v in variaveis:
     linha=pos +' '+val
     doc_final=doc_final+linha+'\n'
 
-print('\n\n')
+print('\n')
 
 #Próximo passo é procurar os comandos
 pos=codigo.find('start')        #Primeiro vamos procurar o nosso bloco de comandos
@@ -235,8 +235,12 @@ objeto.close()
 #print(doc_final)
 
 #Quanto de memória utilizamos.
-print('\n\n')
-memoria=end_fun+(1023-end_var)
+print('\n')
+memoria=0
+objeto = open('objeto.obj','r')  
+for linha in objeto:
+    memoria=memoria+1
+objeto.close()
 porcento=(memoria/1024)*100
 print ("Foi usado "+ str(memoria)+" espaços na memoria")
 print("Isso é {:,.2f}% da memória total".format(porcento))
