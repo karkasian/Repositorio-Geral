@@ -66,3 +66,77 @@ Após gerarmos nosso arquivo fonte, publicamos no Kaggle: [Pokémon: estatístic
 ## Tableau
 
 Uma vez com nosso conjunto de dados gerados, podemos utilizar o Tableau para analisarmos os dados em questão. Também seguindo a proposta do compartilhamento na nuvem, publicamos nosso resultado no Tableau Public, com o nome [Análise Pokémon](https://public.tableau.com/profile/jhordan.silveira.de.borba#!/vizhome/AnalisePokmon/Final).
+
+### Página 1
+
+[página 1]()
+Na primeira página de nossa história final, escolhemos abordar os atributos individuais dos pokémons. Os gráficos individualmente relacionam:
+- Ataque e defesa;
+- Ataque especial e defesa especial;
+- Vida e velocidade.
+
+Mas todos eles compartilham características em comuns:
+- As cores identificam os tipos de pokémons;
+- Podemos filtrar por:
+  - Nome;
+  - Se é lendário;
+  - Tipo 1;
+  - Geração.
+ 
+ Nela podemos inferir visualmente algumas coisas como:
+ - A maior parte dos pokémons possuem mais velocidade que vida;
+ - A maior parte dos pokémons possuem Sp. Atk entre 25 e 150, e Sp. Def entre 25 e 100;
+ - A maior parte dos pokémons possuem 100 ou menos de defesa;
+ - O pokémon com o ataque mais alto que também possui uma defesa equilibrada é o Groudon em sua forma Primal, com 180 e 160 respectivamente.
+
+### Página 2
+
+[página 2]()
+
+Agora decidimos dar uma olhada em informações coletivas sobre os pokémons, para isso mantivemos os mesmos filtros da página anterior e temos os gráficos relacionado:
+- Quantidade de pokémon de cada tipo;
+- Quantidade de pokémon de cada geração;
+- Quantidade de vezes que temos cada combinação de tipo 1 com tipo 2 possível.
+
+Daqui podemos tirar mais algumas informações, por exemplo:
+- Geração 1 foi a maior geração até o momento;
+- A maior parte dos pokémons não possui um segundo tipo;
+- Flying é o tipo 1 menos popular, enquanto normal e água são os mais populares.
+  - Esse gráfico é melhor aproveitado de forma interativa para visualizarmos quais são os pokémons de cada tipo, e/ou geração usando os filtros.
+
+### Página 3
+
+[página 3]()
+
+Para a página 3, estamos preocupados em abordar os pontos totais de cada pokémon. Agora utilizamos como filtros unicamente o tipo 1 e a geração. Os gráficos nos mostram basicamente os pontos totais por:
+- Pokémon;
+- Geração;
+- Tipo 1.
+
+Podemos ver algumas coisas como:
+- O máximo total de um pokémon atualmente é 780. 
+  - 3 pokémons em sua forma mega atingem essa pontuação: Mewtwo X, Mewtwo Y e Rayquaza;
+- Como era de esperar, por possuir a maior quantidade de pokémons, é a geração 1 que possui a maior quantidade total acumulada;
+  - Podemos pensar em visualizar a média total por pokémon em cada geração, para compararmos as gerações.
+- Análogo ao item anterior, são os tipos água e normal que acumulam a maior quantidade de total.
+
+### Página 4
+
+[página 4]()
+
+Baseado nas sugestões anteriores, construímos uma página bônus, também com os filtros de geração e tipo, ela apresenta os gráficos com:
+- A média do total por pokémon de cada geração;
+- A média do total por pokémon de cada tipo;
+
+Podemos perceber que:
+- Não há diferença significativa entre as gerações.
+  - Todo caso, a geração 7 tem uma média levemente maior.
+ - O tipo dragão é o tipo que apresenta as maiores médias de total por Pokémon.
+ 
+ ### Página 5
+ 
+ [página 5]()
+ 
+ Como outro bônus ainda, decidimos investigar um pouco a questão levantada pelo conjunto de dados original no Kaggle. Reunimos em uma págiba, basicamente todas as combinações possíveis entre 2 atributos. Como podemos ver, não tem nenhum par de atributos que sozinhos consigam separar os pokémons entre os diversos tipos principais.
+ 
+ Sendo assim, não é possível inferir o tipo do pokémon olhando apenas um par de seus atributos, seja qual for.
