@@ -1,4 +1,4 @@
-# Gestor Pokémon
+﻿# Gestor Pokémon
 
 Para utilizarmos o Tableau, precisamos inicialmente de uma fonte de dados. Pesquisando na internet, encontramos um no Kaggle chamado [Pokemon with stats](https://www.kaggle.com/abcsds/pokemon). Porém este conjunto de dados está desatualizado, por exemplo, não contém a última geração de Pokémons, então decidimos montar nosso próprio conjunto.
 
@@ -48,5 +48,12 @@ Onde cada coluna indica:
 - Sp Def: Análogo ao caso anterior, é a resistência base contra ataques especiais;
 - Speed: Determina que pokémon ataca primeiro em cada rodada;
 - Legendary: Verdadeiro se o pokémon é lendário ou mítico, e falso caso contrário.
+
+E um último ponto a destacar, é que diferentemente de nosso conjunto de dados de referência hospedado no Kaggle, vamos utilizar tab e quebra de linhas para separar as linhas e colunas. Ex:
+<pre>
+Coluna 1	Coluna 2	Coluna 3
+Linha 1		Null		True
+Linha 2		Valor		False
+</pre>
 
 Para pegarmos os dados de nossa fonte, vamos utilizar o [Selenium](http://selenium-python.readthedocs.io/installation.html)  novamente. Vale lembrar que já utilizamos o mesmo na primeira vez em nosso projeto [WFAPI](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/WFAPI).
