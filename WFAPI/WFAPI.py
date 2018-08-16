@@ -8,8 +8,8 @@
 from selenium import webdriver                          #Biblioteca de automatização de tarefas no navegador
 from selenium.webdriver.common.keys import Keys         #Importa os atalhos de teclas do Selenium
 from PIL import Image                                   #Biblioteca para tratamento de imagem
-import time
-import threading
+import time                                             #Biblioteca com comandos relacionados ao tempo
+import threading                                        #Biblioteca relacionado a paralelismo
 
 driver = webdriver.Chrome()                     #Conectamos no Chrome
 driver.get("https://web.whatsapp.com")          #Abrimos a pagina do WhatsApp Web
