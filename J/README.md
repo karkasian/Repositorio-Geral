@@ -75,7 +75,7 @@ O IAS opera realizando repetidamente um ciclo de instrução, e cada ciclo possu
   - O endereço é carregado no MAR;
 - Ciclo de execução.
 
-![ciclo do processador](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/imagens/ciclo.png)
+![ciclo do processador](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/J/imagens/ciclo.png)
 
 O IAS tinha 21 instruções agrupadas da seguinte forma?
 - **Transferencia de dados**: movem dados entre memórias e registradores da ALU;
@@ -84,7 +84,7 @@ O IAS tinha 21 instruções agrupadas da seguinte forma?
 - **Aritméticas**: operações realizadas na ALU;
 - **Modificação de endereço**: permite que os endereços sejam calculados na ALU e depois inseridos em instruções armazenadas na memória.
 
-![instruções do IAS](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/imagens/instrucoes.png)
+![instruções do IAS](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/J/imagens/instrucoes.png)
 
 # Linguagem
 
