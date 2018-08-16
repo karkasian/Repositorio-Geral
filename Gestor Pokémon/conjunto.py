@@ -84,14 +84,16 @@ while(True):
 
     tab='	'           #O tab
     #Vamos montar a linha
-    linha=str(ide)+tab+nome+tab+tipo1+tab+tipo2+tab+str(total)+tab+str(hp)+tab+str(attack)+tab+str(defense)+tab+str(spatk)+tab+str(spdef)+tab+str(speed)+'\n'
+    linha=str(ide)+tab+nome+tab+tipo1+tab+tipo2+tab+str(total)+tab+str(hp)+tab+str(attack)+tab+str(defense)+tab+str(spatk)+tab+str(spdef)+tab+str(speed)+tab+str(g)+tab+str(l)+'\n'
     pks.append(linha)       #Vamos salvar a linha
     print(c)
     c=c+1                                   #Avançamos o elemento
 
+print('Dados capturados.')
 #Agora podemos guardar as linhas no arquivo
-arquivo = open('banco','w')
-cabecalho='#'+tab+'Name'+tab+'Type 1'+tab+'Type 2'+tab+'Total'+tab+'HP'+tab+'Attack'+tab+'Defense'+tab+'Sp. Atk'+tab+'Sp. Def'+tab+'Speed'+tab+'Generations'+tab+'Legendary\n'
+arquivo = open('pokemon.csv', mode='w', encoding="utf-8")
+cabecalho='#'+tab+'Name'+tab+'Type 1'+tab+'Type 2'+tab+'Total'+tab+'HP'+tab+'Attack'+tab+'Defense'+tab+'Sp. Atk'+tab+'Sp. Def'+tab+'Speed'+tab+'Generation'+tab+'Legendary\n'
 arquivo.write(cabecalho)
 arquivo.writelines(pks)
 arquivo.close()
+print('Conjunto de dados criados.')

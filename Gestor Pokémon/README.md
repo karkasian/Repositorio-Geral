@@ -1,5 +1,7 @@
 ﻿# Gestor Pokémon
 
+## Conjunto de dados
+
 Para utilizarmos o Tableau, precisamos inicialmente de uma fonte de dados. Pesquisando na internet, encontramos um no Kaggle chamado [Pokemon with stats](https://www.kaggle.com/abcsds/pokemon). Porém este conjunto de dados está desatualizado, por exemplo, não contém a última geração de Pokémons, então decidimos montar nosso próprio conjunto.
 
 Para isso vamos utilizar como fonte a Pokedéx do [Pokémon Database](https://pokemondb.net/pokedex/all). Pensando em manter um padrão para quem utilizava a disponibilizada no Kaggle, precisamos de algumas informações extras que não constam em nossa fonte principal:
@@ -57,3 +59,7 @@ Linha 2		Valor		False
 </pre>
 
 Para pegarmos os dados de nossa fonte, vamos utilizar o [Selenium](http://selenium-python.readthedocs.io/installation.html)  novamente. Vale lembrar que já utilizamos o mesmo na primeira vez em nosso projeto [WFAPI](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/WFAPI).
+
+## Tableau
+
+Uma vez com nosso conjunto de dados gerados, podemos utilizar o Tableau para analisarmos os dados em questão.
