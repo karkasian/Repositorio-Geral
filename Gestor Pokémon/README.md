@@ -73,6 +73,7 @@ Na primeira página de nossa história final, escolhemos abordar os atributos in
 - Ataque e defesa;
 - Ataque especial e defesa especial;
 - Vida e velocidade.
+
 Mas todos eles compartilham características em comuns:
 - As cores identificam os tipos de pokémons;
 - Podemos filtrar por:
@@ -81,7 +82,8 @@ Mas todos eles compartilham características em comuns:
  - Tipo 1;
  - Geração.
  
- Nela podemos conferir algumas coisas como:
+ Nela podemos inferir visualmente algumas coisas como:
  - A maior parte dos pokémons possuem mais velocidade que vida;
  - A maior parte dos pokémons possuem Sp. Atk entre 25 e 150, e Sp. Def entre 25 e 100;
- - 
+ - A maior parte dos pokémons possuem 100 ou menos de defesa;
+ - O pokémon com o ataque mais alto que também possui uma defesa equilibrada é o Groudon em sua forma Primal, com 180 e 160 respectivamente.
