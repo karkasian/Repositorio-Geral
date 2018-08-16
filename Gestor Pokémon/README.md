@@ -47,6 +47,7 @@ Onde cada coluna indica:
 - Sp Atk: Do inglês _special attack_, é o modificador base para ataques especiais;
 - Sp Def: Análogo ao caso anterior, é a resistência base contra ataques especiais;
 - Speed: Determina que pokémon ataca primeiro em cada rodada;
+- Generation: A geração do pokémon;
 - Legendary: Verdadeiro se o pokémon é lendário ou mítico, e falso caso contrário.
 
 Para pegarmos os dados de nossa fonte, vamos utilizar o [Selenium](http://selenium-python.readthedocs.io/installation.html)  novamente. Vale lembrar que já utilizamos o mesmo na primeira vez em nosso projeto [WFAPI](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/WFAPI).
