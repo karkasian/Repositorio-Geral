@@ -66,3 +66,22 @@ Após gerarmos nosso arquivo fonte, publicamos no Kaggle: [Pokémon: estatístic
 ## Tableau
 
 Uma vez com nosso conjunto de dados gerados, podemos utilizar o Tableau para analisarmos os dados em questão. Também seguindo a proposta do compartilhamento na nuvem, publicamos nosso resultado no Tableau Public, com o nome [Análise Pokémon](https://public.tableau.com/profile/jhordan.silveira.de.borba#!/vizhome/AnalisePokmon/Final).
+
+### Página 1
+[página 1]()
+Na primeira página de nossa história final, escolhemos abordar os atributos individuais dos pokémons. Os gráficos individualmente relacionam:
+- Ataque e defesa;
+- Ataque especial e defesa especial;
+- Vida e velocidade.
+Mas todos eles compartilham características em comuns:
+- As cores identificam os tipos de pokémons;
+- Podemos filtrar por:
+ - Nome;
+ - Se é lendário;
+ - Tipo 1;
+ - Geração.
+ 
+ Nela podemos conferir algumas coisas como:
+ - A maior parte dos pokémons possuem mais velocidade que vida;
+ - A maior parte dos pokémons possuem Sp. Atk entre 25 e 150, e Sp. Def entre 25 e 100;
+ - 
