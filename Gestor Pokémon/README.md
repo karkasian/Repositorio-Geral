@@ -47,6 +47,7 @@ Onde cada coluna indica:
 - Sp Atk: Do inglês _special attack_, é o modificador base para ataques especiais;
 - Sp Def: Análogo ao caso anterior, é a resistência base contra ataques especiais;
 - Speed: Determina que pokémon ataca primeiro em cada rodada;
+- Generation: A geração do pokémon;
 - Legendary: Verdadeiro se o pokémon é lendário ou mítico, e falso caso contrário.
 
 E um último ponto a destacar, é que diferentemente de nosso conjunto de dados de referência hospedado no Kaggle, vamos utilizar tab e quebra de linhas para separar as linhas e colunas. Ex:
