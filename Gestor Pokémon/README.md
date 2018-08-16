@@ -69,7 +69,8 @@ Uma vez com nosso conjunto de dados gerados, podemos utilizar o Tableau para ana
 
 ### Página 1
 
-[página 1]()
+![página 1](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Gestor%20Pok%C3%A9mon/imagens/pagina1.png)
+
 Na primeira página de nossa história final, escolhemos abordar os atributos individuais dos pokémons. Os gráficos individualmente relacionam:
 - Ataque e defesa;
 - Ataque especial e defesa especial;
@@ -91,7 +92,7 @@ Mas todos eles compartilham características em comuns:
 
 ### Página 2
 
-[página 2]()
+![página 2](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Gestor%20Pok%C3%A9mon/imagens/pagina2.png)
 
 Agora decidimos dar uma olhada em informações coletivas sobre os pokémons, para isso mantivemos os mesmos filtros da página anterior e temos os gráficos relacionado:
 - Quantidade de pokémon de cada tipo;
@@ -106,7 +107,7 @@ Daqui podemos tirar mais algumas informações, por exemplo:
 
 ### Página 3
 
-[página 3]()
+![página 3](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Gestor%20Pok%C3%A9mon/imagens/pagina3.png)
 
 Para a página 3, estamos preocupados em abordar os pontos totais de cada pokémon. Agora utilizamos como filtros unicamente o tipo 1 e a geração. Os gráficos nos mostram basicamente os pontos totais por:
 - Pokémon;
@@ -122,7 +123,7 @@ Podemos ver algumas coisas como:
 
 ### Página 4
 
-[página 4]()
+![página 4](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Gestor%20Pok%C3%A9mon/imagens/pagina4.png)
 
 Baseado nas sugestões anteriores, construímos uma página bônus, também com os filtros de geração e tipo, ela apresenta os gráficos com:
 - A média do total por pokémon de cada geração;
@@ -135,8 +136,8 @@ Podemos perceber que:
  
  ### Página 5
  
- [página 5]()
+![página 5](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Gestor%20Pok%C3%A9mon/imagens/pagina5.png)
  
  Como outro bônus ainda, decidimos investigar um pouco a questão levantada pelo conjunto de dados original no Kaggle. Reunimos em uma págiba, basicamente todas as combinações possíveis entre 2 atributos. Como podemos ver, não tem nenhum par de atributos que sozinhos consigam separar os pokémons entre os diversos tipos principais.
  
- Sendo assim, não é possível inferir o tipo do pokémon olhando apenas um par de seus atributos, seja qual for.
+Sendo assim, não é possível inferir o tipo do pokémon olhando apenas um par de seus atributos, seja qual for.
