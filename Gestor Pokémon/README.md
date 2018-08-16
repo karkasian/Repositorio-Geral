@@ -49,6 +49,7 @@ Onde cada coluna indica:
 - Sp Atk: Do inglês _special attack_, é o modificador base para ataques especiais;
 - Sp Def: Análogo ao caso anterior, é a resistência base contra ataques especiais;
 - Speed: Determina que pokémon ataca primeiro em cada rodada;
+- Generation: A geração do pokémon;
 - Legendary: Verdadeiro se o pokémon é lendário ou mítico, e falso caso contrário.
 
 E um último ponto a destacar, é que diferentemente de nosso conjunto de dados de referência hospedado no Kaggle, vamos utilizar tab e quebra de linhas para separar as linhas e colunas. Ex:
@@ -60,6 +61,8 @@ Linha 2		Valor		False
 
 Para pegarmos os dados de nossa fonte, vamos utilizar o [Selenium](http://selenium-python.readthedocs.io/installation.html)  novamente. Vale lembrar que já utilizamos o mesmo na primeira vez em nosso projeto [WFAPI](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/WFAPI).
 
+Após gerarmos nosso arquivo fonte, publicamos no Kaggle: [Pokémon: estatísticas básicas](https://www.kaggle.com/sapokaggle/pokmon-estatsticas-bsicas)
+
 ## Tableau
 
-Uma vez com nosso conjunto de dados gerados, podemos utilizar o Tableau para analisarmos os dados em questão.
+Uma vez com nosso conjunto de dados gerados, podemos utilizar o Tableau para analisarmos os dados em questão. Também seguindo a proposta do compartilhamento na nuvem, publicamos nosso resultado no Tableau Public, com o nome [Análise Pokémon](https://public.tableau.com/profile/jhordan.silveira.de.borba#!/vizhome/AnalisePokmon/Final).
