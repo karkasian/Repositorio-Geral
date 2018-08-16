@@ -94,8 +94,8 @@ Mas todos eles compartilham características em comuns:
 [página 2]()
 
 Agora decidimos dar uma olhada em informações coletivas sobre os pokémons, para isso mantivemos os mesmos filtros da página anterior e temos os gráficos relacionado:
-- Quantidad de pokémon de cada tipo;
-- Quantidad de pokémon de cada geração;
+- Quantidade de pokémon de cada tipo;
+- Quantidade de pokémon de cada geração;
 - Quantidade de vezes que temos cada combinação de tipo 1 com tipo 2 possível.
 
 Daqui podemos tirar mais algumas informações, por exemplo:
