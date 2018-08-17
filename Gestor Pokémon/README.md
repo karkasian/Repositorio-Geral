@@ -85,7 +85,7 @@ Mas todos eles compartilham características em comuns:
   - Geração.
  
  Nela podemos inferir visualmente algumas coisas como:
- - A maior parte dos pokémons possuem mais velocidade que vida;
+ - Existe um equilibrio entre pokémons com mais vida que velocidade e o contrário;
  - A maior parte dos pokémons possuem Sp. Atk entre 25 e 150, e Sp. Def entre 25 e 100;
  - A maior parte dos pokémons possuem 100 ou menos de defesa;
  - O pokémon com o ataque mais alto que também possui uma defesa equilibrada é o Groudon em sua forma Primal, com 180 e 160 respectivamente.

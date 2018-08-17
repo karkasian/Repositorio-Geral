@@ -71,7 +71,7 @@ while(True):
     defense=int(driver.find_element_by_xpath('//*[@id="pokedex"]/tbody/tr['+str(c)+']'+'/td[7]').text)  #Defense
     spatk=int(driver.find_element_by_xpath('//*[@id="pokedex"]/tbody/tr['+str(c)+']'+'/td[8]').text)    #Sp. Atk
     spdef=int(driver.find_element_by_xpath('//*[@id="pokedex"]/tbody/tr['+str(c)+']'+'/td[9]').text)    #Sp. Def
-    speed=int(driver.find_element_by_xpath('//*[@id="pokedex"]/tbody/tr['+str(c)+']'+'/td[6]').text)    #Speed
+    speed=int(driver.find_element_by_xpath('//*[@id="pokedex"]/tbody/tr['+str(c)+']'+'/td[10]').text)    #Speed
 
     if ide in ger:          #Se é o primeiro pokémon de uma geração
         g=g+1               #Avançamos nossa geração
