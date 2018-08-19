@@ -1,3 +1,11 @@
+##J: Compilador
+##Desenvolvido por:     Jhordan Silveira de Borba
+##E-mail:               jhordandecacapava@gmail.com
+##Website:              https://sapogithub.github.io
+##Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/tree/master/J
+##2018
+
+
 from comandos import *          #Vamos importar os comandos
 
 #Lista de palavras reservadas

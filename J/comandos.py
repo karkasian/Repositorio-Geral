@@ -1,3 +1,11 @@
+##J: Comandos
+##Desenvolvido por:     Jhordan Silveira de Borba
+##E-mail:               jhordandecacapava@gmail.com
+##Website:              https://sapogithub.github.io
+##Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/tree/master/J
+##2018
+
+
 def atribuicao(a,b,variaveis,lista_com,instrucoes,doc_final,end_fun,de):
     #a          - Variável que vai receber o valor
     #b          - Valor a ser salvo na variável
