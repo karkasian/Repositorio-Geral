@@ -1,3 +1,5 @@
+﻿<code>Em andamento</code>
+
 #  Arquitetura de computadores
 
 Especificamente sobre a programação do computador IAS o professor Edson Borin disponibiliza um excelente material:
