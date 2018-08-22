@@ -1,0 +1,13 @@
+
+#Armazena o número 25 em 0FA
+0FA 19
+
+#Passa o valor de 0FA AC, e do AC para 0FB
+000 01 0FA 21 0FB
+#Passa o valor de 0FA AC, E se for positivo vai para 08D
+001 01 0FA 0F 08D
+#Passamos o valor de 0FA com sinal invertido para AC e do AC para 0FB
+08D 02 0FA 21 0FB
+
+#Buscamos a próxima instrução na posição 1024 (saímos do programa)
+08E 0D 400 00 000   
