@@ -1,5 +1,17 @@
+##ARQUITETURA: Algoritmo de Booth
+##Desenvolvido por:     Jhordan Silveira de Borba
+##E-mail:               jhordandecacapava@gmail.com
+##Website:              https://sapogithub.github.io
+##Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/tree/master/Introdu%C3%A7%C3%A3o%20ao%20Hacking%20e%20Pentest
+##2018
+
+
 #Vamos definir os registradores
-class
+class registradores:
+    Q=0     #Multiplicador
+    M=0     #Multiplicando
+    A=0     #Registrador
+    C=0     #Multiplicador de 1 bit
 
 #Algoritmos relacionados a adição
 class adicao:

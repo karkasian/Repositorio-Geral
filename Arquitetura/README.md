@@ -1,11 +1,17 @@
 ﻿# Arquitetura de computadores
 
-**Problema 2.1**:
+## Problemas
+
+Estes são alguns problemas retirados do livro de Arquitetura e Organização de Computadores (8 edição, William Stallings).
+
+### Problema 2.1
+
 Considere que A = A(1), A(2),... , A(1 000) e B = B(1), B(2),..., B(1 000) sejam dois vetores (arrays unidimensionais) compostos de 3 números em cada um, que são somados para formar um array C tal que C(I) = A(I) + B(I) para I = 1,2,3. Usando o conjunto de instruções do IAS, escreva um programa para esse problema. 
 
 [Código](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.1.asm) em linguagem de montagem.
 
-**Problema2.4**:
+## Problema 2.4
+
 Interprete e escreva em linguagem de montagem:
 ```
 08A 010FA210FB
@@ -51,7 +57,12 @@ Então agora nosso código:
 
 Temos o código em [linguagem de máquina](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.obj) e [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.asm).
 
-**Adição de inteiros**:
+## Algoritmo de Booth
+
+### Adição
+
+Primeiro precisamos definir como funciona a adição, já que uma multiplicação nada mais é que sucessivas adições.
+
 A adição de inteiros em binário seguem algumas regras simples:
 - 0+0=0;
 - 0+1=1;
@@ -59,6 +70,11 @@ A adição de inteiros em binário seguem algumas regras simples:
 - 1+1=0 (e 'vai 1' para o dígito de ordem superior)
 - 1+1+1=1 (e 'vai 1' para o dígito de ordem superior)
 
-E temos uma regra simples para determinar a ocorrência de overflow: se os dois números somados tem o mesmo sinal, ocorre overflow se o resultado possuir o sinal oposto.
+### Overflow
 
-Escrevemos um [código em python](overflow.py) para isso.
+E temos uma regra simples para determinar a ocorrência de overflow: se os dois números somados tem o mesmo sinal, ocorre overflow se o resultado possuir o sinal oposto.
+Agora 
+
+## Multiplicação de inteiros sem sinal
+
+Escrevemos um [código em python](booth.py) para isso.
