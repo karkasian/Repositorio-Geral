@@ -73,15 +73,34 @@ A adição de inteiros em binário seguem algumas regras simples:
 - 0+0=0;
 - 0+1=1;
 - 1+0=1;
-- 1+1=0 (e 'vai 1' para o dígito de ordem superior)
-- 1+1+1=1 (e 'vai 1' para o dígito de ordem superior)
+- 1+1=0 (e 'vai 1' para o dígito de ordem superior);
+- 1+1+1=1 (e 'vai 1' para o dígito de ordem superior).
 
-### Overflow
-
-E temos uma regra simples para determinar a ocorrência de overflow: se os dois números somados tem o mesmo sinal, ocorre overflow se o resultado possuir o sinal oposto.
+**Overflow**: E temos uma regra simples para determinar a ocorrência de overflow: se os dois números somados tem o mesmo sinal, ocorre overflow se o resultado possuir o sinal oposto.
 Agora 
 
-## Multiplicação de inteiros sem sinal
+### Subtração
+
+**Negação**: o processo de obter o mesmo número com sinal invertido, por exemplo, fazendo a negação de 1, temos -1.
+
+Na representação sinal-magnitude, a negação de um inteiro é só inverter o bit de sinal. Na notação de complemento de dois seguimos as seguintes regras:
+1. Invertemos bit a bit o número:
+	- Onde é 0, escrevemos 1;
+	- Onde é 1, escrevemos 0;
+2. Tratamos o resultado como um inteiro binário sem sinal, e somamos 1:
+
+```
+11101110 	-18 em complemento de dois
+00010001 	Complemento bit a bit
+      +1
+--------
+00010010	+18
+```
+
+
+### Multiplicação
+
+**Multiplicação de inteiros sem sinal**:
 
 ```
     1011	Multiplicando
@@ -95,8 +114,29 @@ Agora
 10001111	Produto
 ```
 
-1. A multiplicação envolve a geração de produtos parciais, um para cada dígito no multiplicador, e eesses produtos parciais são então somados para produzir o produto final.
+1. A multiplicação envolve a geração de produtos parciais, um para cada dígito no multiplicador, e eesses produtos parciais são então somados para produzir o produto final;
 2. Os produtos parciais são fácilmente definidos segundo o bit multiplicador:
 	- 0: o produto parcial e 0;
 	- 1: o produto parcial é o multiplicando.
+3. O produto total é produzido somando-se os produtos parciais;
+	- Cada produto parcial sucesso é deslocado uma posição à esquerda em relação ao produto parcial anterior.
+4. A multiplicação de dois inteiros binários de n bits resulta em um produto de até 2n bits.
+
+
+Observações:
+- Podemos realizar uma adição acumulada nos produtos parciais ao invés de esperar até o final.
+- Para cada 1, uma operação de soma e deslocamento é necessária;
+- Para cada 0, somente um deslocamento é necessário.
+
+**Multiplicação por complemento de dois**
+
+Não podemos considerar como inteiros sem sinal da mesma fora que fazemos com a adição, se o muliplicando ou multiplicador for negativo.
+
+O algoritmo de Boot é descrito da seguinte forma:
+
+- O multiplicador e o multiplicando são colocados nos registradores Q e M respectivamente.
+- Temos um registrador de 1 bit colocado logicamente à direita do bit menos significativo do registrador Q, chamado C.
+- Resultados aparecerão em A e Q.
+- A e C são inicializados em 9.
+
 Escrevemos um [código em python](booth.py) para isso.
