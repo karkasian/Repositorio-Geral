@@ -3,9 +3,9 @@
 **Problema 2.1**:
 Considere que A = A(1), A(2),... , A(1 000) e B = B(1), B(2),..., B(1 000) sejam dois vetores (arrays unidimensionais) compostos de 3 números em cada um, que são somados para formar um array C tal que C(I) = A(I) + B(I) para I = 1,2,3. Usando o conjunto de instruções do IAS, escreva um programa para esse problema. 
 
-[Código](Problema 2.1.asm) em linguagem de montagem.
+[Código](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.1.asm) em linguagem de montagem.
 
-** Problema 2.4**:
+**Problema2.4**:
 Interprete e escreva em linguagem de montagem:
 ```
 08A 010FA210FB
@@ -48,7 +48,7 @@ Então agora nosso código:
 - Salvamos 25 com sinal contrário (-25) em AC e do AC guardamos em 0FB;
 - Buscamos a próxima instrução em um endereço inexistente (1024 em decimal) causando a interrupção do programa:
 
-Temos o código em [linguagem de máquina](Problema 2.4.obj) e [linguagem de montagem](Problema 2.4.asm).
+Temos o código em [linguagem de máquina](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.obj) e [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.asm).
 
 **Adição de inteiros**:
 A adição de inteiros em binário seguem algumas regras simples:
