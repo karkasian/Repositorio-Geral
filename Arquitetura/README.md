@@ -22,6 +22,7 @@ Reescrevendo de forma mais legível:
 Então para a primeira linha guarda seu conteúdo no endereço 08A Hex (138 Dec). Seu conteúdo tem 2 palavras:
 1. [01 0FA]
 2. [21 0FB]
+
 A primeira palavra, traz um opcode e um endereço:
 1. 01 Hex (1 Dec, 0000 0001 Bin): Load M(X): transfere o conteúdo de X para o AC
 2. 0FA Hex (250 Dec): Endereço de memória.
