@@ -1,4 +1,6 @@
-﻿<code>Em andamento</code>
+﻿```
+Em andamento
+```
 
 #  Arquitetura de computadores
 

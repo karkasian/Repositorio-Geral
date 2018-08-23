@@ -1,6 +1,12 @@
-﻿# Arquitetura de computadores
+﻿```
+Em andamento.
+```
+
+# Arquitetura de computadores
 
 ## Problemas
+
+Uma introdução ao IAS está no meu projeto [J](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/J).
 
 Estes são alguns problemas retirados do livro de Arquitetura e Organização de Computadores (8 edição, William Stallings).
 
@@ -77,4 +83,20 @@ Agora
 
 ## Multiplicação de inteiros sem sinal
 
+```
+    1011	Multiplicando
+  x 1101	Multiplicador
+--------
+    1011
+   0000		Produtos
+  1011		Parciais
+ 1011
+--------
+10001111	Produto
+```
+
+1. A multiplicação envolve a geração de produtos parciais, um para cada dígito no multiplicador, e eesses produtos parciais são então somados para produzir o produto final.
+2. Os produtos parciais são fácilmente definidos segundo o bit multiplicador:
+	- 0: o produto parcial e 0;
+	- 1: o produto parcial é o multiplicando.
 Escrevemos um [código em python](booth.py) para isso.
