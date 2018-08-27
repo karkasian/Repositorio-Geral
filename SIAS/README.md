@@ -34,3 +34,8 @@ Outras observações:
 - Foi considerado que o registrador PC possui acesso um hardware próprio que lhe fornece capacidade de realizar uma soma binária do tipo <code>+1</code> sem acessar a ULA.
 - Da mesma forma dentro do complementador no módulo de adição e subtração, ele possui a mesma capacidade de realizar a soma <code>+1</code>.
 - Os detalhes de como funciona a conexão entre as estruturas foi ignorado.
+
+Melhorias:
+- Tratar o argumento das funções aritméticas dentro da função, e não antes/depois.
+- Tratar todas as instruções como funções.
+	- Muitos trechos podem ser reaproveitados

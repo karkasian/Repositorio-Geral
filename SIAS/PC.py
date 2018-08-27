@@ -56,9 +56,11 @@ class memoria:
 
 #ENTRADA/SAÍDA:
 class ES:
-    memoria.conteudo[0]='00000000 000000000000 00001110 000000001000'
-    memoria.conteudo[4]='00000000 000000000000 00000000 000000000001'
-    memoria.conteudo[8]='00000000 000000000001 00000100 000000000100'
+    memoria.conteudo[0]= '00000000 000000000000 00000001 000000001000'
+    memoria.conteudo[1]= '00000111 000000001000 00000111 000000010000'
+    memoria.conteudo[2]= '00001000 000000001000 00001000 000000010000'
+    memoria.conteudo[8]= '00000000 000000000000 00000000 000000000001'
+    memoria.conteudo[16]='11111111 111111111111 11111111 111111111111'
 
 #ESTRUTURAS INTERNAS------------------------------------------------------------
 
@@ -241,11 +243,17 @@ class funcao_UC:
 
         #ADD M(X) Soma M(X) a AC e coloca o resultado em AC
         elif(CPU.UC.IR=='00000101'):
-            CPU.ULA.circuito(func_memoria.M(CPU.UC.MAR),1)
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            regs('MBR<-M(MAR)')
+ 
+            CPU.ULA.circuito(CPU.ULA.MBR,1)
 
         #SUB M(X) Subtrai M(X) a AC e coloca o resultado em AC
         elif(CPU.UC.IR=='00000110'):
-            CPU.ULA.circuito(func_memoria.M(CPU.UC.MAR),0)
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            regs('MBR<-M(MAR)')
+            
+            CPU.ULA.circuito(CPU.ULA.MBR,0)
 
         #STOR M(X) Transfere o conteudo de AC parao local de memória X
         elif(CPU.UC.IR=='00100001'):
@@ -340,9 +348,9 @@ class funcao_UC:
             CPU.UC.PC=CPU.UC.MAR                                  # MBR<-M(MAR)
             regs('PC <- MAR')
 
-        #JUMP M(X,20:39) Apanha a proxima instrução da metade esquerda de m(X)
+        #JUMP M(X,20:39) Apanha a proxima instrução da metade direita de m(X)
         elif(CPU.UC.IR=='00001110'):
-            CPU.UC.PC=CPU.UC.MAR                                  # MBR<-M(MAR)
+            CPU.UC.PC=CPU.UC.MAR                                  # PC<-MAR
             regs('PC <- MAR')
 
             (CPU.UC.PC,OF)=estrutura_ULA.adicao.somador(CPU.UC.PC.replace(' ',''),'000000000001')   #PC <- PC+1 
@@ -353,6 +361,103 @@ class funcao_UC:
 
             CPU.UC.IBR=CPU.ULA.MBR.split(' ')[2]+' '+CPU.ULA.MBR.split(' ')[3]      #IBR <- MBR(20:39)
             regs('IBR <- MBR(20:39)')
+
+        #JUMP+ M(X,0:19) Se o número no AC for não negativo, apanha a proxima instrução da metade esquerda
+        elif(CPU.UC.IR=='00001111'):
+        
+            if(CPU.ULA.AC[0]=='0'):        #Vamos checar se o número é positivo
+                CPU.UC.PC=CPU.UC.MAR                                  # PC<-MAR
+                regs('O número é positivo? Sim.\nPC <- MAR')
+            else:
+                regs('O número é positivo? Não.')
+
+        #JUMP+ M(X,20:39) Se o número no AC for não negativo, apanha a proxima instrução da metade direita
+        elif(CPU.UC.IR=='00010000'):
+        
+            if(CPU.ULA.AC[0]=='0'):        #Vamos checar se o número já é positivo
+                CPU.UC.PC=CPU.UC.MAR                                  # PC<-MAR
+                regs('PC <- MAR')
+
+                (CPU.UC.PC,OF)=estrutura_ULA.adicao.somador(CPU.UC.PC.replace(' ',''),'000000000001')   #PC <- PC+1 
+                regs('PC <- PC+1')
+
+                CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+                regs('MBR <- M(MAR)')
+
+                CPU.UC.IBR=CPU.ULA.MBR.split(' ')[2]+' '+CPU.ULA.MBR.split(' ')[3]      #IBR <- MBR(20:39)
+                regs('IBR <- MBR(20:39)')
+            else:
+                regs('O número é positivo? Não.')
+
+        #STOR M(X,8:19) Substitui o campo de endereço da esquerda em M(X) por 12 bits mais a direita de AC
+        elif(CPU.UC.IR=='00010010'):
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            regs('MBR <- M(MAR)')
+
+            CPU.ULA.MBR=CPU.ULA.MBR.split(' ')[0]+' '+CPU.ULA.AC.split(' ')[3]+' '+CPU.ULA.MBR.split(' ')[2]+' '+CPU.ULA.MBR.split(' ')[3]     #Passamos os 12 bits
+            regs('MBR (8:19) <- AC (8:19)')
+
+            func_memoria.stor(CPU.UC.MAR,CPU.ULA.MBR)               #M(MAR) <- MBR
+            regs('M(MAR) <- MBR')
+            
+        #STOR M(X,28:39) Substitui o campo de endereço da direita em M(X) por 12 bits mais a direita de AC
+        elif(CPU.UC.IR=='00010011'):
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            regs('MBR <- M(MAR)')
+
+            CPU.ULA.MBR=CPU.ULA.MBR.split(' ')[0]+' '+CPU.ULA.MBR.split(' ')[1]+' '+CPU.ULA.MBR.split(' ')[2]+' '+CPU.ULA.AC.split(' ')[3]     #Passamos os 12 bits
+            regs('MBR (8:19) <- AC (8:19)')
+
+            func_memoria.stor(CPU.UC.MAR,CPU.ULA.MBR)               #M(MAR) <- MBR
+            regs('M(MAR) <- MBR')
+
+        #ADD |M(X)| Soma |M(X)| a AC e coloca o resultado em AC
+        elif(CPU.UC.IR=='00000111'):
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            regs('MBR <- M(MAR)')
+
+            if(CPU.ULA.MBR[0]=='0'):        #Vamos checar se o número já é positivo
+                regs('O número é positivo? Sim')
+            else:                           #Se é negativo pegamos o complemento
+                estrutura_ULA.adicao.B=CPU.ULA.MBR.replace(' ','')                      #B<- MBR
+                print('O número é positivo? Não.\nRegistrador B: '+ estrutura_ULA.adicao.B)
+
+                binario=estrutura_ULA.adicao.complementador()                       #MBR <- -B
+                CPU.ULA.MBR=''
+                #Vamos remontar o número
+                for x in range (40):
+                    if (x==8 or x==20 or x==28):
+                        CPU.ULA.MBR=CPU.ULA.MBR+' '
+                    CPU.ULA.MBR=CPU.ULA.MBR+binario[x]
+                regs('MBR <- -B')           
+
+            CPU.ULA.circuito(CPU.ULA.MBR,1)
+
+        #SUB|M(X)| subtrai |M(X)| de AC e coloca o resultado em AC
+        elif(CPU.UC.IR=='00001000'):
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            regs('MBR <- M(MAR)')
+
+            if(CPU.ULA.MBR[0]=='0'):        #Vamos checar se o número já é positivo
+                regs('O número é positivo? Sim.')
+            else:                           #Se é negativo pegamos o complemento
+                estrutura_ULA.adicao.B=CPU.ULA.MBR.replace(' ','')                      #B<- MBR
+                print('O número é positivo? Não.\nRegistrador B: '+ estrutura_ULA.adicao.B)
+
+                binario=estrutura_ULA.adicao.complementador()                       #MBR <- -B
+                CPU.ULA.MBR=''
+                #Vamos remontar o número
+                for x in range (40):
+                    if (x==8 or x==20 or x==28):
+                        CPU.ULA.MBR=CPU.ULA.MBR+' '
+                    CPU.ULA.MBR=CPU.ULA.MBR+binario[x]
+                regs('MBR <- -B')           
+
+            CPU.ULA.circuito(CPU.ULA.MBR,0)
+            
+        else:
+            print('Op code inválido.')
+            parar()
         
 #Funções relacionadas a memória memória
 class func_memoria:
@@ -383,6 +488,8 @@ class func_memoria:
 
 #Printar os valores dos registradores e uma mensagem extra
 def regs(msg):
+    #msg    - Mensagem extra
+    
     print('\n'+msg)
     print('AC:  '+CPU.ULA.AC)
     print('MQ:  '+CPU.ULA.MQ)
@@ -391,7 +498,21 @@ def regs(msg):
     print('PC:  '+CPU.UC.PC)
     print('IR:  '+CPU.UC.IR)
     print('MAR: '+CPU.UC.MAR)
+
+#Printar a memória
+def mmria(inicial,final):
+    #inicial    - Primeiro endereço a ser exibido
+    #final      - Último endereço
     
+    for x in range(inicial,final+1):
+        num=str(x)
+        if(x<10):
+            num='000'+num
+        elif(x<100):
+            num='00'+num
+        elif(x<1000):
+            num='0'+num
+        print('['+num+'] '+memoria.conteudo[x])
     
 #Iniciamos o PC
 def start():
