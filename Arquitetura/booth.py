@@ -8,14 +8,15 @@
 #Vamos definir os registradores
 class registradores:
     #Vamos setar as configurações iniciais
-    def __init__(self,multiplicando,multiplicador):
+    def __init__(self,multiplicando,multiplicador,A):
         #self           - Referência a própria classe
         #multiplicando  - Multiplicando do cálculo
         #multiplicador  - Multiplicador do cálculo
+        #A              - Valor inicial do registrador A
         
         self.Q=multiplicador    #Multiplicador
         self.M=multiplicando    #Multiplicando
-        self.A='0'              #Registrador
+        self.A=A                #Registrador
         self.C='0'              #Multiplicador de 1 bit
 
         return None
@@ -23,7 +24,7 @@ class registradores:
 #Algoritmos relacionados a adição
 class adicao:
     
-    #Checar se ouve overflow
+    #Checar se houve overflow
     def overflow(um,dois,res):
         #um     - Primeiro número somado
         #dois   - Segundo número somado
@@ -70,7 +71,6 @@ class adicao:
                 (res,elev2)=adicao.regras(res,dois)     #E somamos o resultado ao segundo
                 (elev,des)=adicao.regras(elev1,elev2)   #E retornamos a soma dos elevados
         return (res,elev)
-        
     
     #Operação de fato
     def operacao (um,dois):
@@ -115,11 +115,34 @@ class subtracao:
         return (res)                #Retornamos a soma
     
     #Função para fazer a operação de fato
-    def operacao():
-        print('')
+    def operacao(minuendo,subtraendo):
+        #subtraendo     - Subtraendo da operação
+        #minuendo       - Minuendo da operação
+
+        sub=subtracao.negacao(subtraendo)       #Vamos pegar a negação
+        res=adicao.operacao(minuendo,sub)       #E somamos ao minuendo
+        return (res)
 
 #Algoritmos relacionados a multiplicação
 class multiplicacao:
+    #Função para realizar o deslocamento
+    def deslocamento(self, A,Q,C,n):
+        #self           - Referência a própria classe
+        #A              - Registrador A
+        #Q              - Registrador Q
+        #C              - Registrador C
+        #n              - Tamanho dos bits
+
+        nC=Q[n-1]       #Nosso novo C
+        nQ=''           #Onde vamos armazenar nosso novo Q
+        nA=''           #Onde vamos armazenar nosso novo A
+        nQ=nQ+A[n-1]    #Primeiro elemento do Q
+        nA=A[0]
+        for x in range (n-1):   #Vamos percorrer até o penúltimo elemento
+            nQ=nQ+Q[x]
+            nA=nA+A[x]
+
+        return (nA,nQ,nC)       #Retornamos os valores
     
     #Operaçao de fato
     def __init__(self,multiplicando,multiplicador):
@@ -127,16 +150,72 @@ class multiplicacao:
         #multiplicando  - Multiplicando do cálculo
         #multiplicador  - Multiplicador do cálculo
 
-        pc=registradores(multiplicando,multiplicador)   #Vamos setar nossas configurações iniciais
+        manual=''       #Para definir se o controle e manual
 
-        print('REGISTRADORES:')
-        print('Multiplicador(Q): '+pc.Q)
-        print('Multiplicando(M): '+pc.M)
-        print('A: ' +pc.A)
-        print('C: ' +pc.C)
+        #INÍCIO
+        print('INÍCIO.')
+        if(manual==''):
+                manual= input()
+                
+        #VALORES INICIAIS
+        contador=len(multiplicando)                     #Inicializar o contador
+        a=''
+        for x in range(contador):                       #Vamos gerar nosso valor inicial de A
+            a=a+'0'                                     #De acordo com o tamanho dos nossos bits
+        pc=registradores(multiplicando,multiplicador,a) #Vamos setar nossas configurações iniciais
+    
+        print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Valores iniciais')
+        if(manual==''):
+                manual= input()
+
+        #ESTRUTURA ITERATIVA
+        n=contador                                      #Variável para nos ajudar a printar o ciclo na tela 
+        while (True):               #Iteração
+            print('Ciclo '+str(n-x))
+
+            #ESTRUTURA CONDICIONAL 1
+            est=pc.Q[n-1]+pc.C
+            print('Testa a condição de operação: '+str(est))
+            if(manual==''):
+                manual= input()
+
+            if (est=='10'):
+                pc.A=subtracao.operacao(pc.A,pc.M)      #Vamos realizar a subtração
+                print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A-M')
+                if(manual==''):
+                    manual= input()
+
+            elif (est=='01'):
+                pc.A=adicao.operacao(pc.A,pc.M)         #Vamos realizar a adição
+                print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A+M')
+                if(manual==''):
+                    manual= input()
+            else:
+                print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	')
+
+            #DESLOCAMENTO
+            (pc.A,pc.Q,pc.C)=self.deslocamento(pc.A,pc.Q,pc.C,n)  #Vamos realizar o deslocamento
+            contador=contador-1
+            print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Deslocamento')
+            if(manual==''):
+                manual= input()
+
+            #ESTRUTURA CONDICIONAL 2
+            print('Testa a condição de encerramento: '+str(contador))
+            if(manual==''):
+                manual= input()
+            
+            if(contador==0):
+                #FIM
+                print('FIM: ')
+                resultado=str(pc.A)+str(pc.Q)       #Resultado
+                print('O Resultado é: '+resultado)
+                break
+            
         return None
         
-multiplicando='1001'
-multiplicador='0011'
 
+#Variáveis para nossa animação
+multiplicando='0111'
+multiplicador='0011'
 multiplicacao(multiplicando,multiplicador)

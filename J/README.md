@@ -56,7 +56,7 @@ Estrutura da CPU:
   - Um equipamento de entrada e saída (E/S): opera pela unidade de controle.
 
 Memória do IAS:
-- 1.000 locais de armazenamento (*words*) de 40 dígitos bináris (bits) cada.
+- 1.000 locais de armazenamento (*words*) de 40 dígitos binários (bits) cada.
 - Dados e instruções são armazenados.
 - Número são representados em código binário.
   - Cada número é representador por 1 bit de sinal e um valor de 39 bits.

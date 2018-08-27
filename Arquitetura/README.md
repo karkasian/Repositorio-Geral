@@ -90,11 +90,21 @@ Na representação sinal-magnitude, a negação de um inteiro é só inverter o 
 2. Tratamos o resultado como um inteiro binário sem sinal, e somamos 1:
 
 ```
-11101110 	-18 em complemento de dois
-00010001 	Complemento bit a bit
+11101110 	-18 (decimal)
+00010001 	
       +1
 --------
-00010010	+18
+00010010	+18 (decimal)
+```
+
+E então para realizarmos a subtração seguimos a seguinte regra: para subtrair um número (subtraendo) de outro (minuendo) apanhamos o complemento de dois (negação) do subtraendo e somamos ao minuendo.
+Já que para diminuirmos B de A, somamos a negação de B a A: <code>A-B=A+(-B)</code>.
+
+```
+ 0111	Minuendo	 0111
+-0101	Subtranedo	+1011
+-----   		-----
+ 0010	 		 0010
 ```
 
 
@@ -122,7 +132,6 @@ Na representação sinal-magnitude, a negação de um inteiro é só inverter o 
 	- Cada produto parcial sucesso é deslocado uma posição à esquerda em relação ao produto parcial anterior.
 4. A multiplicação de dois inteiros binários de n bits resulta em um produto de até 2n bits.
 
-
 Observações:
 - Podemos realizar uma adição acumulada nos produtos parciais ao invés de esperar até o final.
 - Para cada 1, uma operação de soma e deslocamento é necessária;
@@ -132,11 +141,47 @@ Observações:
 
 Não podemos considerar como inteiros sem sinal da mesma fora que fazemos com a adição, se o muliplicando ou multiplicador for negativo.
 
+![Algoritmo de boot](/imagens/fluxograma.png)
+
 O algoritmo de Boot é descrito da seguinte forma:
 
-- O multiplicador e o multiplicando são colocados nos registradores Q e M respectivamente.
-- Temos um registrador de 1 bit colocado logicamente à direita do bit menos significativo do registrador Q, chamado C.
-- Resultados aparecerão em A e Q.
-- A e C são inicializados em 9.
+- O multiplicador e o multiplicando são colocados nos registradores Q e M respectivamente;
+- Temos um registrador de 1 bit colocado logicamente à direita do bit menos significativo do registrador Q, chamado C;
+- Resultados aparecerão em A e Q;
+- A e C são inicializados em 0; 
 
-Escrevemos um [código em python](booth.py) para isso.
+O código:
+1. A, C, M e Q são inicializados.
+2. Vamos verificar os bits do multiplicador um de cada vez;
+	- Cada vez que cada bit é examinado, o bit à sua direita também é examinado.
+3. Se os dois bits:
+	- Forem iguais (1 e 1, 0 e 0) não fazemos nada;
+	- Forem 0 e 1 então o multiplicando é somado ao registrador A;
+	- Forem 1 e 0 então o multiplicando é subitraído do registrador A;
+4. Então todos os bits dos registrados A,Q e C são deslocados à direita por 1 bit.
+	- **Deslocamento aritmético**: O bit mais a esquerda de A é deslocado, e o novo bit é igual a ele.
+
+*Atenção*: Os registrados são colocados logicamente na seguinte ordem: A,Q,C.
+
+- Isso significa que por exemplo se termos <code>1001 0011 0</code> respectivamente,  quando deslocarmos a direita vamos ter: <code>1100 1001 1</code>. 
+- E agora com <code>1100 1001 1</code> a comparação vai ser entre 1 e 1;
+- Se o estado final for <code>0001 0101 0</code>, a resposta está em A e Q, então é <code>0001 0101</code>, ou em decimal 23.
+
+Um exemplo de algoritmo de Boot (7x3) é:
+| A    | Q     | C  | M     |                  	|                  	|
+| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
+| 0000 | 0011  | 0  | 0111  | Valores iniciais 	| 			|
+| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
+| 1001 | 0011  | 0  | 0111  | A <- A - M	| Primeiro ciclo	|
+| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
+| 1100 | 1001  | 1  | 0111  | Deslocamento 	|   			|
+| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
+| 1110 | 0100  | 1  | 0111  | Deslocamento 	| Segundo ciclo		|
+| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
+| 0101 | 0100  | 1  | 0111  | A <- A + M 	| Terceiro ciclo 	|
+| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
+| 0010 | 1010  | 0  | 0111  | Deslocamento 	|    			|
+| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
+| 0001 | 0101  | 0  | 0111  | Deslocamento 	| Quarto ciclo		|
+
+Escrevemos um [código em python](booth.py) para isso. E escrevemos outro com [interface gráfica](booth - GUI.py).
