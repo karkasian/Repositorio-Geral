@@ -1,0 +1,31 @@
+# SIAS 
+
+SIAS é a abreviação para Simulador do IAS. O IAS foi previamente discutido em meu outro projeto [J](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/J).
+
+Apesar do nome, realizemos algumas adaptações conforme pareceram necessárias, mas o conteúdo é totalmente baseado no livro de Arquitetura e Organização de Computadores do  William Stallings, 8ª edição.
+
+Primeiramente, foi implementado um ciclo de busca baseado no seguinte fluxograma:
+
+![Ciclo de Instrução](/imagens/ciclo.png)
+
+Então começamos a implementar as 21 instruções originais:
+
+![Instruções do IAS](/imagens/instrucoes.png)
+
+Sempre respeitando a estrutura do computador proposta em:
+
+![Estrutura expandida](/imagens/estrutura.png)
+
+Para a operação de adição, nos baseamos no seguinte diagrama:
+
+[!Diagrama em blocos do Hardware](/imagens/adicao.png)
+
+Isso implica por exemplo, em 2 registradores e um FLAG (um registrador que indica o estado da CPU) dentro do módulo. Da mesma forma, para multiplicação utilizamos o Algoritmo de Booth, o que exige 4 registradores.
+
+[!Algoritmo de Booth](/imagens/multiplicacao)
+
+Essa abordagem foi utilizada pensando na didática de tais algoritmos.
+
+Outras observações:
+- Foi considerado que o registrador PC possui acesso um hardware próprio que lhe fornece capacidade de realizar uma soma binária do tipo <code>+1</code> sem acessar a ULA.
+- Da mesma forma dentro do complementador no módulo de adição e subtração, ele possui a mesma capacidade de realizar a soma <code>+1</code>.
