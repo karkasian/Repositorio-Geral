@@ -33,6 +33,7 @@ Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 Outras observações:
 - Foi considerado que o registrador PC possui acesso um hardware próprio que lhe fornece capacidade de realizar uma soma binária do tipo <code>+1</code> sem acessar a ULA.
 - Da mesma forma dentro do complementador no módulo de adição e subtração, ele possui a mesma capacidade de realizar a soma <code>+1</code>.
+- O circuito da ULA desloca o binário em AC sem utilizar nenhum outro registrador.
 - Os detalhes de como funciona a conexão entre as estruturas foi ignorado.
 
 Melhorias:

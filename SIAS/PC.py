@@ -56,11 +56,12 @@ class memoria:
 
 #ENTRADA/SAÍDA:
 class ES:
-    memoria.conteudo[0]= '00000000 000000000000 00000001 000000001000'
-    memoria.conteudo[1]= '00000111 000000001000 00000111 000000010000'
-    memoria.conteudo[2]= '00001000 000000001000 00001000 000000010000'
-    memoria.conteudo[8]= '00000000 000000000000 00000000 000000000001'
-    memoria.conteudo[16]='11111111 111111111111 11111111 111111111111'
+    memoria.conteudo[0]= '00000000 000000000000 00010101 000000000000'
+#    memoria.conteudo[1]= '00000111 000000001000 00000111 000000010000'
+#    memoria.conteudo[2]= '00001000 000000001000 00001000 000000010000'
+#    memoria.conteudo[8]= '00000000 000000000000 00000000 000000000001'
+#    memoria.conteudo[16]='11111111 111111111111 11111111 111111111111'
+    CPU.ULA.AC='10000000 100000000001 00000000 000000000001'
 
 #ESTRUTURAS INTERNAS------------------------------------------------------------
 
@@ -454,6 +455,28 @@ class funcao_UC:
                 regs('MBR <- -B')           
 
             CPU.ULA.circuito(CPU.ULA.MBR,0)
+
+        #LSH  multiplca AC por 2 desloca a esquerda uma posição de bit
+        elif(CPU.UC.IR=='00010100'):
+            binario=CPU.ULA.AC.replace(' ','')
+            CPU.ULA.AC=''
+            for x in range(1,40):
+                if (x==9 or x==21 or x==29):
+                        CPU.ULA.AC=CPU.ULA.AC+' '
+                CPU.ULA.AC=CPU.ULA.AC+binario[x]
+                
+            CPU.ULA.AC=CPU.ULA.AC+'0'
+            regs('AC * 2')
+
+        #RSH  divide AC por 2 desloca a esquerda uma posição de bit
+        elif(CPU.UC.IR=='00010101'):
+            binario=CPU.ULA.AC.replace(' ','')
+            CPU.ULA.AC='0'
+            for x in range(0,39):
+                if (x==7 or x==19 or x==27):
+                        CPU.ULA.AC=CPU.ULA.AC+' '
+                CPU.ULA.AC=CPU.ULA.AC+binario[x]
+            regs('AC / 2')
             
         else:
             print('Op code inválido.')
