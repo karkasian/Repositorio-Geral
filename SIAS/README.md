@@ -22,11 +22,11 @@ Sempre respeitando a estrutura do computador proposta em:
 
 Para a operação de adição, nos baseamos no seguinte diagrama:
 
-[!Diagrama em blocos do Hardware](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/adicao.png)
+![Diagrama em blocos do Hardware](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/adicao.png)
 
 Isso implica por exemplo, em 2 registradores e um FLAG (um registrador que indica o estado da CPU) dentro do módulo. Da mesma forma, para multiplicação utilizamos o Algoritmo de Booth, o que exige 4 registradores.
 
-[!Algoritmo de Booth](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/21:38 26/08/2018multiplicacao)
+![Algoritmo de Booth](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/multiplicacao.png)
 
 Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 
