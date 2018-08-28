@@ -17,7 +17,7 @@ class registradores:
         self.Q=multiplicador    #Multiplicador
         self.M=multiplicando    #Multiplicando
         self.A=A                #Registrador
-        self.C='0'              #Multiplicador de 1 bit
+        self.C='0'              #Registrador de 1 bit
 
         return None
 
@@ -137,7 +137,7 @@ class multiplicacao:
         nQ=''           #Onde vamos armazenar nosso novo Q
         nA=''           #Onde vamos armazenar nosso novo A
         nQ=nQ+A[n-1]    #Primeiro elemento do Q
-        nA=A[0]
+        nA=A[0]         #Nosso novo A
         for x in range (n-1):   #Vamos percorrer até o penúltimo elemento
             nQ=nQ+Q[x]
             nA=nA+A[x]

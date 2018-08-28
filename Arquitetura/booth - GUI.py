@@ -153,13 +153,13 @@ class multiplicacao:
         global regs             #Onde vamos guardar os valores dos registradores
         global outros           #Onde vamos guardar outros valores
         global imgs             #Onde vamos guardar a ordem correta de exibição das imagens
-        manual=''             #Para definir se o controle e manual
+        manual='p'             #Para definir se o controle e manual (p é automático)
 
         #INÍCIO
         print('INÍCIO.')
         regs.append(['0','0','0','0'])
         outros.append( None )
-        imgs.append('/imagens/1.png')
+        imgs.append('imagens/1.png')
         if(manual==''):
                 manual= input()
                 
@@ -173,7 +173,7 @@ class multiplicacao:
         print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Valores iniciais')
         regs.append([pc.A,pc.Q,pc.C,pc.M])
         outros.append( 'Contador: '+str(contador) )
-        imgs.append('/imagens/2.png')
+        imgs.append('imagens/2.png')
         if(manual==''):
                 manual= input()
 
@@ -187,7 +187,7 @@ class multiplicacao:
             print('Testa a condição de operação: '+str(est))
             regs.append([pc.A,pc.Q,pc.C,pc.M])
             outros.append( 'Q0,Q-1: '+est )
-            imgs.append('/imagens/3.png')
+            imgs.append('imagens/3.png')
             if(manual==''):
                 manual= input()
 
@@ -196,7 +196,7 @@ class multiplicacao:
                 print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A-M')
                 regs.append([pc.A,pc.Q,pc.C,pc.M])
                 outros.append( None )
-                imgs.append('/imagens/4a.png')
+                imgs.append('imagens/4a.png')
                 if(manual==''):
                     manual= input()
 
@@ -205,7 +205,7 @@ class multiplicacao:
                 print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A+M')
                 regs.append([pc.A,pc.Q,pc.C,pc.M])
                 outros.append( None )
-                imgs.append('/imagens/4b.png')
+                imgs.append('imagens/4b.png')
                 if(manual==''):
                     manual= input()
             else:
@@ -217,7 +217,7 @@ class multiplicacao:
             print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Deslocamento')
             regs.append([pc.A,pc.Q,pc.C,pc.M])
             outros.append( 'Contador: '+str(contador) )
-            imgs.append('/imagens/5.png')
+            imgs.append('imagens/5.png')
             if(manual==''):
                 manual= input()
 
@@ -225,7 +225,7 @@ class multiplicacao:
             print('Testa a condição de encerramento: '+str(contador))
             regs.append([pc.A,pc.Q,pc.C,pc.M])
             outros.append( 'Contador: '+str(contador) )
-            imgs.append('/imagens/6.png')
+            imgs.append('imagens/6.png')
             if(manual==''):
                 manual= input()
             
@@ -237,7 +237,7 @@ class multiplicacao:
                 
                 regs.append([pc.A,pc.Q,pc.C,pc.M])
                 outros.append( 'Resultado: '+resultado)
-                imgs.append('/imagens/7.png')
+                imgs.append('imagens/7.png')
                 break
             
         return None
@@ -248,6 +248,134 @@ regs=[]             #Onde vamos guardar os valores dos registradores
 outros=[]           #Onde vamos guardar outros valores
 imgs=[]             #Onde vamos guardar a ordem correta de exibição das imagens
 
+#Fazemos a multiplicação
 multiplicando='0111'
 multiplicador='0011'
 multiplicacao(multiplicando,multiplicador)
+
+##GUI
+print('\n\n')
+
+#E vamos exibir na tela
+# Importa as bibliotecas utilizadas
+import pygame,sys
+from pygame.locals import *
+
+# Define algumas cores em RGB
+PRETO  = (0, 0, 0)
+BRANCO = (255, 255, 255)
+
+# Inicializa a biblioteca
+pygame.init()
+
+# Define a largura e altura da janela em pixels 800x600
+size = (600, 600)
+screen = pygame.display.set_mode(size)
+
+# Armazena a posicao X e Y do circulo que iremos desenhar dentro do Loop
+posicaoCirculo = [200, 30]
+
+# Utilizado para controlar a velocidade de quadros (de atualizacoes da tela)
+clock = pygame.time.Clock()
+
+# Define um nome para a janela
+pygame.display.set_caption("Algoritmo de Booth")
+
+#Variável de controle
+c=0
+
+#Configura a fonte
+fonte = pygame.font.SysFont(None,48)
+
+#Configura as imagens
+vet_imgs=[]     #Vetor que vamos guardar as imagens
+vet_ret=[]      #Vetor que vamos guardar as posições
+for x in range(len(imgs)):
+    i=pygame.image.load(imgs[x])
+    r= i.get_rect()
+
+    vet_imgs.append(i)
+    vet_ret.append(r)
+
+#Define se vamos automático e variável auxiliar
+aut=False
+con=0
+# Loop principal do jogo
+while True:
+
+    if (aut==False):
+        for event in pygame.event.get():
+            if event.type==KEYDOWN:
+                if event.key == K_RIGHT:
+                    c=c+1
+                if event.key == K_LEFT:
+                    c=c-1
+                if event.key == K_UP:
+                    aut=True
+                if event.key == K_DOWN:
+                    aut=None
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+                    
+    elif (aut==True):
+        if(con==1):
+            c=c+1
+            con=0
+        con=con+1
+    else:
+        if(con==1):
+            c=c-1
+            con=0
+        con=con+1
+
+    
+                
+    if (c==len(imgs)):
+        c=len(imgs)-1
+        aut=False
+        con=0
+        
+    elif(c<0):
+        c=0
+        aut=False
+        con=0
+
+    # Preenche a tela com uma cor, neste caso preto (definido logo apos importar as bibliotecas)
+    screen.fill(BRANCO)
+
+    #Desenha o fluxograma
+    screen.blit(vet_imgs[c],vet_ret[c])
+
+    #Desenha o estado dos registradores
+    texto=fonte.render("A   : "+regs[c][0],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(400,10)
+    screen.blit(texto,textoret)
+
+    texto=fonte.render("Q   : "+regs[c][1],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(400,40)
+    screen.blit(texto,textoret)
+
+    texto=fonte.render("Q-1: "+regs[c][2],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(400,70)
+    screen.blit(texto,textoret)
+
+    texto=fonte.render("M   : "+regs[c][3],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(400,100)
+    screen.blit(texto,textoret)
+
+    texto=fonte.render(outros[c],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(150,450)
+    screen.blit(texto,textoret)
+
+    
+    # Atualiza a tela visivel ao usuario
+    pygame.display.flip()
+
+    # Limita a taxa de quadros (framerate) a 60 quadros por segundo (60fps)
+    clock.tick(30)

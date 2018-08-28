@@ -14,7 +14,8 @@ class CPU:
             #conteudo   - Coneúdo da memória que devemos trabalhar
             #Comando    - Comando definindo a operação que faremos
 
-            if (comando==1 or comando==0):
+            
+            if (comando==1 or comando==0):  #Se é soma ou subtração
                 print('\nAdição ou subtração:')
                 estrutura_ULA.adicao.A=CPU.ULA.AC.replace(' ','')
                 estrutura_ULA.adicao.B=conteudo.replace(' ','')
@@ -30,7 +31,76 @@ class CPU:
                         CPU.ULA.AC=CPU.ULA.AC+' '
                     CPU.ULA.AC=CPU.ULA.AC+binario[x]
                 print('OF: '+str(estrutura_ULA.adicao.OF))
-                regs('Somador')                
+                regs('Somador')
+            elif (comando==2):          #Se é Multiplicação
+                #INÍCIO
+                print('\nINÍCIO DO ALGORITMO DE BOOTH.')
+                        
+                #VALORES INICIAIS
+                contador=40                     #Inicializar o contador
+                estrutura_ULA.multiplicacao.A='0000000000000000000000000000000000000000'
+                estrutura_ULA.multiplicacao.Q=CPU.ULA.MBR.replace(' ','')
+                estrutura_ULA.multiplicacao.C='0'
+                estrutura_ULA.multiplicacao.M=CPU.ULA.MQ.replace(' ','')
+            
+                booth('Valores iniciais')
+
+                #ESTRUTURA ITERATIVA
+                n=contador                                      #Variável para nos ajudar a printar o ciclo na tela 
+                while (True):               #Iteração
+                    print('\nCiclo '+str(41-contador))
+
+                    #ESTRUTURA CONDICIONAL 1
+                    est=estrutura_ULA.multiplicacao.Q[n-1]+estrutura_ULA.multiplicacao.C
+                    print('Testa a condição de operação: '+str(est))
+
+                    if (est=='10'): #Vamos realizar a subtração
+
+                        estrutura_ULA.adicao.A=estrutura_ULA.multiplicacao.A
+                        estrutura_ULA.adicao.B=estrutura_ULA.multiplicacao.M
+                        binario=estrutura_ULA.adicao.seletor(0,estrutura_ULA.adicao.complementador())
+                        (binario,estrutura_ULA.adicao.OF)=estrutura_ULA.adicao.somador(estrutura_ULA.adicao.A,binario)
+                        estrutura_ULA.multiplicacao.A=binario
+
+                        booth('A<- A-M')
+
+                    elif (est=='01'): #Vamos realizar a adição
+                        estrutura_ULA.adicao.A=estrutura_ULA.multiplicacao.A
+                        estrutura_ULA.adicao.B=estrutura_ULA.multiplicacao.M
+                        binario=estrutura_ULA.adicao.seletor(1,estrutura_ULA.adicao.complementador())
+                        (binario,estrutura_ULA.adicao.OF)=estrutura_ULA.adicao.somador(estrutura_ULA.adicao.A,binario)
+                        estrutura_ULA.multiplicacao.A=binario
+
+                        booth('A<- A+M')
+                        
+                    else:
+                        print('...	')
+
+                    #DESLOCAMENTO
+                    (estrutura_ULA.multiplicacao.A,estrutura_ULA.multiplicacao.Q,estrutura_ULA.multiplicacao.C)=funcao_ULA.deslocamento(estrutura_ULA.multiplicacao.A,estrutura_ULA.multiplicacao.Q,estrutura_ULA.multiplicacao.C)  #Vamos realizar o deslocamento
+                    contador=contador-1
+                    booth ('Deslocamento')
+
+                    #ESTRUTURA CONDICIONAL 2
+                    print('Testa a condição de encerramento: '+str(contador))
+                    
+                    if(contador==0):
+                        #FIM
+                        print('FIM: ')
+                        resultado=str(estrutura_ULA.multiplicacao.A)+str(estrutura_ULA.multiplicacao.Q)       #Resultado
+                        print('O Resultado é: '+resultado)
+                        break
+
+                #Agora precisamos montar os números
+                CPU.ULA.AC=''
+                CPU.ULA.MQ=''
+                for x in range (40):
+                    if (x==8 or x==20 or x==28):
+                        CPU.ULA.AC=CPU.ULA.AC+' '
+                        CPU.ULA.MQ=CPU.ULA.MQ+' '
+                    CPU.ULA.AC=CPU.ULA.AC+estrutura_ULA.multiplicacao.A[x]
+                    CPU.ULA.MQ=CPU.ULA.MQ+estrutura_ULA.multiplicacao.Q[x]
+                regs('Resultados em AC e MQ')
 
     #UNIDADE DE CONTROLE
     class UC:
@@ -56,12 +126,9 @@ class memoria:
 
 #ENTRADA/SAÍDA:
 class ES:
-    memoria.conteudo[0]= '00000000 000000000000 00010101 000000000000'
-#    memoria.conteudo[1]= '00000111 000000001000 00000111 000000010000'
-#    memoria.conteudo[2]= '00001000 000000001000 00001000 000000010000'
-#    memoria.conteudo[8]= '00000000 000000000000 00000000 000000000001'
-#    memoria.conteudo[16]='11111111 111111111111 11111111 111111111111'
-    CPU.ULA.AC='10000000 100000000001 00000000 000000000001'
+    memoria.conteudo[0]= '00001001 000000010000 00001011 000000001000'
+    memoria.conteudo[8]= '00000000 000000000000 00000000 000000000011'
+    memoria.conteudo[16]='00000000 000000000000 00000000 000000000111'
 
 #ESTRUTURAS INTERNAS------------------------------------------------------------
 
@@ -128,6 +195,14 @@ class estrutura_ULA:
             of=funcao_ULA.overflow(um,dois,resposta)
             return (resposta,of)                                           #Retornamos a resposta
 
+    #Multiplicação
+    class multiplicacao:
+        Q='0000000000000000000000000000000000000000'    #Multiplicador
+        M='0000000000000000000000000000000000000000'    #Multiplicando
+        A='0000000000000000000000000000000000000000'    #Registrador A
+        C='0'    #Registrador de um bit
+
+
 #FUNÇÕES ESPECÍFICAS------------------------------------------------------------
 
 #Funções relacionadas a ULA
@@ -179,6 +254,23 @@ class funcao_ULA:
                 (res,elev2)=funcao_ULA.regras_adicao(res,dois)     #E somamos o resultado ao segundo
                 (elev,des)=funcao_ULA.regras_adicao(elev1,elev2)   #E retornamos a soma dos elevados
         return (res,elev)
+
+    #Para realizarmos o deslocamento da multiplicação:
+    def deslocamento(A,Q,C):
+        #A              - Registrador A
+        #Q              - Registrador Q
+        #C              - Registrador C
+
+        nC=Q[39]       #Nosso novo C
+        nQ=''           #Onde vamos armazenar nosso novo Q
+        nA=''           #Onde vamos armazenar nosso novo A
+        nQ=nQ+A[39]    #Primeiro elemento do Q
+        nA=A[0]         #Primeiro elemento do A
+        for x in range (39):   #Vamos percorrer até o penúltimo elemento
+            nQ=nQ+Q[x]
+            nA=nA+A[x]
+
+        return (nA,nQ,nC)       #Retornamos os valores
 
 #Funções relacionadas a UC
 class funcao_UC:
@@ -477,6 +569,13 @@ class funcao_UC:
                         CPU.ULA.AC=CPU.ULA.AC+' '
                 CPU.ULA.AC=CPU.ULA.AC+binario[x]
             regs('AC / 2')
+
+        #MUL(X) multiplica M(X) por MQ e coloca os bits mais significativos do resultado em AC
+        elif(CPU.UC.IR=='00001011'):
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            regs('MBR<-M(MAR)')
+ 
+            CPU.ULA.circuito(CPU.ULA.MBR,2)
             
         else:
             print('Op code inválido.')
@@ -536,6 +635,15 @@ def mmria(inicial,final):
         elif(x<1000):
             num='0'+num
         print('['+num+'] '+memoria.conteudo[x])
+
+#Printa os valores dos registrado da multiplicação e uma mensagem extra
+def booth(msg):
+    #msg    - Mensagame extra
+    print('\n'+msg)
+    print('A  : '+estrutura_ULA.multiplicacao.A)
+    print('Q  : '+estrutura_ULA.multiplicacao.Q)
+    print('Q-1: '+estrutura_ULA.multiplicacao.C)
+    print('M  : '+estrutura_ULA.multiplicacao.M)
     
 #Iniciamos o PC
 def start():
