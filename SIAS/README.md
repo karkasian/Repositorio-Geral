@@ -39,4 +39,5 @@ Outras observações:
 Melhorias:
 - Tratar o argumento das funções aritméticas dentro da função, e não antes/depois.
 - Tratar todas as instruções como funções.
-	- Muitos trechos podem ser reaproveitados
+	- Muitos trechos podem ser reaproveitados.
+- Adicionar fluxogramas para as outras funções.

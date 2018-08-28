@@ -649,4 +649,11 @@ def booth(msg):
 def start():
     CPU.UC.ciclo_instrucao()
 
+#Vetores pra animação
+est=[]  #Estrutura expandida
+reg=[]  #Registradores principais
+
+deta=[] #Detalhes da execução em específico
+msg=[]  #Textos da execução em específico
+
 start()
