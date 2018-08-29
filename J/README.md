@@ -1,5 +1,5 @@
-﻿```
-Em andamento
+```
+ARQUIVADO: Não tem utilidade prática, iniciei o projeto apenas com fins didáticos para entender melhor o IAS e seu ciclo de instrução, mas para isso o projeto SIAS se demonstrou mais interessante.
 ```
 
 #  Arquitetura de computadores
