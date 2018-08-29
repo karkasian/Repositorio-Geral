@@ -1,4 +1,4 @@
-##ARQUITETURA: Divisão de inteiros
+##ARQUITETURA: Divisão de inteiros com interface gráfica
 ##Desenvolvido por:     Jhordan Silveira de Borba
 ##E-mail:               jhordandecacapava@gmail.com
 ##Website:              https://sapogithub.github.io
@@ -147,15 +147,18 @@ class divisao:
         #multiplicando  - Multiplicando do cálculo
         #multiplicador  - Multiplicador do cálculo
 
+        global regs             #Onde vamos guardar os valores dos registradores
+        global outros           #Onde vamos guardar outros valores
+        global imgs             #Onde vamos guardar a ordem correta de exibição das imagens
         manual='p'       #Para definir se o controle e manual
 
 
         #INÍCIO
-        print('INÍCIO.')
+#        print('INÍCIO.')
         if(manual==''):
                 manual= input()
 
-        print('Vamos converter os números para positivo')
+#        print('Vamos converter os números para positivo')
         if (divisor[0]=='0'):
             visor=divisor
         else:
@@ -165,6 +168,10 @@ class divisao:
             dendo=dividendo
         else:
             dendo=subtracao.negacao(dividendo)
+
+        regs.append(['0','0','0'])
+        outros.append( 'Fazemos a negação dos números negativos' )
+        imgs.append('imagens/d1.png')
                 
         #VALORES INICIAIS
         contador=len(divisor)                     #Inicializar o contador
@@ -174,29 +181,44 @@ class divisao:
 
         pc=registradores(visor,dendo,a) #Vamos setar nossas configurações iniciais
     
-        print('A: '+pc.A+' | Q: '+pc.Q+' | M: '+pc.M+' |	Valores iniciais')
+#        print('A: '+pc.A+' | Q: '+pc.Q+' | M: '+pc.M+' |	Valores iniciais')
+        regs.append([pc.A,pc.Q,pc.M])
+        outros.append( None )
+        imgs.append('imagens/d2.png')
         if(manual==''):
                 manual= input()
 
         #ESTRUTURA ITERATIVA
         n=contador                                      #Variável para nos ajudar a printar o ciclo na tela 
         while (True):               #Iteração
-            print('\nCiclo '+str(n-contador+1))
+#            print('\nCiclo '+str(n-contador+1))
 
             #DESLOCAMENTO
             (pc.A,pc.Q)=self.deslocamento(pc.A,pc.Q,n)  #Vamos realizar o deslocamento
 
-            print('A: '+pc.A+' | Q: '+pc.Q+' | M: '+pc.M+' |	Deslocamento')
+ #           print('A: '+pc.A+' | Q: '+pc.Q+' | M: '+pc.M+' |	Deslocamento')
+            regs.append([pc.A,pc.Q,pc.M])
+            outros.append( None )
+            imgs.append('imagens/d3.png')
+ 
             if(manual==''):
                 manual= input()
 
             pc.A=subtracao.operacao(pc.A,pc.M)      #Vamos realizar a subtração
-            print('A: '+pc.A+' | Q: '+pc.Q+' | M: '+pc.M+' |	A<- A-M')
+            #print('A: '+pc.A+' | Q: '+pc.Q+' | M: '+pc.M+' |	A<- A-M')
+            regs.append([pc.A,pc.Q,pc.M])
+            outros.append( None )
+            imgs.append('imagens/d4.png')
+
             if(manual==''):
                 manual= input()
 
             #ESTRUTURA CONDICIONAL 1
-            print('Testa a condição de operação: A<0')
+            #print('Testa a condição de operação: A<0')
+            regs.append([pc.A,pc.Q,pc.M])
+            outros.append( None )
+            imgs.append('imagens/d5.png')
+
             if(manual==''):
                 manual= input()
 
@@ -207,7 +229,11 @@ class divisao:
                 for x in range(len(antQ)-1):
                     pc.Q=pc.Q+antQ[x]
                 pc.Q=pc.Q+'0'
-                print('A: '+pc.A+' | Q: '+pc.Q+'  | M: '+pc.M+' |	A<- A+M e Q0 <-0 ' )
+#                print('A: '+pc.A+' | Q: '+pc.Q+'  | M: '+pc.M+' |	A<- A+M e Q0 <-0 ' )
+                regs.append([pc.A,pc.Q,pc.M])
+                outros.append( None )
+                imgs.append('imagens/d6b.png')
+
                 if(manual==''):
                     manual= input()
             else:
@@ -216,24 +242,35 @@ class divisao:
                 for x in range(len(antQ)-1):
                     pc.Q=pc.Q+antQ[x]
                 pc.Q=pc.Q+'1'
-                print('A: '+pc.A+' | Q: '+pc.Q+'  | M: '+pc.M+' |	Q0 <- 1 ' )
+                #print('A: '+pc.A+' | Q: '+pc.Q+'  | M: '+pc.M+' |	Q0 <- 1 ' )
+                regs.append([pc.A,pc.Q,pc.M])
+                outros.append( None )
+                imgs.append('imagens/d6a.png')
+
                 if(manual==''):
                     manual= input()
                     
             #Contador
             contador=contador-1
-            print('Contador: '+str(contador))
+            #print('Contador: '+str(contador))
+            regs.append([pc.A,pc.Q,pc.M])
+            outros.append('Contador: '+str(contador))
+            imgs.append('imagens/d7.png')
+
             if(manual==''):
                     manual= input()
 
             #ESTRUTURA CONDICIONAL 2
-            print('Testa a condição de encerramento: '+str(contador))
+            #print('Testa a condição de encerramento: '+str(contador))
+            regs.append([pc.A,pc.Q,pc.M])
+            outros.append('Contador: '+str(contador))
+            imgs.append('imagens/d8.png')            
             if(manual==''):
                 manual= input()
             
             if(contador==0):
                 #FIM
-                print('FIM: ')
+                #print('FIM: ')
                 break
 
         #PODEMOS AGORAR CONSIDERAR OS SINAIS
@@ -245,12 +282,136 @@ class divisao:
         if(divisor[0]!=dividendo[0]):
             pc.Q=subtracao.negacao(pc.Q)
             
-        print('Quociente: '+pc.Q)
-        print('Resto: '+pc.A)
+#        print('Quociente: '+pc.Q)
+#        print('Resto: '+pc.A)
+        regs.append([pc.A,pc.Q,pc.M])
+        outros.append('Correção de sinais')
+        imgs.append('imagens/d9.png')
         return None
         
+#Variáveis para nossa animação
+regs=[]             #Onde vamos guardar os valores dos registradores
+outros=[]           #Onde vamos guardar outros valores
+imgs=[]             #Onde vamos guardar a ordem correta de exibição das imagens
 
 #Variáveis para nossa animação
-dividendo=subtracao.negacao('0111')
+dividendo='0111'
 divisor='0011'
 divisao(divisor,dividendo)
+
+#E vamos exibir na tela
+# Importa as bibliotecas utilizadas
+import pygame,sys
+from pygame.locals import *
+
+# Define algumas cores em RGB
+PRETO  = (0, 0, 0)
+BRANCO = (255, 255, 255)
+
+# Inicializa a biblioteca
+pygame.init()
+
+# Define a largura e altura da janela em pixels 800x600
+size = (600, 600)
+screen = pygame.display.set_mode(size)
+
+# Utilizado para controlar a velocidade de quadros (de atualizacoes da tela)
+clock = pygame.time.Clock()
+
+# Define um nome para a janela
+pygame.display.set_caption("Divisao de inteiros")
+
+#Variável de controle
+c=0
+
+#Configura a fonte
+fonte = pygame.font.SysFont(None,48)
+fonte2 = pygame.font.SysFont(None,24)
+
+#Configura as imagens
+vet_imgs=[]     #Vetor que vamos guardar as imagens
+vet_ret=[]      #Vetor que vamos guardar as posições
+for x in range(len(imgs)):
+    i=pygame.image.load(imgs[x])
+    r= i.get_rect()
+
+    vet_imgs.append(i)
+    vet_ret.append(r)
+
+#Define se vamos automático e variável auxiliar
+aut=False
+con=0
+# Loop principal do jogo
+while True:
+
+    if (aut==False):
+        for event in pygame.event.get():
+            if event.type==KEYDOWN:
+                if event.key == K_RIGHT:
+                    c=c+1
+                if event.key == K_LEFT:
+                    c=c-1
+                if event.key == K_UP:
+                    aut=True
+                if event.key == K_DOWN:
+                    aut=None
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+                    
+    elif (aut==True):
+        if(con==1):
+            c=c+1
+            con=0
+        con=con+1
+    else:
+        if(con==1):
+            c=c-1
+            con=0
+        con=con+1
+
+    
+                
+    if (c==len(imgs)):
+        c=len(imgs)-1
+        aut=False
+        con=0
+        
+    elif(c<0):
+        c=0
+        aut=False
+        con=0
+
+    # Preenche a tela com uma cor, neste caso preto (definido logo apos importar as bibliotecas)
+    screen.fill(BRANCO)
+
+    #Desenha o fluxograma
+    screen.blit(vet_imgs[c],vet_ret[c])
+
+    #Desenha o estado dos registradores
+    texto=fonte.render("A   : "+regs[c][0],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(400,10)
+    screen.blit(texto,textoret)
+
+    texto=fonte.render("Q   : "+regs[c][1],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(400,40)
+    screen.blit(texto,textoret)
+
+    texto=fonte.render("M   : "+regs[c][2],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(400,70)
+    screen.blit(texto,textoret)
+
+    texto=fonte2.render(outros[c],1,PRETO)
+    textoret=texto.get_rect()
+    textoret.topleft=(10,500)
+    screen.blit(texto,textoret)
+
+    
+    # Atualiza a tela visivel ao usuario
+    pygame.display.flip()
+
+    # Limita a taxa de quadros (framerate) a 60 quadros por segundo (60fps)
+    clock.tick(30)

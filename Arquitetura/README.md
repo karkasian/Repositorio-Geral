@@ -186,7 +186,7 @@ Que gera o seguinte exemplo de divisão (7/3):
 Com as seguinte adaptações:
 1. Se o divisor ou dividendo for negativo, pegamos o complemento.
 2. Realizamos toda a divisão normalmente.
-3. Atribuimos os sinais do quociente e resto de acord com a seguinte regra:
+3. Atribuimos os sinais do quociente e resto de acordo com a seguinte regra:
 	- sinal(resto)=sinal(dividendo)
 	- sinal(quociente)=sinal(dividendo) x sinal(divisor)
 

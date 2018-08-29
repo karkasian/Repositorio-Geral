@@ -30,6 +30,17 @@ Isso implica por exemplo, em 2 registradores e um FLAG (um registrador que indic
 
 Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 
+E por fim, utilizamos a divisão inspirado no seguinte fluxograma:
+![Algoritmo da divisão](imagens/div.png)
+
+Mas com as seguinte adaptações:
+1. Guardamos os bits mais significativos de Q e M em um registrador QM.
+2. Se o divisor ou dividendo for negativo, pegamos o complemento.
+3. Realizamos toda a divisão normalmente.
+4. Atribuimos os sinais do quociente e resto de acordo com a seguinte regra:
+	- sinal(resto)=sinal(dividendo)
+	- sinal(quociente)=sinal(dividendo) x sinal(divisor)
+
 ## Observações
 
 - Foi considerado que o registrador PC possui acesso um hardware próprio que lhe fornece capacidade de realizar uma soma binária do tipo <code>+1</code> sem acessar a ULA.
@@ -53,3 +64,4 @@ Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 - Detalhar o tipo de instrução quando soma ou subtrai (ex.: ADD M(X) ou ADD |M(X)|).
 - Explicitar como o componente para pegar a negação dentro da operação de adição, pode ser usado em outras operações e sua saída além de ir pro somador, pode ir para o AC.
 - Da mesma forma que o item anterior, o componente que realiza o deslocamento para a multiplicação, pode ser reutilizado para as funções LSH e RSH.
+- A parte de divisão foi implementado somente na interface gráfica.
