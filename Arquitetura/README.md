@@ -168,20 +168,30 @@ O código:
 - Se o estado final for <code>0001 0101 0</code>, a resposta está em A e Q, então é <code>0001 0101</code>, ou em decimal 23.
 
 Um exemplo de algoritmo de Boot (7x3) é:
-| A    | Q     | C  | M     |                  	|                  	|
-| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
-| 0000 | 0011  | 0  | 0111  | Valores iniciais 	| 			|
-| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
-| 1001 | 0011  | 0  | 0111  | A <- A - M	| Primeiro ciclo	|
-| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
-| 1100 | 1001  | 1  | 0111  | Deslocamento 	|   			|
-| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
-| 1110 | 0100  | 1  | 0111  | Deslocamento 	| Segundo ciclo		|
-| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
-| 0101 | 0100  | 1  | 0111  | A <- A + M 	| Terceiro ciclo 	|
-| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
-| 0010 | 1010  | 0  | 0111  | Deslocamento 	|    			|
-| :--- | :---- | :- | :---- | :--------------- 	| :--------------- 	|    
-| 0001 | 0101  | 0  | 0111  | Deslocamento 	| Quarto ciclo		|
+
+![Exemplo de multiplicacao](imagens/multiplicacao.png)
 
 Escrevemos um [código em python](booth.py) para isso. E escrevemos outro com [interface gráfica](booth - GUI.py).
+
+## Divisão
+
+Para divisão nos baseamos no seguinte fluxograma:
+
+![Fluxograma de divisao](imagens/div.png)
+
+Que gera o seguinte exemplo de divisão (7/3):
+
+![Exemplo de divisao](imagens/divisao.png)
+
+Com as seguinte adaptações:
+1. Se o divisor ou dividendo for negativo, pegamos o complemento.
+2. Realizamos toda a divisão normalmente.
+3. Atribuimos os sinais do quociente e resto de acord com a seguinte regra:
+	- sinal(resto)=sinal(dividendo)
+	- sinal(quociente)=sinal(dividendo) x sinal(divisor)
+
+**Observação**: Na operação 7/3=2*3+1:
+- Dividendo: 7
+- Divisor: 3
+- Quociente: 2
+- Resto: 1
