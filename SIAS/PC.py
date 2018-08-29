@@ -136,9 +136,15 @@ class memoria:
 
 #ENTRADA/SAÍDA:
 class ES:
-    memoria.conteudo[0]= '00001001 000000010000 00001011 000000001000'
-    memoria.conteudo[8]= '00000000 000000000000 00000000 000000000011'
-    memoria.conteudo[16]='00000000 000000000000 00000000 000000000111'
+    memoria.conteudo[0]=  '00000000 000000000000 00000001 000000010100'
+    memoria.conteudo[1]=  '00000101 000000010101 00000110 000000010101'
+    memoria.conteudo[2]=  '00100001 000000010110 00001001 000000010101'
+    memoria.conteudo[3]=  '00001010 000000000000 00000010 000000010100'
+    memoria.conteudo[4]=  '00000011 000000010100 00000100 000000010100'
+    memoria.conteudo[5]=  '00001101 000000000111 00000000 000000000000'
+    memoria.conteudo[7]=  '00001110 000000001001 00000000 000000000000'
+    memoria.conteudo[9]=  '00000000 000000000000 00001111 000000001011'
+    memoria.conteudo[11]= '00010000 000000001101 00000000 000000000000'
 
 #ESTRUTURAS INTERNAS------------------------------------------------------------
 
@@ -456,8 +462,6 @@ class funcao_UC:
             CPU.UC.PC=CPU.UC.MAR                                  # PC<-MAR
             regs('PC <- MAR')
 
-            (CPU.UC.PC,OF)=estrutura_ULA.adicao.somador(CPU.UC.PC.replace(' ',''),'000000000001')   #PC <- PC+1 
-            regs('PC <- PC+1')
 
             CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
             regs('MBR <- M(MAR)')
@@ -480,9 +484,6 @@ class funcao_UC:
             if(CPU.ULA.AC[0]=='0'):        #Vamos checar se o número já é positivo
                 CPU.UC.PC=CPU.UC.MAR                                  # PC<-MAR
                 regs('PC <- MAR')
-
-                (CPU.UC.PC,OF)=estrutura_ULA.adicao.somador(CPU.UC.PC.replace(' ',''),'000000000001')   #PC <- PC+1 
-                regs('PC <- PC+1')
 
                 CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
                 regs('MBR <- M(MAR)')
