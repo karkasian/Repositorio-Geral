@@ -61,7 +61,7 @@ Então agora nosso código:
 - Salvamos 25 com sinal contrário (-25) em AC e do AC guardamos em 0FB;
 - Buscamos a próxima instrução em um endereço inexistente (1024 em decimal) causando a interrupção do programa:
 
-Temos o código em [linguagem de máquina](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.obj) e [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.asm).
+Temos o código em [linguagem de máquina](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.o) e [linguagem de montagem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/Problema%202.4.asm).
 
 ## Algoritmo de Booth
 

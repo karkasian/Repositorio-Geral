@@ -5,6 +5,7 @@
 ##Mais informações:     https://github.com/SapoGitHub/Repositorio-Geral/tree/master/SIAS
 ##2018
 
+
 import sys #Função para sair do programa
 
 #ESTRUTURAS PRINCIPAIS ---------------------------------------------------------------------
@@ -294,14 +295,7 @@ class funcao_UC:
             return True
 
     #Ciclo de busca
-    def busca():
-
-        global est
-        global reg
-        global deta
-        global msg
-
-        
+    def busca():        
         print('\nCICLO DE BUSCA')
         regs('Próxima instrução está no IBR?')
         if(CPU.UC.IBR!='00000000 000000000000'):                                    #Sim
@@ -664,22 +658,6 @@ def booth(msg):
     
 #Iniciamos o PC
 def start():
-    global est
-    global reg
-    global deta
-    global msg
-
-    est.append('imagens/Estrutura/estrutura.png')
-    reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
-    deta.append('imagens/Ciclo/c1.png')
-    msg.append(None)
-
     CPU.UC.ciclo_instrucao()
-
-#Vetores pra animação
-est=[]  #Estrutura expandida
-reg=[]  #Registradores principais
-deta=[] #Detalhes da execução em específico
-msg=[]  #Textos da execução em específico
 
 start()

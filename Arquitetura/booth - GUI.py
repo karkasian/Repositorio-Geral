@@ -156,7 +156,7 @@ class multiplicacao:
         manual='p'             #Para definir se o controle e manual (p é automático)
 
         #INÍCIO
-        print('INÍCIO.')
+        #print('INÍCIO.')
         regs.append(['0','0','0','0'])
         outros.append( None )
         imgs.append('imagens/1.png')
@@ -170,7 +170,7 @@ class multiplicacao:
             a=a+'0'                                     #De acordo com o tamanho dos nossos bits
         pc=registradores(multiplicando,multiplicador,a) #Vamos setar nossas configurações iniciais
     
-        print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Valores iniciais')
+        #print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Valores iniciais')
         regs.append([pc.A,pc.Q,pc.C,pc.M])
         outros.append( 'Contador: '+str(contador) )
         imgs.append('imagens/2.png')
@@ -180,11 +180,11 @@ class multiplicacao:
         #ESTRUTURA ITERATIVA
         n=contador                                      #Variável para nos ajudar a printar o ciclo na tela 
         while (True):               #Iteração
-            print('Ciclo '+str(n-x))
+            #print('Ciclo '+str(n-x))
 
             #ESTRUTURA CONDICIONAL 1
             est=pc.Q[n-1]+pc.C
-            print('Testa a condição de operação: '+str(est))
+            #print('Testa a condição de operação: '+str(est))
             regs.append([pc.A,pc.Q,pc.C,pc.M])
             outros.append( 'Q0,Q-1: '+est )
             imgs.append('imagens/3.png')
@@ -193,7 +193,7 @@ class multiplicacao:
 
             if (est=='10'):
                 pc.A=subtracao.operacao(pc.A,pc.M)      #Vamos realizar a subtração
-                print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A-M')
+                #print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A-M')
                 regs.append([pc.A,pc.Q,pc.C,pc.M])
                 outros.append( None )
                 imgs.append('imagens/4a.png')
@@ -202,19 +202,19 @@ class multiplicacao:
 
             elif (est=='01'):
                 pc.A=adicao.operacao(pc.A,pc.M)         #Vamos realizar a adição
-                print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A+M')
+                #print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	A<- A+M')
                 regs.append([pc.A,pc.Q,pc.C,pc.M])
                 outros.append( None )
                 imgs.append('imagens/4b.png')
                 if(manual==''):
                     manual= input()
-            else:
-                print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	')
+            #else:
+                #print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	')
 
             #DESLOCAMENTO
             (pc.A,pc.Q,pc.C)=self.deslocamento(pc.A,pc.Q,pc.C,n)  #Vamos realizar o deslocamento
             contador=contador-1
-            print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Deslocamento')
+            #print('A: '+pc.A+' | Q: '+pc.Q+' | Q-1: '+pc.C+' | M: '+pc.M+' |	Deslocamento')
             regs.append([pc.A,pc.Q,pc.C,pc.M])
             outros.append( 'Contador: '+str(contador) )
             imgs.append('imagens/5.png')
@@ -222,7 +222,7 @@ class multiplicacao:
                 manual= input()
 
             #ESTRUTURA CONDICIONAL 2
-            print('Testa a condição de encerramento: '+str(contador))
+            #print('Testa a condição de encerramento: '+str(contador))
             regs.append([pc.A,pc.Q,pc.C,pc.M])
             outros.append( 'Contador: '+str(contador) )
             imgs.append('imagens/6.png')
@@ -231,9 +231,9 @@ class multiplicacao:
             
             if(contador==0):
                 #FIM
-                print('FIM: ')
+                #print('FIM: ')
                 resultado=str(pc.A)+str(pc.Q)       #Resultado
-                print('O Resultado é: '+resultado)
+                #print('O Resultado é: '+resultado)
                 
                 regs.append([pc.A,pc.Q,pc.C,pc.M])
                 outros.append( 'Resultado: '+resultado)
@@ -254,7 +254,7 @@ multiplicador='0011'
 multiplicacao(multiplicando,multiplicador)
 
 ##GUI
-print('\n\n')
+#print('\n\n')
 
 #E vamos exibir na tela
 # Importa as bibliotecas utilizadas
@@ -271,9 +271,6 @@ pygame.init()
 # Define a largura e altura da janela em pixels 800x600
 size = (600, 600)
 screen = pygame.display.set_mode(size)
-
-# Armazena a posicao X e Y do circulo que iremos desenhar dentro do Loop
-posicaoCirculo = [200, 30]
 
 # Utilizado para controlar a velocidade de quadros (de atualizacoes da tela)
 clock = pygame.time.Clock()

@@ -6,7 +6,7 @@ Em andamento
 
 SIAS é a abreviação para Simulador do IAS. O IAS foi previamente discutido em meu outro projeto [J](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/J).
 
-Apesar do nome, realizemos algumas adaptações conforme pareceram necessárias, mas o conteúdo é totalmente baseado no livro de Arquitetura e Organização de Computadores do  William Stallings, 8ª edição.
+Apesar do nome, realizemos algumas adaptações conforme pareceram necessárias ou nosso conhecimento for limitado acerca dos detalhes de algum processo. O conteúdo é totalmente baseado no livro de Arquitetura e Organização de Computadores do  William Stallings, 8ª edição.
 
 Primeiramente, foi implementado um ciclo de busca baseado no seguinte fluxograma:
 
@@ -35,9 +35,15 @@ Outras observações:
 - Da mesma forma dentro do complementador no módulo de adição e subtração, ele possui a mesma capacidade de realizar a soma <code>+1</code>.
 - O circuito da ULA desloca o binário em AC sem utilizar nenhum outro registrador.
 - Os detalhes de como funciona a conexão entre as estruturas foi ignorado.
+- Estamos interpretando "Próxima instrução está no IBR?" como "O conteúdo no IBR é diferente de 00000000000000000000?". Por isso quando o IBR passa os valores pro IR e MAR, estamos zerando ele.
+	- Uma opção é comparar se os valores atuais do IBR, IR e MAR são diferentes, nesse caso nossa condição poderia ser reescrita como "Os valores do IR e MAR são diferentes do IBR?".
+	- Essa abordagem é mais próxima da utilizada no [IAS Simulator](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-sim/)
 
 Melhorias:
 - Tratar o argumento das funções aritméticas dentro da função, e não antes/depois.
 - Tratar todas as instruções como funções.
 	- Muitos trechos podem ser reaproveitados.
 - Adicionar fluxogramas para as outras funções.
+- Melhorar a conexão entre as imagens secundárias.
+- Desenhar novas imagens para as outras instruções.
+- Destacar quando algum circuito está sendo usado na imagem principal.
