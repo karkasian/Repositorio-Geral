@@ -32,37 +32,51 @@ class CPU:
 
             
             if (comando==1 or comando==0):  #Se é soma ou subtração
-#                print('\nAdição ou subtração:')
                 estrutura_ULA.adicao.A=CPU.ULA.AC.replace(' ','')
                 estrutura_ULA.adicao.B=conteudo.replace(' ','')
- #               print('Registrador A: '+  estrutura_ULA.adicao.A)
-#                print('Registrador B: '+  estrutura_ULA.adicao.B)
+                estrutura_ULA.adicao.OF='0'
                 est.append('imagens/Estrutura/mbr e ac - ula.png')
                 reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                 deta.append('imagens/Adição/entrada.png')
-                msg.append(['A <- AC e B <- MBR','A  : '+estrutura_ULA.adicao.A,'B  : '+estrutura_ULA.adicao.B])
+                msg.append(['A <- AC e B <- MBR','A  : '+estrutura_ULA.adicao.A,'B  : '+estrutura_ULA.adicao.B,'OF: ' +'OF: 0'])
 
-                binario=estrutura_ULA.adicao.seletor(comando,estrutura_ULA.adicao.complementador())
+
+                saida_complementador=estrutura_ULA.adicao.complementador()
+                est.append('imagens/Estrutura/estrutura.png')
+                reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                deta.append('imagens/Adição/complementador.png')
+                msg.append(['Saida do complemento: '+saida_complementador,'A  : '+estrutura_ULA.adicao.A,'B  : '+estrutura_ULA.adicao.B,'OF: 0'])
+
+                binario=estrutura_ULA.adicao.seletor(comando,saida_complementador)
+                est.append('imagens/Estrutura/estrutura.png')
+                reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                deta.append('imagens/Adição/seletor.png')
+                msg.append(['Operação: '+str(comando),'A  : '+estrutura_ULA.adicao.A,'B  : '+estrutura_ULA.adicao.B,'OF: 0'])
+                
                 #Vamos montar os números pra somar
                 (binario,estrutura_ULA.adicao.OF)=estrutura_ULA.adicao.somador(estrutura_ULA.adicao.A,binario)
+                est.append('imagens/Estrutura/estrutura.png')
+                reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                deta.append('imagens/Adição/somador.png')
+                msg.append(['Registrador A + '+binario,'A  : '+estrutura_ULA.adicao.A,'B  : '+estrutura_ULA.adicao.B,'OF: 0'])
+                
                 #Vamos remontar o número
                 CPU.ULA.AC=''
                 for x in range (40):
                     if (x==8 or x==20 or x==28):
                         CPU.ULA.AC=CPU.ULA.AC+' '
                     CPU.ULA.AC=CPU.ULA.AC+binario[x]
-                print('OF: '+str(estrutura_ULA.adicao.OF))
-                regs('Somador')
+                est.append('imagens/Estrutura/ula - ac.png')
+                reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                deta.append('imagens/Adição/saida.png')
+                msg.append(['AC <- Resultado','A  : '+estrutura_ULA.adicao.A,'B  : '+estrutura_ULA.adicao.B,'OF: ' +str(estrutura_ULA.adicao.OF)])
             elif (comando==2):          #Se é Multiplicação
                 #INÍCIO
-                #print('\nINÍCIO DO ALGORITMO DE BOOTH.')
                         
                 #VALORES INICIAIS
                 contador=40                     #Inicializar o contador
                 estrutura_ULA.multiplicacao.A='0000000000000000000000000000000000000000'
     
-                #            msg.append(['MBR<-M(MAR)','A  : 0000000000000000000000000000000000000000','Q  : 0000000000000000000000000000000000000000','Q-1: 0','M  : 0000000000000000000000000000000000000000'])
-
                 estrutura_ULA.multiplicacao.Q=CPU.ULA.MBR.replace(' ','')
                 estrutura_ULA.multiplicacao.C='0'
                 estrutura_ULA.multiplicacao.M=CPU.ULA.MQ.replace(' ','')
@@ -77,32 +91,26 @@ class CPU:
                 #ESTRUTURA ITERATIVA
                 n=contador                                      #Variável para nos ajudar a printar o ciclo na tela 
                 while (True):               #Iteração
-                    #print('\nCiclo '+str(41-contador))
-
+    
                     #ESTRUTURA CONDICIONAL 1
                     estr=estrutura_ULA.multiplicacao.Q[n-1]+estrutura_ULA.multiplicacao.C
-                    #print('Testa a condição de operação: '+str(est))
                     est.append('imagens/Estrutura/estrutura.png')
                     reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                     deta.append('imagens/Multiplicação/3.png')
                     msg.append(['Q0,Q-1: '+estr,'A  : '+estrutura_ULA.multiplicacao.A,'Q  : '+estrutura_ULA.multiplicacao.Q,'Q-1: '+estrutura_ULA.multiplicacao.C,'M  : '+estrutura_ULA.multiplicacao.M])
 
-
                     if (estr=='10'): #Vamos realizar a subtração
-
                         estrutura_ULA.adicao.A=estrutura_ULA.multiplicacao.A
                         estrutura_ULA.adicao.B=estrutura_ULA.multiplicacao.M
                         binario=estrutura_ULA.adicao.seletor(0,estrutura_ULA.adicao.complementador())
                         (binario,estrutura_ULA.adicao.OF)=estrutura_ULA.adicao.somador(estrutura_ULA.adicao.A,binario)
                         estrutura_ULA.multiplicacao.A=binario
 
-                        #booth('A<- A-M')
                         est.append('imagens/Estrutura/estrutura.png')
                         reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                         deta.append('imagens/Multiplicação/4a.png')
                         msg.append([' ','A  : '+estrutura_ULA.multiplicacao.A,'Q  : '+estrutura_ULA.multiplicacao.Q,'Q-1: '+estrutura_ULA.multiplicacao.C,'M  : '+estrutura_ULA.multiplicacao.M])
                         
-
                     elif (estr=='01'): #Vamos realizar a adição
                         estrutura_ULA.adicao.A=estrutura_ULA.multiplicacao.A
                         estrutura_ULA.adicao.B=estrutura_ULA.multiplicacao.M
@@ -110,38 +118,27 @@ class CPU:
                         (binario,estrutura_ULA.adicao.OF)=estrutura_ULA.adicao.somador(estrutura_ULA.adicao.A,binario)
                         estrutura_ULA.multiplicacao.A=binario
 
-                        #booth('A<- A+M')
                         est.append('imagens/Estrutura/estrutura.png')
                         reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                         deta.append('imagens/Multiplicação/4b.png')
                         msg.append([' ','A  : '+estrutura_ULA.multiplicacao.A,'Q  : '+estrutura_ULA.multiplicacao.Q,'Q-1: '+estrutura_ULA.multiplicacao.C,'M  : '+estrutura_ULA.multiplicacao.M])
 
-                        
-                    #else:
-                        #print('...	')
-
                     #DESLOCAMENTO
                     (estrutura_ULA.multiplicacao.A,estrutura_ULA.multiplicacao.Q,estrutura_ULA.multiplicacao.C)=funcao_ULA.deslocamento(estrutura_ULA.multiplicacao.A,estrutura_ULA.multiplicacao.Q,estrutura_ULA.multiplicacao.C)  #Vamos realizar o deslocamento
                     contador=contador-1
-                    #booth ('Deslocamento')
+
                     est.append('imagens/Estrutura/estrutura.png')
                     reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                     deta.append('imagens/Multiplicação/5.png')
                     msg.append(['Contador: '+str(contador) ,'A  : '+estrutura_ULA.multiplicacao.A,'Q  : '+estrutura_ULA.multiplicacao.Q,'Q-1: '+estrutura_ULA.multiplicacao.C,'M  : '+estrutura_ULA.multiplicacao.M])
 
-
                     #ESTRUTURA CONDICIONAL 2
-                    #print('Testa a condição de encerramento: '+str(contador))
                     est.append('imagens/Estrutura/estrutura.png')
                     reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                     deta.append('imagens/Multiplicação/6.png')
                     msg.append(['Contador: '+str(contador) ,'A  : '+estrutura_ULA.multiplicacao.A,'Q  : '+estrutura_ULA.multiplicacao.Q,'Q-1: '+estrutura_ULA.multiplicacao.C,'M  : '+estrutura_ULA.multiplicacao.M])
 
                     if(contador==0):
-                        #FIM
-                        #print('FIM: ')
-                        resultado=str(estrutura_ULA.multiplicacao.A)+str(estrutura_ULA.multiplicacao.Q)       #Resultado
-                        #print('O Resultado é: '+resultado)
                         break
 
                 #Agora precisamos montar os números
@@ -153,12 +150,11 @@ class CPU:
                         CPU.ULA.MQ=CPU.ULA.MQ+' '
                     CPU.ULA.AC=CPU.ULA.AC+estrutura_ULA.multiplicacao.A[x]
                     CPU.ULA.MQ=CPU.ULA.MQ+estrutura_ULA.multiplicacao.Q[x]
-                #regs('Resultados em AC e MQ')
+
                 est.append('imagens/Estrutura/ula - ac e mq.png')
                 reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                 deta.append('imagens/Multiplicação/7.png')
                 msg.append([' AC <- A e MQ <- Q ','A  : '+estrutura_ULA.multiplicacao.A,'Q  : '+estrutura_ULA.multiplicacao.Q,'Q-1: '+estrutura_ULA.multiplicacao.C,'M  : '+estrutura_ULA.multiplicacao.M])
-
 
     #UNIDADE DE CONTROLE
     class UC:
@@ -171,7 +167,6 @@ class CPU:
         def ciclo_instrucao():
             
             #Ciclo de instrução
-            print('Ciclo de instrução iniciada')
             while(True):
                 funcao_UC.busca()       #Ciclo de busca
                 funcao_UC.execucao()    #Ciclo de execucao               
@@ -215,7 +210,6 @@ class estrutura_ULA:
                     som=som+'0'         #Adicionamos outro 0
 
             (res,OF)=estrutura_ULA.adicao.somador(res,som)
-            print('Complemento de B: '+res)
             return (res)                #Retornamos a soma
 
         #Função para selecionar
@@ -225,17 +219,14 @@ class estrutura_ULA:
             #complementado  - Número binário negado
 
             if (operacao==0):
-                print('Operação: subtração')
                 return complementado
             else:
-                print('Operação: adição')
                 return estrutura_ULA.adicao.B
 
         #Estrutura para somar
         def somador (um,dois):
             #um     - Primeiro número a ser somado
-            #dois   - Segundo número a ser somado
-         
+            #dois   - Segundo número a ser somado         
             
             tam=len(um)                     #Vamos pegar o tamanho
             res=[]                          #Vamos guardar o resultado
@@ -243,6 +234,7 @@ class estrutura_ULA:
             for bit in range(tam-1,-1,-1):  #Vamos percorrer bit a bit o número
                 (r,elev)=funcao_ULA.bit_a_bit(int(um[bit]),int(dois[bit]),elev)   #Vamos somar todos os bits
                 res.append(r)               #Salvamos o resultado
+                
             #Agora vamos montar o resultado
             resposta=''                     #Onde vamos guardar a resposta
             
@@ -350,20 +342,16 @@ class funcao_UC:
         global deta
         global msg
 
-        
-        #print('\nCICLO DE BUSCA')
-        #regs('Próxima instrução está no IBR?')
         est.append('imagens/Estrutura/estrutura.png')
         reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
         deta.append('imagens/Ciclo/c2.png')
         msg.append(None)
         
-        
         if(CPU.UC.IBR!='00000000 000000000000'):                                    #Sim
             CPU.UC.IR=CPU.UC.IBR.split(' ')[0]                                      #IR <- IBR(0:7)
             CPU.UC.MAR=CPU.UC.IBR.split(' ')[1]                                     #MAR <- IBR(8:19)
             CPU.UC.IBR='00000000 000000000000'     #Vamos zerar o IBR
-            #regs('Está: \nIR <- IBR (0:7) \nMAR <- IBR(8:19)')
+
             est.append('imagens/Estrutura/ibr - ir e mar.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Ciclo/c3b.png')
@@ -371,7 +359,6 @@ class funcao_UC:
 
             (CPU.UC.PC,OF)=estrutura_ULA.adicao.somador(CPU.UC.PC.replace(' ',''),'000000000001')   #PC <- PC+1 
 
-            #regs('PC <- PC+1')
             est.append('imagens/Estrutura/estrutura.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Ciclo/c7.png')
@@ -379,14 +366,14 @@ class funcao_UC:
             
         else:                                                                       #Não
             CPU.UC.MAR=CPU.UC.PC                                                    #MAR <- PC
-            #regs('Não está: MAR <- PC')
+
             est.append('imagens/Estrutura/pc - mar.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Ciclo/c3a.png')
             msg.append(None)
             
             CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  #MBR <- M(MAR)
-            #regs('MBR <- M(MAR)\nA instrução à esquerda é requisitada?')
+
             est.append('imagens/Estrutura/mmar - mbr.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Ciclo/c4.png')
@@ -401,7 +388,7 @@ class funcao_UC:
                 CPU.UC.IBR=CPU.ULA.MBR.split(' ')[2]+' '+CPU.ULA.MBR.split(' ')[3]  #IBR <- MBR(20:39)
                 CPU.UC.IR=CPU.ULA.MBR.split(' ')[0]                                 #IR <- MBR(0:7)
                 CPU.UC.MAR=CPU.ULA.MBR.split(' ')[1]                                #MAR <- MBR(8:19)
-                #regs('É: \nIBR <- MBR (20:39) \nIR <- MBR(0:7)\nMAR <- MBR(8:19)')
+
                 est.append('imagens/Estrutura/mbr - ir mar e ibr.png')
                 reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                 deta.append('imagens/Ciclo/c6b.png')
@@ -409,14 +396,14 @@ class funcao_UC:
             else:                                                                   #Não                        
                 CPU.UC.IR=CPU.ULA.MBR.split(' ')[2]                                 #IR <- MBR (20:27)
                 CPU.UC.MAR=CPU.ULA.MBR.split(' ')[3]                                #MAR <- MBR (28:39)
-                #regs('Não é: \nIR <- MBR (20:27) \nMAR <- MBR(28:39)')
+
                 est.append('imagens/Estrutura/mbr - ir e mar.png')
                 reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                 deta.append('imagens/Ciclo/c6a.png')
                 msg.append(None)
 
                 (CPU.UC.PC,OF)=estrutura_ULA.adicao.somador(CPU.UC.PC.replace(' ',''),'000000000001')               #PC<-PC+1
-                #regs('PC <- PC+1')
+
                 est.append('imagens/Estrutura/estrutura.png')
                 reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                 deta.append('imagens/Ciclo/c7.png')
@@ -425,7 +412,6 @@ class funcao_UC:
     #Ciclo de execução
     def execucao():
 
-        print('\nCICLO DE EXECUÇÃO')
         #Se não temos instrução
         if (CPU.UC.IR=='00000000'):
             print('Nenhuma instrução')
@@ -434,7 +420,7 @@ class funcao_UC:
         #LOAD M(X)  Transfere M(X) para AC
         elif(CPU.UC.IR=='00000001'):
             CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
-#            regs('MBR <- M(MAR)')
+
             est.append('imagens/Estrutura/mmar - mbr.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Outros/branco.png')
@@ -442,7 +428,7 @@ class funcao_UC:
 
 
             CPU.ULA.AC=CPU.ULA.MBR                                                  #AC <- MBR
-#            regs('AC<-MBR')
+
             est.append('imagens/Estrutura/mbr - ac.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Outros/branco.png')
@@ -452,11 +438,11 @@ class funcao_UC:
         #ADD M(X) Soma M(X) a AC e coloca o resultado em AC
         elif(CPU.UC.IR=='00000101'):
             CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
-            #regs('MBR<-M(MAR)')
+
             est.append('imagens/Estrutura/mmar - mbr.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Adição/adicao.png')
-            msg.append(['MBR <- M(MAR)','A  : 0000000000000000000000000000000000000000','B  : 0000000000000000000000000000000000000000'])
+            msg.append(['MBR <- M(MAR)','A  : 0000000000000000000000000000000000000000','B  : 0000000000000000000000000000000000000000','OF: 0'])
  
             CPU.ULA.circuito(CPU.ULA.MBR,1)
 
@@ -482,15 +468,14 @@ class funcao_UC:
          #LOAD MQ M(X) Transfere o conteudo de X para MQ
         elif(CPU.UC.IR=='00001001'):
             CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
-            #regs('MBR <- M(MAR)')
+
             est.append('imagens/Estrutura/mmar - mbr.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Outros/branco.png')
             msg.append(['MBR <- M(MAR)'])
 
-
             CPU.ULA.MQ=CPU.ULA.MBR                                                  #MQ <- MBR
-            #regs('MQ<-MBR')
+
             est.append('imagens/Estrutura/mbr - mq.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Outros/branco.png')
@@ -702,7 +687,7 @@ class funcao_UC:
         #MUL(X) multiplica M(X) por MQ e coloca os bits mais significativos do resultado em AC
         elif(CPU.UC.IR=='00001011'):
             CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
-            #regs('MBR<-M(MAR)')
+
             est.append('imagens/Estrutura/mmar - mbr.png')
             reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
             deta.append('imagens/Multiplicação/1.png')

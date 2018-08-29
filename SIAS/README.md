@@ -47,3 +47,4 @@ Melhorias:
 - Melhorar a conexão entre as imagens secundárias.
 - Desenhar novas imagens para as outras instruções.
 - Destacar quando algum circuito está sendo usado na imagem principal.
+- Fechar quando clicar no x.
