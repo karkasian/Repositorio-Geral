@@ -30,7 +30,8 @@ Isso implica por exemplo, em 2 registradores e um FLAG (um registrador que indic
 
 Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 
-Outras observações:
+## Observações
+
 - Foi considerado que o registrador PC possui acesso um hardware próprio que lhe fornece capacidade de realizar uma soma binária do tipo <code>+1</code> sem acessar a ULA.
 - Da mesma forma dentro do complementador no módulo de adição e subtração, ele possui a mesma capacidade de realizar a soma <code>+1</code>.
 - O circuito da ULA desloca o binário em AC sem utilizar nenhum outro registrador.
@@ -39,7 +40,7 @@ Outras observações:
 	- Uma opção é comparar se os valores atuais do IBR, IR e MAR são diferentes, nesse caso nossa condição poderia ser reescrita como "Os valores do IR e MAR são diferentes do IBR?".
 	- Essa abordagem é mais próxima da utilizada no [IAS Simulator](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-sim/)
 
-Melhorias:
+## Melhorias:
 - Tratar o argumento das funções aritméticas dentro da função, e não antes/depois.
 - Tratar todas as instruções como funções.
 	- Muitos trechos podem ser reaproveitados.
@@ -48,3 +49,4 @@ Melhorias:
 - Desenhar novas imagens para as outras instruções.
 - Destacar quando algum circuito está sendo usado na imagem principal.
 - Fechar quando clicar no x.
+	- Atualmente sai usando a tecla ESC.
