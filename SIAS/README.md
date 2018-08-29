@@ -40,7 +40,7 @@ Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 	- Uma opção é comparar se os valores atuais do IBR, IR e MAR são diferentes, nesse caso nossa condição poderia ser reescrita como "Os valores do IR e MAR são diferentes do IBR?".
 	- Essa abordagem é mais próxima da utilizada no [IAS Simulator](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-sim/)
 
-## Melhorias:
+## Melhorias possíveis:
 - Tratar o argumento das funções aritméticas dentro da função, e não antes/depois.
 - Tratar todas as instruções como funções.
 	- Muitos trechos podem ser reaproveitados.
@@ -50,3 +50,6 @@ Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 - Destacar quando algum circuito está sendo usado na imagem principal.
 - Fechar quando clicar no x.
 	- Atualmente sai usando a tecla ESC.
+- Detalhar o tipo de instrução quando soma ou subtrai (ex.: ADD M(X) ou ADD |M(X)|).
+- Explicitar como o componente para pegar a negação dentro da operação de adição, pode ser usado em outras operações e sua saída além de ir pro somador, pode ir para o AC.
+- Da mesma forma que o item anterior, o componente que realiza o deslocamento para a multiplicação, pode ser reutilizado para as funções LSH e RSH.

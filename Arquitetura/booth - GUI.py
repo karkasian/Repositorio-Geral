@@ -249,8 +249,8 @@ outros=[]           #Onde vamos guardar outros valores
 imgs=[]             #Onde vamos guardar a ordem correta de exibição das imagens
 
 #Fazemos a multiplicação
-multiplicando='0111'
-multiplicador='0011'
+multiplicando='0010'
+multiplicador='0010'
 multiplicacao(multiplicando,multiplicador)
 
 ##GUI
