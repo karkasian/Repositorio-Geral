@@ -141,7 +141,7 @@ Observações:
 
 Não podemos considerar como inteiros sem sinal da mesma fora que fazemos com a adição, se o muliplicando ou multiplicador for negativo.
 
-![Algoritmo de boot](/imagens/fluxograma.png)
+![Algoritmo de boot](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/imagens/fluxograma.png)
 
 O algoritmo de Boot é descrito da seguinte forma:
 
@@ -171,7 +171,7 @@ Um exemplo de algoritmo de Boot (7x3) é:
 
 ![Exemplo de multiplicacao](imagens/multiplicacao.png)
 
-Escrevemos um [código em python](booth.py) para isso. E escrevemos outro com [interface gráfica](booth - GUI.py).
+Escrevemos um [código em python](booth.py) para isso. E escrevemos outro com [interface gráfica](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/booth%20-%20GUI.py).
 
 ## Divisão
 
@@ -195,3 +195,5 @@ Com as seguinte adaptações:
 - Divisor: 3
 - Quociente: 2
 - Resto: 1
+
+Novamente também desenvolvemos um código [sem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/divisao.py) e [com](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/divisao%20-%20GUI.py) interface gráfica.
