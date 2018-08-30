@@ -32,11 +32,11 @@ E por fim, utilizamos a divisão inspirado no seguinte fluxograma:
 
 Mas com as seguinte adaptações:
 1. Guardamos os bits mais significativos de Q e M em um registrador QM.
-2. Se o divisor ou dividendo for negativo, pegamos o complemento.
-3. Realizamos toda a divisão normalmente.
-4. Atribuimos os sinais do quociente e resto de acordo com a seguinte regra:
-	- sinal(resto)=sinal(dividendo)
-	- sinal(quociente)=sinal(dividendo) x sinal(divisor)
+2. Se o divisor ou dividendo for negativo, pegamos o complemento do mesmo.
+3. Realizamos toda a divisão normalmente com inteiros positivos.
+4. Atribuimos os sinais (fazemos o complemento se necessário) do quociente e resto de acordo com a seguinte regra:
+	- sinal(resto)=sinal(dividendo).
+	- sinal(quociente)=sinal(dividendo) x sinal(divisor).
 
 ## Observações
 
