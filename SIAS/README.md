@@ -1,68 +1,65 @@
-```
-Em andamento
-```
-
 # SIAS 
 
-SIAS È a abreviaÁ„o para Simulador do IAS. O IAS foi previamente discutido em meu outro projeto [J](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/J).
+SIAS √© a abrevia√ß√£o para Simulador do IAS. O IAS foi previamente discutido em meu outro projeto [J](https://github.com/SapoGitHub/Repositorio-Geral/tree/master/J).
 
-Apesar do nome, realizemos algumas adaptaÁıes conforme pareceram necess·rias ou nosso conhecimento for limitado acerca dos detalhes de algum processo. O conte˙do È totalmente baseado no livro de Arquitetura e OrganizaÁ„o de Computadores do  William Stallings, 8™ ediÁ„o.
+Apesar do nome, realizemos algumas adapta√ß√µes conforme pareceram necess√°rias ou nosso conhecimento for limitado acerca dos detalhes de algum processo. O conte√∫do √© totalmente baseado no livro de Arquitetura e Organiza√ß√£o de Computadores do  William Stallings, 8¬™ edi√ß√£o.
 
 Primeiramente, foi implementado um ciclo de busca baseado no seguinte fluxograma:
 
-![Ciclo de InstruÁ„o](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/ciclo.png)
+![Ciclo de Instru√ß√£o](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/ciclo.png)
 
-Ent„o comeÁamos a implementar as 21 instruÁıes originais:
+Ent√£o come√ßamos a implementar as 21 instru√ß√µes originais:
 
-![InstruÁıes do IAS](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/instrucoes.png)
+![Instru√ß√µes do IAS](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/instrucoes.png)
 
 Sempre respeitando a estrutura do computador proposta em:
 
 ![Estrutura expandida](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/estrutura.png)
 
-Para a operaÁ„o de adiÁ„o, nos baseamos no seguinte diagrama:
+Para a opera√ß√£o de adi√ß√£o, nos baseamos no seguinte diagrama:
 
 ![Diagrama em blocos do Hardware](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/adicao.png)
 
-Isso implica por exemplo, em 2 registradores e um FLAG (um registrador que indica o estado da CPU) dentro do mÛdulo. Da mesma forma, para multiplicaÁ„o utilizamos o Algoritmo de Booth, o que exige 4 registradores.
+Isso implica por exemplo, em 2 registradores e um FLAG (um registrador que indica o estado da CPU) dentro do m√≥dulo. Da mesma forma, para multiplica√ß√£o utilizamos o Algoritmo de Booth, o que exige 4 registradores.
 
 ![Algoritmo de Booth](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/SIAS/imagens/multiplicacao.png)
 
-Essa abordagem foi utilizada pensando na did·tica de tais algoritmos.
+Essa abordagem foi utilizada pensando na did√°tica de tais algoritmos.
 
-E por fim, utilizamos a divis„o inspirado no seguinte fluxograma:
-![Algoritmo da divis„o](imagens/div.png)
+E por fim, utilizamos a divis√£o inspirado no seguinte fluxograma:
+![Algoritmo da divis√£o](imagens/div.png)
 
-Mas com as seguinte adaptaÁıes:
+Mas com as seguinte adapta√ß√µes:
 1. Guardamos os bits mais significativos de Q e M em um registrador QM.
 2. Se o divisor ou dividendo for negativo, pegamos o complemento.
-3. Realizamos toda a divis„o normalmente.
+3. Realizamos toda a divis√£o normalmente.
 4. Atribuimos os sinais do quociente e resto de acordo com a seguinte regra:
 	- sinal(resto)=sinal(dividendo)
 	- sinal(quociente)=sinal(dividendo) x sinal(divisor)
 
-## ObservaÁıes
+## Observa√ß√µes
 
-- Foi considerado que o registrador PC possui acesso um hardware prÛprio que lhe fornece capacidade de realizar uma soma bin·ria do tipo <code>+1</code> sem acessar a ULA.
-- Da mesma forma dentro do complementador no mÛdulo de adiÁ„o e subtraÁ„o, ele possui a mesma capacidade de realizar a soma <code>+1</code>.
-- O circuito da ULA desloca o bin·rio em AC sem utilizar nenhum outro registrador.
-- Os detalhes de como funciona a conex„o entre as estruturas foi ignorado.
-- Estamos interpretando "PrÛxima instruÁ„o est· no IBR?" como "O conte˙do no IBR È diferente de 00000000000000000000?". Por isso quando o IBR passa os valores pro IR e MAR, estamos zerando ele.
-	- Uma opÁ„o È comparar se os valores atuais do IBR, IR e MAR s„o diferentes, nesse caso nossa condiÁ„o poderia ser reescrita como "Os valores do IR e MAR s„o diferentes do IBR?".
-	- Essa abordagem È mais prÛxima da utilizada no [IAS Simulator](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-sim/)
+- Foi considerado que o registrador PC possui acesso um hardware pr√≥prio que lhe fornece capacidade de realizar uma soma bin√°ria do tipo <code>+1</code> sem acessar a ULA.
+- Da mesma forma dentro do complementador no m√≥dulo de adi√ß√£o e subtra√ß√£o, ele possui a mesma capacidade de realizar a soma <code>+1</code>.
+- O circuito da ULA desloca o bin√°rio em AC sem utilizar nenhum outro registrador.
+- Os detalhes de como funciona a conex√£o entre as estruturas foi ignorado.
+- Estamos interpretando "Pr√≥xima instru√ß√£o est√° no IBR?" como "O conte√∫do no IBR √© diferente de 00000000000000000000?". Por isso quando o IBR passa os valores pro IR e MAR, estamos zerando ele.
+	- Uma op√ß√£o √© comparar se os valores atuais do IBR, IR e MAR s√£o diferentes, nesse caso nossa condi√ß√£o poderia ser reescrita como "Os valores do IR e MAR s√£o diferentes do IBR?".
+	- Essa abordagem √© mais pr√≥xima da utilizada no [IAS Simulator](http://www.ic.unicamp.br/~edson/disciplinas/mc404/2017-2s/abef/IAS-sim/)
+- Todas opera√ß√µes s√£o apenas de inteiros, mas com sinal. Temos 1 bit pra indicar o sinal e 39 para magnitude.
 
-## Melhorias possÌveis:
-- Tratar o argumento das funÁıes aritmÈticas dentro da funÁ„o, e n„o antes/depois.
-- Tratar todas as instruÁıes como funÁıes.
+## Melhorias poss√≠veis:
+- Tratar o argumento das fun√ß√µes aritm√©ticas dentro da fun√ß√£o, e n√£o antes/depois.
+- Tratar todas as instru√ß√µes como fun√ß√µes.
 	- Muitos trechos podem ser reaproveitados.
-- Adicionar fluxogramas para as outras funÁıes.
-- Melhorar a conex„o entre as imagens secund·rias.
-- Desenhar novas imagens para as outras instruÁıes.
-- Destacar quando algum circuito est· sendo usado na imagem principal.
+- Adicionar fluxogramas para as outras fun√ß√µes.
+- Melhorar a conex√£o entre as imagens secund√°rias.
+- Desenhar novas imagens para as outras instru√ß√µes.
+- Destacar quando algum circuito est√° sendo usado na imagem principal.
 - Fechar quando clicar no x.
 	- Atualmente sai usando a tecla ESC.
-- Detalhar o tipo de instruÁ„o quando soma ou subtrai (ex.: ADD M(X) ou ADD |M(X)|).
-- Explicitar como o componente para pegar a negaÁ„o dentro da operaÁ„o de adiÁ„o, pode ser usado em outras operaÁıes e sua saÌda alÈm de ir pro somador, pode ir para o AC.
-- Da mesma forma que o item anterior, o componente que realiza o deslocamento para a multiplicaÁ„o, pode ser reutilizado para as funÁıes LSH e RSH.
-- A parte de divis„o foi implementado somente na interface gr·fica.
-	- Corrigir o fluxograma da divis„o.
+- Detalhar o tipo de instru√ß√£o quando soma ou subtrai (ex.: ADD M(X) ou ADD |M(X)|).
+- Explicitar como o componente para pegar a nega√ß√£o dentro da opera√ß√£o de adi√ß√£o, pode ser usado em outras opera√ß√µes e sua sa√≠da al√©m de ir pro somador, pode ir para o AC.
+- Da mesma forma que o item anterior, o componente que realiza o deslocamento para a multiplica√ß√£o, pode ser reutilizado para as fun√ß√µes LSH e RSH.
+- A parte de divis√£o foi implementado somente na interface gr√°fica.
+	- Corrigir o fluxograma da divis√£o.
