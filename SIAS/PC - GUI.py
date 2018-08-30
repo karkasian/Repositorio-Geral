@@ -81,13 +81,11 @@ class CPU:
                         
                 #VALORES INICIAIS
                 contador=40                     #Inicializar o contador
-                estrutura_ULA.multiplicacao.A='0000000000000000000000000000000000000000'
-    
+                estrutura_ULA.multiplicacao.A='0000000000000000000000000000000000000000'    
                 estrutura_ULA.multiplicacao.Q=CPU.ULA.MBR.replace(' ','')
                 estrutura_ULA.multiplicacao.C='0'
                 estrutura_ULA.multiplicacao.M=CPU.ULA.MQ.replace(' ','')
             
-                #booth('Valores iniciais')
                 est.append('imagens/Estrutura/mbr e mq - ula.png')
                 reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
                 deta.append('imagens/Multiplicação/2.png')
@@ -167,6 +165,161 @@ class CPU:
                 deta.append('imagens/Multiplicação/7.png')
                 msg.append([' AC <- A e MQ <- Q ','A  : '+estrutura_ULA.multiplicacao.A,'Q  : '+estrutura_ULA.multiplicacao.Q,'Q-1: '+estrutura_ULA.multiplicacao.C,'M  : '+estrutura_ULA.multiplicacao.M])
                 memor.append(memoria.conteudo.copy())
+
+            #Divisão
+            elif (comando==3):
+                #INÍCIO
+                #Pega o sinal do divisor e dividendo
+                estrutura_ULA.divisao.QM=CPU.ULA.AC.replace(' ','')[0]+CPU.ULA.MBR.replace(' ','')[0]
+                est.append('imagens/Estrutura/mbr e ac - ula.png')
+                reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                deta.append('imagens/Divisão/d1.png')
+                msg.append(['QM<-Q0,M0','A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M])
+                memor.append(memoria.conteudo.copy())
+
+                #Pegar a negação se necessário
+                if (estrutura_ULA.divisao.QM[1]=='0'):
+                    visor=CPU.ULA.MBR.replace(' ','')
+                else:
+                    estrutura_ULA.adicao.B=CPU.ULA.MBR.replace(' ','')
+                    visor=estrutura_ULA.adicao.complementador()
+
+                if (estrutura_ULA.divisao.QM[0]=='0'):
+                    dendo=CPU.ULA.AC.replace(' ','')
+                else:
+                    estrutura_ULA.adicao.B=CPU.ULA.AC.replace(' ','')
+                    dendo=estrutura_ULA.adicao.complementador()
+                        
+                #VALORES INICIAIS
+                contador=40                                 
+                estrutura_ULA.divisao.M=visor
+                estrutura_ULA.divisao.Q=dendo
+                estrutura_ULA.divisao.A='0000000000000000000000000000000000000000'
+                est.append('imagens/Estrutura/mbr e ac - ula.png')
+                reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                deta.append('imagens/Divisão/d2.png')
+                msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M,'Valores positivos apenas'])
+                memor.append(memoria.conteudo.copy())
+            
+
+                #ESTRUTURA ITERATIVA
+                while (True):               #Iteração
+                  #DESLOCAMENTO
+                    (estrutura_ULA.divisao.A,estrutura_ULA.divisao.Q)= funcao_ULA.des_div(estrutura_ULA.divisao.A,estrutura_ULA.divisao.Q)  #Vamos realizar o deslocamento
+                    est.append('imagens/Estrutura/estrutura.png')
+                    reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                    deta.append('imagens/Divisão/d3.png')
+                    msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M])
+                    memor.append(memoria.conteudo.copy())
+
+
+                    #Subtração
+                    estrutura_ULA.adicao.A=estrutura_ULA.divisao.A
+                    estrutura_ULA.adicao.B=estrutura_ULA.divisao.M
+                    binario=estrutura_ULA.adicao.seletor(0,estrutura_ULA.adicao.complementador())
+                    (binario,estrutura_ULA.adicao.OF)=estrutura_ULA.adicao.somador(estrutura_ULA.adicao.A,binario)
+                    estrutura_ULA.divisao.A=binario
+                    est.append('imagens/Estrutura/estrutura.png')
+                    reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                    deta.append('imagens/Divisão/d4.png')
+                    msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M])
+                    memor.append(memoria.conteudo.copy())
+
+
+                    #ESTRUTURA CONDICIONAL 1
+                    est.append('imagens/Estrutura/estrutura.png')
+                    reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                    deta.append('imagens/Divisão/d5.png')
+                    msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M])
+                    memor.append(memoria.conteudo.copy())
+
+                    if (estrutura_ULA.divisao.A[0]=='1'):
+                        #Adição
+                        estrutura_ULA.adicao.A=estrutura_ULA.divisao.A
+                        estrutura_ULA.adicao.B=estrutura_ULA.divisao.M
+                        binario=estrutura_ULA.adicao.seletor(1,estrutura_ULA.adicao.complementador())
+                        (binario,estrutura_ULA.adicao.OF)=estrutura_ULA.adicao.somador(estrutura_ULA.adicao.A,binario)
+                        estrutura_ULA.divisao.A=binario
+
+                        #Deslocamento
+                        antQ=estrutura_ULA.divisao.Q
+                        estrutura_ULA.divisao.Q=''
+                        for x in range(len(antQ)-1):
+                            estrutura_ULA.divisao.Q=estrutura_ULA.divisao.Q+antQ[x]
+                        estrutura_ULA.divisao.Q=estrutura_ULA.divisao.Q+'0'
+
+                        est.append('imagens/Estrutura/estrutura.png')
+                        reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                        deta.append('imagens/Divisão/d6b.png')
+                        msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M])
+                        memor.append(memoria.conteudo.copy())
+
+
+                    else:
+                        antQ=estrutura_ULA.divisao.Q
+                        estrutura_ULA.divisao.Q=''
+                        for x in range(len(antQ)-1):
+                            estrutura_ULA.divisao.Q=estrutura_ULA.divisao.Q+antQ[x]
+                        estrutura_ULA.divisao.Q=estrutura_ULA.divisao.Q+'1'
+
+                        est.append('imagens/Estrutura/estrutura.png')
+                        reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                        deta.append('imagens/Divisão/d6a.png')
+                        msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M])
+                        memor.append(memoria.conteudo.copy())
+
+
+
+                    #Contador
+                    contador=contador-1
+                    est.append('imagens/Estrutura/estrutura.png')
+                    reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                    deta.append('imagens/Divisão/d7.png')
+                    msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M])
+                    memor.append(memoria.conteudo.copy())
+
+
+                    #ESTRUTURA CONDICIONAL 2
+                    est.append('imagens/Estrutura/estrutura.png')
+                    reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                    deta.append('imagens/Divisão/d8.png')
+                    msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M,'Contador: '+str(contador)])
+                    memor.append(memoria.conteudo.copy())
+                    
+                    if(contador==0):
+                        break
+
+                #PODEMOS AGORAR CONSIDERAR OS SINAIS
+
+                if (estrutura_ULA.divisao.QM[0]=='1'):
+                    estrutura_ULA.adicao.B=estrutura_ULA.divisao.A
+                    CPU.ULA.AC=estrutura_ULA.adicao.complementador()
+                else:
+                    CPU.ULA.AC=estrutura_ULA.divisao.A
+                    
+                if(estrutura_ULA.divisao.QM[0]!=estrutura_ULA.divisao.QM[1]):
+                    estrutura_ULA.adicao.B=estrutura_ULA.divisao.Q
+                    CPU.ULA.MQ=estrutura_ULA.adicao.complementador()
+                else:
+                    CPU.ULA.MQ=estrutura_ULA.divisao.Q
+
+                #Vamos montar os números
+                AC_temp=CPU.ULA.AC
+                MQ_temp=CPU.ULA.MQ
+                CPU.ULA.AC=''
+                CPU.ULA.MQ=''
+                for x in range (40):
+                    if (x==8 or x==20 or x==28):
+                        CPU.ULA.AC=CPU.ULA.AC+' '
+                        CPU.ULA.MQ=CPU.ULA.MQ+' '
+                    CPU.ULA.AC=CPU.ULA.AC+AC_temp[x]
+                    CPU.ULA.MQ=CPU.ULA.MQ+MQ_temp[x]
+
+                est.append('imagens/Estrutura/ula - ac e mq.png')
+                reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+                deta.append('imagens/Divisão/d9.png')
+                msg.append(['A  : '+estrutura_ULA.divisao.A,'Q  : '+estrutura_ULA.divisao.Q,'QM: '+estrutura_ULA.divisao.QM,'M  : '+estrutura_ULA.divisao.M,'Correção de sinais'])
+                memor.append(memoria.conteudo.copy())
                 
     #UNIDADE DE CONTROLE
     class UC:
@@ -191,10 +344,10 @@ class memoria:
 
 #ENTRADA/SAÍDA:
 class ES:
-    memoria.conteudo[0]=  '00000000 000000000000 00001001 000000010100'
-    memoria.conteudo[1]=  '00000000 000000000000 00001011 000000010101'
-    memoria.conteudo[20]= '00000000 000000000000 00000000 000000000001'
-    memoria.conteudo[21]= '00000000 000000000000 00000000 000000000011'
+    memoria.conteudo[0]=  '00000000 000000000000 00000001 000000010100'
+    memoria.conteudo[1]=  '00000000 000000000000 00001100 000000010101'
+    memoria.conteudo[20]= '00000000 000000000000 00000000 000000000111'
+    memoria.conteudo[21]= '11111111 111111111111 11111111 111111111101'
 ##    #FALTA MUL, ADD e SUB ||
 
 #ESTRUTURAS INTERNAS------------------------------------------------------------
@@ -209,7 +362,7 @@ class estrutura_ULA:
         OF=0                                            #Bit de overflow
 
         #Função para pegar a negação do número
-        def complementador (*conteudo):
+        def complementador ():
             #binario    - Número binário que vamos pegar a negacao
             res=''      #Onde vamos guardar o resultado
             som=''      #Onde vamos guardar o 1 que vamos somar
@@ -265,6 +418,12 @@ class estrutura_ULA:
         M='0000000000000000000000000000000000000000'    #Multiplicando
         A='0000000000000000000000000000000000000000'    #Registrador A
         C='0'    #Registrador de um bit
+
+    class divisao:
+        Q= '0000000000000000000000000000000000000000'    #Dividendo
+        M= '0000000000000000000000000000000000000000'    #Divisor
+        A= '0000000000000000000000000000000000000000'    #Registrador A
+        QM='00'    #Registrador de um bit
 
 
 #FUNÇÕES ESPECÍFICAS------------------------------------------------------------
@@ -335,6 +494,19 @@ class funcao_ULA:
             nA=nA+A[x]
 
         return (nA,nQ,nC)       #Retornamos os valores
+
+    def des_div(A,Q):
+        #A              - Registrador A
+        #Q              - Registrador Q
+
+        nQ=''           #Onde vamos armazenar nosso novo Q
+        nA=''           #Onde vamos armazenar nosso novo A
+        for x in range (1,40):   #Vamos percorrer até o penúltimo elemento
+            nQ=nQ+Q[x]
+            nA=nA+A[x]
+        nA=nA+Q[0]        
+        nQ=nQ+'0'
+        return (nA,nQ)       #Retornamos os valores
 
 #Funções relacionadas a UC
 class funcao_UC:
@@ -858,6 +1030,17 @@ class funcao_UC:
             memor.append(memoria.conteudo.copy())
              
             CPU.ULA.circuito(CPU.ULA.MBR,2)
+
+        #DIV M(X) divide AC por M(X) coloca o quociente em MQ e  o resto em AC
+        elif(CPU.UC.IR=='00001100'):
+            CPU.ULA.MBR=func_memoria.M(CPU.UC.MAR)                                  # MBR<-M(MAR)
+            est.append('imagens/Estrutura/mmar - mbr.png')
+            reg.append([CPU.ULA.AC,CPU.ULA.MQ,CPU.ULA.MBR,CPU.UC.IBR,CPU.UC.PC,CPU.UC.IR,CPU.UC.MAR])
+            deta.append('imagens/Divisão/div.png')
+            msg.append(['DIV(X)','MBR<-M(MAR)','A  : 0000000000000000000000000000000000000000','Q  : 0000000000000000000000000000000000000000','QM: 00','M  : 0000000000000000000000000000000000000000'])
+            memor.append(memoria.conteudo.copy())
+
+            CPU.ULA.circuito(CPU.ULA.MBR,3)
             
         else:
             print('Op code inválido.')
@@ -1075,7 +1258,7 @@ def GUI():
             for x in range(len(msg[c])):
                 texto=fonte.render(msg[c][x],1,PRETO)
                 textoret=texto.get_rect()
-                textoret.topleft=(800,400+x*20)
+                textoret.topleft=(800,500+x*20)
                 screen.blit(texto,textoret)
 
         

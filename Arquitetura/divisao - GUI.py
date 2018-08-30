@@ -10,10 +10,6 @@ class registradores:
     #Vamos setar as configurações iniciais
     def __init__(self,divisor,dividendo,A):
         #self           - Referência a própria classe
-
-        #multiplicando  - Multiplicando do cálculo
-        #multiplicador  - Multiplicador do cálculo
-        #A              - Valor inicial do registrador A
         
         self.Q=dividendo      #Multiplicador
         self.M=divisor    #Multiplicando

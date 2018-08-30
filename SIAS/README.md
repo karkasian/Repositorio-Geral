@@ -65,3 +65,4 @@ Mas com as seguinte adaptações:
 - Explicitar como o componente para pegar a negação dentro da operação de adição, pode ser usado em outras operações e sua saída além de ir pro somador, pode ir para o AC.
 - Da mesma forma que o item anterior, o componente que realiza o deslocamento para a multiplicação, pode ser reutilizado para as funções LSH e RSH.
 - A parte de divisão foi implementado somente na interface gráfica.
+	- Corrigir o fluxograma da divisão.
