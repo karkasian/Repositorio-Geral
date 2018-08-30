@@ -27,6 +27,7 @@ Isso implica por exemplo, em 2 registradores e um FLAG (um registrador que indic
 Essa abordagem foi utilizada pensando na didática de tais algoritmos.
 
 E por fim, utilizamos a divisão inspirado no seguinte fluxograma:
+
 ![Algoritmo da divisão](imagens/div.png)
 
 Mas com as seguinte adaptações:
