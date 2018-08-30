@@ -10,14 +10,13 @@ class registradores:
     #Vamos setar as configurações iniciais
     def __init__(self,divisor,dividendo,A):
         #self           - Referência a própria classe
-
-        #multiplicando  - Multiplicando do cálculo
-        #multiplicador  - Multiplicador do cálculo
-        #A              - Valor inicial do registrador A
+        #divisor    - Divisor da operação
+        #dividendo  - Dividendo da operação
+        #A          - Valor inicial do registrador A
         
-        self.Q=dividendo      #Multiplicador
-        self.M=divisor    #Multiplicando
-        self.A=A                #Registrador
+        self.Q=dividendo      
+        self.M=divisor    
+        self.A=A           
 
         return None
 
@@ -144,8 +143,8 @@ class divisao:
     #Operaçao de fato
     def __init__(self,divisor,dividendo):
         #self           - Referência a própria classe
-        #multiplicando  - Multiplicando do cálculo
-        #multiplicador  - Multiplicador do cálculo
+        #divisor    - Divisor da operação
+        #dividendo  - Dividendo da operação
 
         manual='p'       #Para definir se o controle e manual
 
@@ -237,8 +236,7 @@ class divisao:
                 break
 
         #PODEMOS AGORAR CONSIDERAR OS SINAIS
-        #A
-            
+           
         if (dividendo[0]=='1'):
             pc.A=subtracao.negacao(pc.A)
 
@@ -250,7 +248,6 @@ class divisao:
         return None
         
 
-#Variáveis para nossa animação
 dividendo=subtracao.negacao('0111')
 divisor='0011'
 divisao(divisor,dividendo)

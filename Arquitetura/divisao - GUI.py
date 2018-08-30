@@ -10,10 +10,12 @@ class registradores:
     #Vamos setar as configurações iniciais
     def __init__(self,divisor,dividendo,A):
         #self           - Referência a própria classe
+        #divisor    - Divisor da operação
+        #dividendo  - Dividendo da operação
         
-        self.Q=dividendo      #Multiplicador
-        self.M=divisor    #Multiplicando
-        self.A=A                #Registrador
+        self.Q=dividendo    
+        self.M=divisor      
+        self.A=A            
 
         return None
 
@@ -140,8 +142,8 @@ class divisao:
     #Operaçao de fato
     def __init__(self,divisor,dividendo):
         #self           - Referência a própria classe
-        #multiplicando  - Multiplicando do cálculo
-        #multiplicador  - Multiplicador do cálculo
+        #divisor    - Divisor da operação
+        #dividendo  - Dividendo da operação
 
         global regs             #Onde vamos guardar os valores dos registradores
         global outros           #Onde vamos guardar outros valores
