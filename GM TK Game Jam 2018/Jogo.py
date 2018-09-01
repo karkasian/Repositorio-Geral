@@ -40,16 +40,23 @@ class solidos:
 
 class personagens:
     jogador={'imagem':pygame.image.load('imagens/jogador.png'),'agacha':pygame.image.load('imagens/agacha.png'),'ret':''}
+    jorjao2={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'mov':''}
 
 class objeto:
     escada={'imagem':pygame.image.load('imagens/escada.png'),'ret':''}
-    armas={'arma1':{'imagem':pygame.image.load('imagens/arma1.png'),'ret':''},
-           'arma2':{'imagem':pygame.image.load('imagens/arma2.png'),'ret':''},
-           'arma3':{'imagem':pygame.image.load('imagens/arma3.png'),'ret':''},
+    armas={'arma1':{'imagem':pygame.image.load('imagens/arma1.png'),'ret':''},  #Revolver
+           'arma2':{'imagem':pygame.image.load('imagens/arma2.png'),'ret':''},  #Morteiro
+           'arma3':{'imagem':pygame.image.load('imagens/arma3.png'),'ret':''},  #Taser
            }
+    barris={'interior':{'imagem':pygame.image.load('imagens/barril.png'),'explosao':pygame.image.load('imagens/explosão.png'),'ret':'','vivo':True},
+            'exterior':{'imagem':pygame.image.load('imagens/barril.png'),'explosao':pygame.image.load('imagens/explosão.png'),'ret':'','vivo':True}
+            }
+    aviao={'imagem':pygame.image.load('imagens/avião.png'),'ret':'','caindo':False}
+    lixo={'imagem':pygame.image.load('imagens/lixo.png'),'ret':'','fogo':pygame.image.load('imagens/chamas.png'),'queimando':False}
     
 #Fundo
 fundo={'imagem':pygame.image.load('imagens/fundo.png'),'ret':''}
+#Explosão
 
 #Condição de início
 inicio=True
@@ -89,6 +96,13 @@ while True:
 
         personagens.jogador['ret']=personagens.jogador['imagem'].get_rect()
         personagens.jogador['ret'].bottomleft=(600,160)
+        
+        personagens.jorjao2['posicao']='direita'
+        personagens.jorjao2['movendo']=False
+        personagens.jorjao2['vivo']=True
+        personagens.jorjao2['ret']=personagens.jorjao2['imagem'].get_rect()
+        personagens.jorjao2['ret'].bottomleft=(660,490)
+        personagens.jorjao2['mov']=''
 
         objeto.escada['ret']=objeto.escada['imagem'].get_rect()
         objeto.escada['ret'].topleft=(674,170)
@@ -99,6 +113,19 @@ while True:
         objeto.armas['arma3']['ret']=objeto.armas['arma3']['imagem'].get_rect()
         
         objeto.armas['arma3']['ret'].topleft=(200,450)
+
+        objeto.barris['interior']['vivo']=True
+        objeto.barris['interior']['ret']=objeto.barris['interior']['imagem'].get_rect()
+        objeto.barris['interior']['ret'].bottomleft=(620,480)
+        objeto.barris['exterior']['vivo']=True
+        objeto.barris['exterior']['ret']=objeto.barris['exterior']['imagem'].get_rect()
+        objeto.barris['exterior']['ret'].bottomleft=(170,480)
+        objeto.aviao['caindo']=False
+        objeto.aviao['ret']=objeto.aviao['imagem'].get_rect()
+        objeto.aviao['ret'].topleft=(410,195)
+        objeto.lixo['queimando']=False
+        objeto.lixo['ret']=objeto.lixo['imagem'].get_rect()
+        objeto.lixo['ret'].bottomright=(150,335)
 
         fundo['ret']=fundo['imagem'].get_rect()
 
@@ -217,6 +244,23 @@ while True:
                     projeteis[n]['ret'].colliderect(solidos.fixos['parede2']['ret']) or
                     projeteis[n]['ret'].colliderect(solidos.fixos['parede3']['ret'])):
                     elim.append(projeteis[n])
+
+                #Vamos detectar se explodiu o barril do interior
+                elif (projeteis[n]['ret'].colliderect(objeto.barris['interior']['ret']) and objeto.barris['interior']['vivo']==True):
+                     objeto.barris['interior']['vivo']=False
+                     elim.append(projeteis[n])
+                     if (objeto.barris['interior']['ret'].colliderect(personagens.jorjao2['ret'])):
+                         personagens.jorjao2['vivo']=False
+                #Vamos detectar se explodiu o barril do exterior
+                elif (projeteis[n]['ret'].colliderect(objeto.barris['exterior']['ret']) and objeto.barris['exterior']['vivo']==True):
+                     objeto.barris['exterior']['vivo']=False
+                     elim.append(projeteis[n])
+                #Se derrubou o avião
+                elif (projeteis[n]['ret'].colliderect(objeto.aviao['ret']) and objeto.aviao['caindo']==False):
+                     objeto.aviao['caindo']=True
+                     elim.append(projeteis[n])
+                     
+                     
             elif (projeteis[n]['arma']=='arma2'):
                 projeteis[n]['ret']=projeteis[n]['img'].get_rect()                  #Pegamos o rect
                 projeteis[n]['ret'].topleft=(projeteis[n]['x'][0],projeteis[n]['y'][0])#Ajustamos a posição
@@ -230,6 +274,10 @@ while True:
                     projeteis[n]['ret'].colliderect(solidos.fixos['parede2']['ret']) or
                     projeteis[n]['ret'].colliderect(solidos.fixos['parede3']['ret'])):
                     elim.append(projeteis[n])
+                elif (projeteis[n]['ret'].colliderect(objeto.lixo['ret']) and objeto.lixo['queimando']==False):   #Se acertou o lixo
+                    objeto.lixo['queimando']=True
+                    elim.append(projeteis[n])
+                    
             elif (projeteis[n]['arma']=='arma3'):
                 projeteis[n]['ret']=projeteis[n]['img'].get_rect()                  #Pegamos o rect
                 projeteis[n]['ret'].topleft=(projeteis[n]['x'][0],projeteis[n]['y'])#Ajustamos a posição
@@ -245,7 +293,55 @@ while True:
 
         for item in elim:
             projeteis.remove(item)
+    #Do avião
+    if(objeto.aviao['caindo']==True):
+        objeto.aviao['ret'].move_ip(0,50)    #Desce devido a gravidade
+        if (objeto.aviao['ret'].colliderect(personagens.jorjao2['ret'])):
+                         personagens.jorjao2['vivo']=False
+        if (objeto.aviao['ret'].colliderect(solidos.fixos['chao']['ret'])):      #Com o chão
+            objeto.aviao['ret'].bottom=solidos.fixos['chao']['ret'].top
+            objeto.aviao['caindo']=None
             
+
+    #DETECÇÃO DE COLISÂO COM INIMIGOS
+    if(personagens.jorjao2['vivo']==True):
+        if (personagens.jorjao2['movendo']==False):
+            if(personagens.jorjao2['ret'].colliderect(personagens.jogador['ret'])):
+                personagens.jorjao2['movendo']=True
+                
+                if(personagens.jorjao2['posicao']=='esquerda'):
+                    inicial=personagens.jorjao2['ret'].right
+                    final=inicial+200
+                    pos=[]
+                    for x in range(inicial,final,10):
+                        pos.append(x)
+                    personagens.jorjao2['mov']=pos
+                    personagens.jorjao2['posicao']='direita'
+                    
+                else:
+                    inicial=personagens.jorjao2['ret'].left
+                    final=inicial-200
+                    pos=[]
+                    for x in range(inicial,final,-10):
+                        pos.append(x)
+                    personagens.jorjao2['mov']=pos
+                    personagens.jorjao2['posicao']='esquerda'
+
+                personagens.jorjao2['movendo']=True
+                
+        elif (personagens.jorjao2['movendo']==True):
+            if (personagens.jorjao2['posicao']=='esquerda'):
+                personagens.jorjao2['ret'].left=personagens.jorjao2['mov'][0]
+            else:
+                personagens.jorjao2['ret'].right=personagens.jorjao2['mov'][0]
+            personagens.jorjao2['mov'].pop(0)
+            if(len(personagens.jorjao2['mov'])==0):
+                personagens.jorjao2['movendo']=False
+            
+
+    #Movimentação de fato
+        
+        
 #projeteis.pop(0)
     #TIRO-----------------------------------------------------------------------------------------
     if (estado['atirando']==True):
@@ -335,10 +431,24 @@ while True:
     screen.blit(fundo['imagem'],fundo['ret'])
 
     #Desenha os objetos
+    if( objeto.barris['exterior']['vivo']==True):
+        screen.blit(objeto.barris['exterior']['imagem'],objeto.barris['exterior']['ret'])
+    else:
+        screen.blit(objeto.barris['exterior']['explosao'],objeto.barris['exterior']['ret'])
+    if( objeto.barris['interior']['vivo']==True):
+        screen.blit(objeto.barris['interior']['imagem'],objeto.barris['interior']['ret'])
+    else:
+        screen.blit(objeto.barris['interior']['explosao'],objeto.barris['interior']['ret'])
+    if (objeto.lixo['queimando']==False):
+        screen.blit(objeto.lixo['imagem'],objeto.lixo['ret'])
+    else:
+        screen.blit(objeto.lixo['fogo'],objeto.lixo['ret'])
+
     screen.blit(objeto.escada['imagem'],objeto.escada['ret'])
     screen.blit(objeto.armas['arma1']['imagem'],objeto.armas['arma1']['ret'])
     screen.blit(objeto.armas['arma2']['imagem'],objeto.armas['arma2']['ret'])
     screen.blit(objeto.armas['arma3']['imagem'],objeto.armas['arma3']['ret'])
+    screen.blit(objeto.aviao['imagem'],objeto.aviao['ret'])
 
     #Desenha os sólidos fixos
     screen.blit(solidos.fixos['chao']['imagem'],solidos.fixos['chao']['ret'])
@@ -352,6 +462,10 @@ while True:
         screen.blit(personagens.jogador['imagem'],personagens.jogador['ret'])
     else:
         screen.blit(personagens.jogador['agacha'],personagens.jogador['ret'])
+
+    #O Jorjão2
+    if (personagens.jorjao2['vivo']==True):
+        screen.blit(personagens.jorjao2['imagem'],personagens.jorjao2['ret'])
 
     #Printar os projeteis
     if (len(projeteis)>0):
