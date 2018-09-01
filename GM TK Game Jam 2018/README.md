@@ -1,4 +1,4 @@
-# GDD
+﻿# GDD
 
 A estrutura desse GDD é feita baseado no [GDD Maker](http://www.gddmaker.com/), e o jogo por sua vez, foi feito para uma [game jam](https://itch.io/jam/gmtk-2018) de 48h.
 
@@ -51,10 +51,7 @@ O visual todo do jogo é construído em cima de uma mistura de visual pixelado c
 
 **Ações**: Toda a ação e a interação entre o jogador e qualquer outro componente no cenário é feito através das armas.
 
-**Combate**: O combate é realizado de forma diferente dependendo de quem é o agressor:
-- O jogador não consegue ferir nenhum inimigo diretamente, seus tiros e inclusive você mesmo simplesmente atravessam os inimigos.
-- Porém alguns inimigos possuem um armamento especial capaz de o matar.
-  - Explosões também são capazes de atingir o jogador principal por algum motivo desconhecido.
+**Combate**: O jogador não consegue ferir nenhum inimigo diretamente, seus tiros e inclusive você mesmo simplesmente atravessam os inimigos.
 
 **Economia**: Não há.
 
@@ -64,7 +61,7 @@ O visual todo do jogo é construído em cima de uma mistura de visual pixelado c
 
 **Opções**: Não há nenhum menu de opções.
 
-**Replay e salvamento**: Não há opção de salvar, simplesmente quando o jogador morre, o jogo é reiniciado. Se o jogador fechar o jogo, ele também é reiniciado.
+**Replay e salvamento**: Não há opção de salvar, apenas reiniciar. Se o jogador fechar o jogo, ele também é reiniciado.
 
 **Códigos e easter eggs**: Não há nada deste tipo a princípio.
 
@@ -118,12 +115,13 @@ Com a porta eletrônica aberta, então nossa ideia é fazer os Paulões atirarem
 **Sistema de Controle**:
 Como o jogo tem uma única tela, onde o jogador controla o personagem principal, todo o sistema de controle do jogo, é o sistema de controle deste personagem, e ele é controlado da seguinte forma:
 - O movimento vai ser feito pelo teclado através das teclas direcionais:
-  - Para os lados de desloca na direção correspondente;
-  - Para baixo se abaixa;
-  - Para cima pula.
-- O tiro é disparado utilizando espaço.
-- As teclas numéricas serão utilizadas para alternar entre as armas.
-- Esc sai do jogo.
+  - Para os lados: desloca na direção correspondente;
+  - Para baixo: se abaixa e desce as escadas;
+  - Para cima: sobe as escadas.
+- Espaço: Dispara.
+- Teclas numéricas: serão utilizadas para alternar entre as armas.
+- Esc: sai do jogo.
+- R: reinicia o jogo.
 
 **Audio**: A princípio, não se aplica.
 
@@ -143,7 +141,7 @@ Como o jogo tem uma única tela, onde o jogador controla o personagem principal,
 **IA de suporte**:
 Temos é a detecção de colisão que é baseado em sobreposição das imagens dos objetos, impedindo que um objeto sólido entre dentro de outro e a colisão entre os projetéis e alguns itens do cenário como:
 - Porta eletrônica e taser.
-- Tiro dos Pedrões e personagens.
+- Tiro dos Pedrões e os pedrões.
 - Revolver e avião ou barril.
 - Morteiro e lixo.
 No momento da explosão do primeiro barril, o Jorjão apenas de desloca até a escada e desce pro próximo andar.
