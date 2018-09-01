@@ -197,3 +197,13 @@ Com as seguinte adaptações:
 - Resto: 1
 
 Novamente também desenvolvemos um código [sem](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/divisao.py) e [com](https://github.com/SapoGitHub/Repositorio-Geral/blob/master/Arquitetura/divisao%20-%20GUI.py) interface gráfica.
+
+## Trabalho do algoritmo de Booht
+
+Implementar, na linguagem de programação de sua escolha, o algoritmo de Booth que realiza multiplicação de número inteiros representados em complemento de 2.
+Os operandos estarão representados em 5 bits (-16 à 15) e o resultado deve ser representado em 10 bits (-512 à 511).
+A implementação deverá receber os números em formato decimal e realizar a conversão dos mesmos para complemento de 2.
+Na sequencia o algoritmo deve ser executado passo a passo a fim de ilustrar a execução do algoritmo relacionado com as tomadas de decisões.
+Os resultados da multiplicação deverão ser apresentados no formato decimal e binário (em complemento de 2)
+
+O código resultante de deste trabalho é o [booth - GUI - Decimal.py](booth - GUI - Decimal.py).
