@@ -110,7 +110,7 @@ Com a porta eletrônica aberta, então nossa ideia é fazer os Paulões atirarem
 
 **Sistema visual**: O jogo é em plataforma, então a câmera é de lado, 2D equivalente. Na tela, além do jogo, vamos exibir apenas a quantidade de inimigos vivos e as teclas de acesso às armas.
 
-![HUD](imagens/HUD.png)
+![HUD](imagens/hud.png)
 
 **Sistema de Controle**:
 Como o jogo tem uma única tela, onde o jogador controla o personagem principal, todo o sistema de controle do jogo, é o sistema de controle deste personagem, e ele é controlado da seguinte forma:
