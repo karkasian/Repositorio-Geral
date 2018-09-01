@@ -41,14 +41,8 @@ O visual todo do jogo é construído em cima de uma mistura de visual pixelado c
 
 **Física**: A física na maior parte do tempo não existe. Não vai ser desenvolvido nenhum motor de física, na maior parte dos movimentos não vai seguir nenhuma física, apenas quando julgar necessário se baseará na física para realizar algum movimento de forma mais realista.
 
-**Movimento no jogo**:
-- O movimento vai ser feito pelo teclado através das teclas direcionais:
-  - Para os lados de desloca na direção correpodente;
-  - Para baixo se abaixa;
-  - Para cima pula.
-- O tiro é disparado utilizando espaço.
-- As teclas numéricas serão utilizadas para alternar entre as armas.
-- Esc pausa o jogo.
+**Movimento no jogo**: O jogador se desloca pelo mapa do jogo através de seu personagem principal, isto é, controlando o seu avatar.
+
 
 **Objetos**: Os únicos objetos que o jogador pode pegar são as armas, e elas são coletadas apenas passando por elas.
 
@@ -72,4 +66,69 @@ O visual todo do jogo é construído em cima de uma mistura de visual pixelado c
 
 ## História, configuração e personagens
 
-**História e narrativa**: 
+**História e narrativa**: Você controla um antigo veterano de guerra já morto. Ele trabalhava em uma base militar em uma região extremamente problemática, com um alto índice de violência e conflitos armados. A história conta que antes de morrer ele teve uma súbita iluminação, isto, é pode compreender algumas coisas que até então, não compreendia. Sua compreensão lhe fez entender o fato de que o maior causador de problemas na região, eram os próprios militares que ali estavam, toda a violência era uma reação de uma população que vivia temendo por suas vidas diante de uma força militar estrangeira hostil.
+
+Então, nosso herói morto volta como um fantasma, e com a compreensão de que para conseguir sua liberdade, precisa cessar o ciclo de violência que ajudou a instaurar e trazer paz para a região, isto implica em eliminar a base militar em que ele próprio operou. Infelizmente, sua nova forma fantasmagórica lhe traz algumas dificuldades, como o fato de não conseguir interagir diretamente com as pessoas, mas para sua sorte sua arma consegue, e é através dela que deve cumprir sua missão.
+
+É evidente que histórias similares rondam o mundo, então o exército possui projetos experimentais voltados a conter ameaças vindas da pós-morte, o que lhe traz alguns desafios extras, mas certamente, nada que um veterano de guerra cheio de traumas que se comunica através das armas de fogo não consiga resolver.
+
+**Mundo**: Todo o mundo jogável é uma única base militar. Isso inclui as dependências internas e dependências externas.
+
+**Áreas**: O mapa é dividido em 3 áreas principais:
+1. Prédio da baixa patente: Este é o prédio onde ficam os soldados de patente mais baixas, o pessoal menos importante e provavelmente o menos preparado também. Ele possui ainda 2 sub-áreas, que são respectivamente o primeiro andar e o térreo:
+  1.  Dormitório: Onde ficam as camas, banheiro e comida, suprimentos básicos para a sobrevivência das patentes baixas que ali moram. Costumava ser sua antiga casa, ou o mais próximo disto.
+  2. Andar principal: Onde os soldados se reúnem, discutem as táticas e guardam os armamentos e o equipamento relacionado a guerra.
+2. Pátio: A esquerda do prédio da baixa patente, temos o pátio. Aqui ficam principalmente os veículos utilizado pelo exército e também o é o local de exercícios no exterior, por exemplo exercícios físicos ou tiro ao alvo.
+3. Prédio da alta patente: A direita do prédio da baixa patente, aqui é onde ficam os homens mais importantes da região, isto é, ao menos quando se encontram na base, já que dificilmente fazem desta base sua moradia. De forma semelhante ao outro prédio, possui duas áreas, sendo o térreo e o primeiro andar respectivamente:
+  1. Andar tático: Onde os homens importantes se reúnem para tomar suas decisões importantes que vão colocar a vida dos outros (e nunca as suas) em perigo.
+  2. Sala de segurança: Por algum motivo inexplicável construído no primeiro andar e não debaixo da terra, este é uma espécie de bunker. O local onde os homens de mais alta patente, os mais valorosos homens do exército correm para se esconder quando acham que suas vidam estão em risco. Ou simplesmente não querem ser incomodados.
+
+**Personagens**:
+
+## Fases
+
+**Fases e mapa**: O jogo possui um só fase, e consequentemente um só mapa
+
+1366 x 768
+
+**Tutorial**: Não há;
+
+## Interface
+
+**Sistema visual**:
+
+**Sistema de Controle**:
+Como o jogo tem uma única tela, onde o jogador controla o personagem principal, todo o sistema de controle do jogo, é o sistema de controle deste personagem, e ele é controlado da seguinte forma:
+- O movimento vai ser feito pelo teclado através das teclas direcionais:
+  - Para os lados de desloca na direção correspondente;
+  - Para baixo se abaixa;
+  - Para cima pula.
+- O tiro é disparado utilizando espaço.
+- As teclas numéricas serão utilizadas para alternar entre as armas.
+- Esc pausa o jogo.
+
+**Audio**: A princípio, não se aplica.
+
+**Sistema de ajuda**: Não possui.
+
+## Inteligência artificial
+
+**Inimigos**:
+
+**Personagens neutros**: Não possui.
+
+**IA de suporte**:
+
+## Aspectos Técnicos
+
+**Hardware Alvo**: Qualquer computador moderno é capaz de executar.
+
+**Desenvolvimento**: O desenvolvimento está sendo feito no Windows 10 x64 com o python 3.6 e os seguintes módulos extras instalados:
+- pygame 1.9.4
+- py2exe 0.9.2.2
+
+**Requerimentos de rede**: Não há necessidade conexão com a internet.
+
+## Game Art
+
+**Estilo de arte**:
