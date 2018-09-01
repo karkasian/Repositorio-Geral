@@ -44,13 +44,17 @@ O visual todo do jogo é construído em cima de uma mistura de visual pixelado c
 **Movimento no jogo**: O jogador se desloca pelo mapa do jogo através de seu personagem principal, isto é, controlando o seu avatar.
 
 
-**Objetos**: Os únicos objetos que o jogador pode pegar são as armas, e elas são coletadas apenas passando por elas.
+**Objetos**: Os únicos objetos que o jogador pode pegar são as armas, e elas são coletadas apenas passando por elas. Temos 3 armas:
+  1. Revólver: Atira em linha reta e interage de forma mecânica. Por exemplo fazendo barulho na parede, quebrando lâmpada ou estourando um barril.
+  2. Morteiro: Lançado de forma oblíqua também interage de forma mecânica, mas devido a sua física diferente, permite que alcance alvos abaixo, ou acima da linha de visão do jogador.
+  3. Taser: Uma arma de choque, diferente das anteriores, interage de maneira elétrica, por exemplo, dando curto-circuito em dispositivos elétricos.
 
 **Ações**: Toda a ação e a interação entre o jogador e qualquer outro componente no cenário é feito através das armas.
 
 **Combate**: O combate é realizado de forma diferente dependendo de quem é o agressor:
 - O jogador não consegue ferir nenhum inimigo diretamente, seus tiros e inclusive você mesmo simplesmente atravessam os inimigos.
 - Porém alguns inimigos possuem um armamento especial capaz de o matar.
+  - Explosões também são capazes de atingir o jogador principal por algum motivo desconhecido.
 
 **Economia**: Não há.
 
@@ -76,26 +80,40 @@ Então, nosso herói morto volta como um fantasma, e com a compreensão de que p
 
 **Áreas**: O mapa é dividido em 3 áreas principais:
 1. Prédio da baixa patente: Este é o prédio onde ficam os soldados de patente mais baixas, o pessoal menos importante e provavelmente o menos preparado também. Ele possui ainda 2 sub-áreas, que são respectivamente o primeiro andar e o térreo:
-  1.  Dormitório: Onde ficam as camas, banheiro e comida, suprimentos básicos para a sobrevivência das patentes baixas que ali moram. Costumava ser sua antiga casa, ou o mais próximo disto.
-  2. Andar principal: Onde os soldados se reúnem, discutem as táticas e guardam os armamentos e o equipamento relacionado a guerra.
+    1.  Dormitório: Onde ficam as camas, banheiro e comida, suprimentos básicos para a sobrevivência das patentes baixas que ali moram. Costumava ser sua antiga casa, ou o mais próximo disto.
+    2. Andar principal: Onde os soldados se reúnem, discutem as táticas e guardam os armamentos e o equipamento relacionado a guerra.
 2. Pátio: A esquerda do prédio da baixa patente, temos o pátio. Aqui ficam principalmente os veículos utilizado pelo exército e também o é o local de exercícios no exterior, por exemplo exercícios físicos ou tiro ao alvo.
-3. Prédio da alta patente: A direita do prédio da baixa patente, aqui é onde ficam os homens mais importantes da região, isto é, ao menos quando se encontram na base, já que dificilmente fazem desta base sua moradia. De forma semelhante ao outro prédio, possui duas áreas, sendo o térreo e o primeiro andar respectivamente:
-  1. Andar tático: Onde os homens importantes se reúnem para tomar suas decisões importantes que vão colocar a vida dos outros (e nunca as suas) em perigo.
-  2. Sala de segurança: Por algum motivo inexplicável construído no primeiro andar e não debaixo da terra, este é uma espécie de bunker. O local onde os homens de mais alta patente, os mais valorosos homens do exército correm para se esconder quando acham que suas vidam estão em risco. Ou simplesmente não querem ser incomodados.
+3. Prédio da alta patente: A direita do prédio da baixa patente, aqui é onde ficam os homens mais importantes da região, isto é, ao menos quando se encontram na base, já que dificilmente fazem desta base sua moradia. De forma semelhante ao outro prédio, possui duas áreas, mas agora uma que é onde você entra, mais a esquerda e outra mais a direta, respectivamente:
+    1. Sala tática: Onde os homens importantes se reúnem para tomar suas decisões importantes que vão colocar a vida dos outros (e nunca as suas) em perigo.
+    2. Sala de segurança: Por algum motivo inexplicável construído no primeiro andar e não debaixo da terra, este é uma espécie de bunker. O local onde os homens de mais alta patente, os mais valorosos homens do exército correm para se esconder quando acham que suas vidam estão em risco. Ou simplesmente não querem ser incomodados.
 
 **Personagens**:
+  Temos 4 personagens diferentes, 3 inimigos e nosso jogador principal.
+  1. Rogérinho: Jogador principal, sua história é a própria história principal do jogo, não precisa ser discutido. Suas habilidades são aquelas fornecidas pelas armas que podem ser pegadas pelo mapa, discutidas na sessão dos objetos.
+  2. Soldado Jorjões: Soldados de baixa patente, sem nenhuma habilidade especial, apenas se movem para qualquer local diferente quando o jogador passa por ele porque sentem calafrios.
+  3. Soldados Pedrões: Soldados de patente mais alta, possuem uma arma especial em que a arma é capaz de atingir os fantasmas, e o tiro percorre 300px.
+  4. Soldado Paulão: Um soldado inensível ao Rogérinho, não ataca nem foge, mas com um gosto peculiar para fogo.
 
 ## Fases
 
-**Fases e mapa**: O jogo possui um só fase, e consequentemente um só mapa
+**Fases e mapa**: O jogo possui um só fase, e consequentemente um só mapa baseado nas áreas discutidas anteriormente. A ideia é que o jogador inicia na área 1 com acesso as sub-áreas 1.i e 1.ii. Neste momento as portas para as outras duas áreas permanecem fechadas.
 
-1366 x 768
+Aqui o jogador deve eliminar os dois soldados Jorjões que estão um em cada andar. Na sub-área 1.i contém um revolver. Na área 1.ii temos um barril que pode ser explodido pelo revolver, e um avião preso no teto por cordas (incrível isso) que podem ser partidas por um tiro. A ideia é que o jogador utilize o barril para explodir o soldado na sub-área 1.ii, então isto faz o soldado da área 1.i descer e então pode ser eliminado derrubando o avião.
+
+Após isto, é liberada as portas para área 2 e a sub-área 3.i. a sub área 3.ii esta fechada por uma porta eletrônica. Em cada sub-área 3 temos um Pedrão, e o Paulão está na 2. Na 3.i também tempos o morteiro. Na 2 temos uma plataforma com bastante lixo que pode pegar fogo com o morteiro e um barril que pode ser explodido em baixo. A ideia é pegar o morteiro e atirar no lixo, que pega fogo e o Paulão se aproxima do barril, então o mesmo pode ser eliminado. Este por sua vez, sendo eliminado, libera a taser, que pode ser usada para abrir a porta eletrônica.
+
+Com a porta eletrônica aberta, então nossa ideia é fazer os Paulões atirarem entre si, já que eles podem se acertar.
+
+![Mapa](imagens/mapa.png)
+
 
 **Tutorial**: Não há;
 
 ## Interface
 
-**Sistema visual**:
+**Sistema visual**: O jogo é em plataforma, então a câmera é de lado, 2D equivalente. Na tela, além do jogo, vamos exibir apenas a quantidade de inimigos vivos e as teclas de acesso às armas.
+
+![HUD](imagens/HUD.png)
 
 **Sistema de Controle**:
 Como o jogo tem uma única tela, onde o jogador controla o personagem principal, todo o sistema de controle do jogo, é o sistema de controle deste personagem, e ele é controlado da seguinte forma:
@@ -105,7 +123,7 @@ Como o jogo tem uma única tela, onde o jogador controla o personagem principal,
   - Para cima pula.
 - O tiro é disparado utilizando espaço.
 - As teclas numéricas serão utilizadas para alternar entre as armas.
-- Esc pausa o jogo.
+- Esc sai do jogo.
 
 **Audio**: A princípio, não se aplica.
 
@@ -114,10 +132,22 @@ Como o jogo tem uma única tela, onde o jogador controla o personagem principal,
 ## Inteligência artificial
 
 **Inimigos**:
+- Os inimigos detectarão o jogador quando estiver dentro de um raio definido como 200 pixeis, de pé apenas (fantasmas agachados não dão calafrios). Disparando a ação equivalente:
+    - Jorjão: Corre para o lado oposto.
+    - Pedrão: atira na direção indicada.
+- Os inimigos permanecerão normalmente parados, com exceção do Pedrão que se manterá se movendo de forma repetitiva.
+
 
 **Personagens neutros**: Não possui.
 
 **IA de suporte**:
+Temos é a detecção de colisão que é baseado em sobreposição das imagens dos objetos, impedindo que um objeto sólido entre dentro de outro e a colisão entre os projetéis e alguns itens do cenário como:
+- Porta eletrônica e taser.
+- Tiro dos Pedrões e personagens.
+- Revolver e avião ou barril.
+- Morteiro e lixo.
+No momento da explosão do primeiro barril, o Jorjão apenas de desloca até a escada e desce pro próximo andar.
+E no momento da explosão do lixo, o Paulão se dirige até um ponto fixo perto da plataforma.
 
 ## Aspectos Técnicos
 
@@ -131,4 +161,4 @@ Como o jogo tem uma única tela, onde o jogador controla o personagem principal,
 
 ## Game Art
 
-**Estilo de arte**:
+**Estilo de arte**: Própria (feia, muito feia).
