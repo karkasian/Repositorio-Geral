@@ -5,6 +5,7 @@ A estrutura desse GDD é feita baseado no [GDD Maker](http://www.gddmaker.com/),
 ## Título e descrição
 
 **Nome**: Fantasminha CaArmado
+
 **Descrição curta**: Jogo desenvolvido para a game jam GM TK Game Jam 2018.
 
 ## Visão geral
@@ -18,3 +19,5 @@ Jogadores casuais, e principalmente, participantes da Game Jam em questão.
 
 **Aparência e clima**:
 O visual todo do jogo é construído em cima de uma mistura de visual pixelado como terraria e Metal Slug.
+
+## Gameplay
