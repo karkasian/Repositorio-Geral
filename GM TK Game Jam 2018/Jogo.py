@@ -40,6 +40,7 @@ class solidos:
 
 class personagens:
     jogador={'imagem':pygame.image.load('imagens/jogador.png'),'agacha':pygame.image.load('imagens/agacha.png'),'ret':''}
+    jorjao1={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'movx':'','movy':'','descendo':False}
     jorjao2={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'mov':''}
 
 class objeto:
@@ -96,6 +97,15 @@ while True:
 
         personagens.jogador['ret']=personagens.jogador['imagem'].get_rect()
         personagens.jogador['ret'].bottomleft=(600,160)
+
+        personagens.jorjao1['posicao']='direita'
+        personagens.jorjao1['movendo']=False
+        personagens.jorjao1['vivo']=True
+        personagens.jorjao1['ret']=personagens.jorjao1['imagem'].get_rect()
+        personagens.jorjao1['ret'].bottomleft=(660,160)
+        personagens.jorjao1['movx']=''
+        personagens.jorjao1['movy']=''
+        personagens.jorjao1['descendo']=False
         
         personagens.jorjao2['posicao']='direita'
         personagens.jorjao2['movendo']=False
@@ -249,8 +259,11 @@ while True:
                 elif (projeteis[n]['ret'].colliderect(objeto.barris['interior']['ret']) and objeto.barris['interior']['vivo']==True):
                      objeto.barris['interior']['vivo']=False
                      elim.append(projeteis[n])
+                     personagens.jorjao1['descendo']=True
                      if (objeto.barris['interior']['ret'].colliderect(personagens.jorjao2['ret'])):
                          personagens.jorjao2['vivo']=False
+                     if (objeto.barris['interior']['ret'].colliderect(personagens.jorjao1['ret'])):
+                         personagens.jorjao1['vivo']=False
                 #Vamos detectar se explodiu o barril do exterior
                 elif (projeteis[n]['ret'].colliderect(objeto.barris['exterior']['ret']) and objeto.barris['exterior']['vivo']==True):
                      objeto.barris['exterior']['vivo']=False
@@ -298,10 +311,78 @@ while True:
         objeto.aviao['ret'].move_ip(0,50)    #Desce devido a gravidade
         if (objeto.aviao['ret'].colliderect(personagens.jorjao2['ret'])):
                          personagens.jorjao2['vivo']=False
+        if (objeto.aviao['ret'].colliderect(personagens.jorjao1['ret'])):
+                         personagens.jorjao1['vivo']=False
         if (objeto.aviao['ret'].colliderect(solidos.fixos['chao']['ret'])):      #Com o chão
             objeto.aviao['ret'].bottom=solidos.fixos['chao']['ret'].top
             objeto.aviao['caindo']=None
             
+
+    if(personagens.jorjao1['vivo']==True):
+        if  (personagens.jorjao1['descendo']==False):
+            if (personagens.jorjao1['movendo']==False):
+                if(personagens.jorjao1['ret'].colliderect(personagens.jogador['ret'])):
+                    personagens.jorjao1['movendo']=True
+                    
+                    if(personagens.jorjao1['posicao']=='esquerda'):
+                        inicial=personagens.jorjao1['ret'].right
+                        final=inicial+200
+                        pos=[]
+                        for x in range(inicial,final,10):
+                            pos.append(x)
+                        personagens.jorjao1['movx']=pos
+                        personagens.jorjao1['posicao']='direita'
+                        
+                    else:
+                        inicial=personagens.jorjao1['ret'].left
+                        final=inicial-200
+                        pos=[]
+                        for x in range(inicial,final,-10):
+                            pos.append(x)
+                        personagens.jorjao1['movx']=pos
+                        personagens.jorjao1['posicao']='esquerda'
+
+                    personagens.jorjao1['movendo']=True
+                    
+            elif (personagens.jorjao1['movendo']==True):
+                if (personagens.jorjao1['posicao']=='esquerda'):
+                    personagens.jorjao1['ret'].left=personagens.jorjao1['movx'][0]
+                else:
+                    personagens.jorjao1['ret'].right=personagens.jorjao1['movx'][0]
+                personagens.jorjao1['movx'].pop(0)
+                if(len(personagens.jorjao1['movx'])==0):
+                    personagens.jorjao1['movendo']=False
+        else:           
+            if (personagens.jorjao1['movendo']==False):
+             #   print('!')
+                inicio=personagens.jorjao1['ret'].right
+                fim=733
+                movx=[]
+                movy=[]
+                
+                for x in range(inicio,fim,10):
+                    movx.append(x)
+                    movy.append(personagens.jorjao1['ret'].bottom)
+                    
+                inicio=personagens.jorjao1['ret'].bottom
+                fim=490
+                
+                for x in range(inicio,fim,10):
+                    movx.append(733)
+                    movy.append(x)
+                    
+                personagens.jorjao1['movx']=movx
+                personagens.jorjao1['movy']=movy
+                personagens.jorjao1['posicao']='direita'
+                personagens.jorjao1['movendo']=True
+            else:
+                print('!')
+                personagens.jorjao1['ret'].bottomright=(personagens.jorjao1['movx'][0],personagens.jorjao1['movy'][0])
+                personagens.jorjao1['movx'].pop(0)
+                personagens.jorjao1['movy'].pop(0)
+                if(len(personagens.jorjao1['movx'])==0):
+                    personagens.jorjao1['movendo']=False
+                    personagens.jorjao1['descendo']=False
 
     #DETECÇÃO DE COLISÂO COM INIMIGOS
     if(personagens.jorjao2['vivo']==True):
@@ -337,7 +418,7 @@ while True:
             personagens.jorjao2['mov'].pop(0)
             if(len(personagens.jorjao2['mov'])==0):
                 personagens.jorjao2['movendo']=False
-            
+
 
     #Movimentação de fato
         
@@ -462,6 +543,10 @@ while True:
         screen.blit(personagens.jogador['imagem'],personagens.jogador['ret'])
     else:
         screen.blit(personagens.jogador['agacha'],personagens.jogador['ret'])
+
+    #O Jorjão1
+    if (personagens.jorjao1['vivo']==True):
+        screen.blit(personagens.jorjao1['imagem'],personagens.jorjao1['ret'])
 
     #O Jorjão2
     if (personagens.jorjao2['vivo']==True):
