@@ -66,6 +66,7 @@ class portas:
 #Fundo
 fundo={'imagem':pygame.image.load('imagens/fundo.png'),'ret':''}
 #Explosão
+pygame.mixer.music.load('music.wav')
 
 #Condição de início
 inicio=True
@@ -176,6 +177,8 @@ while True:
         inicio=False        #Desativamos a condição de inicio
 
         contador=0
+
+        pygame.mixer.music.play(-1,0.0)
 
     ##DETECÇÃO DE EVENTOS-------------------------------------------------------------------------
 
@@ -676,7 +679,7 @@ while True:
                 pos=[]
                 for x in range(inicial,final,10):
                     pos.append(x)
-                tiro={'arma':'arma1','x':pos,'y':personagens.jogador['ret'].top+60,'img':pygame.image.load('imagens/tiro_revolver.png'),'ret':''}
+                tiro={'arma':'arma1','x':pos,'y':personagens.jogador['ret'].top+61,'img':pygame.image.load('imagens/tiro_revolver.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
             if (estado['lado']=='esquerda'):
@@ -685,7 +688,7 @@ while True:
                 pos=[]
                 for x in range(inicial,final,-10):
                     pos.append(x)
-                tiro={'arma':'arma1','x':pos,'y':personagens.jogador['ret'].top+60,'img':pygame.image.load('imagens/tiro_revolver.png'),'ret':''}
+                tiro={'arma':'arma1','x':pos,'y':personagens.jogador['ret'].top+61,'img':pygame.image.load('imagens/tiro_revolver.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
         if (estado['equipado']==2):
@@ -698,13 +701,10 @@ while True:
                     posx.append(x)
                 #EiXO Y
                 inicial=personagens.jogador['ret'].top
-   #             meio=inicial-150
                 posy=[]
                 for x in range(0,100,1):
-                    soma=-1*x*x
-                    posy.append(inicio+soma)
-  #             for x in range(m,inicial,3):
-  #                  posy.append(x)
+                    soma=-10*x+0.1*x*x
+                    posy.append(inicial+soma)
                 tiro={'arma':'arma2','x':posx,'y':posy,'img':pygame.image.load('imagens/tiro_morteiro.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
@@ -717,12 +717,10 @@ while True:
                     posx.append(x)
                 #EiXO Y
                 inicial=personagens.jogador['ret'].top
-                meio=inicial-150
                 posy=[]
-                for x in range(inicial,meio,-3):
-                    posy.append(x)
-                for x in range(meio,inicial,3):
-                    posy.append(x)
+                for x in range(0,100,1):
+                    soma=-10*x+0.1*x*x
+                    posy.append(inicial+soma)
                 tiro={'arma':'arma2','x':posx,'y':posy,'img':pygame.image.load('imagens/tiro_morteiro.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
@@ -733,16 +731,16 @@ while True:
                 pos=[]
                 for x in range(inicial,final,10):
                     pos.append(x)
-                tiro={'arma':'arma3','x':pos,'y':personagens.jogador['ret'].top+25,'img':pygame.image.load('imagens/tiro_taser.png'),'ret':''}
+                tiro={'arma':'arma3','x':pos,'y':personagens.jogador['ret'].top+61,'img':pygame.image.load('imagens/tiro_taser.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
             if (estado['lado']=='esquerda'):
-                inicial=personagens.jogador['ret'].left
+                inicial=personagens.jogador['ret'].left -13
                 final=inicial-300
                 pos=[]
                 for x in range(inicial,final,-10):
                     pos.append(x)
-                tiro={'arma':'arma3','x':pos,'y':personagens.jogador['ret'].top,'img':pygame.image.load('imagens/tiro_taser.png'),'ret':''}
+                tiro={'arma':'arma3','x':pos,'y':personagens.jogador['ret'].top+61,'img':pygame.image.load('imagens/tiro_taser.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
         estado['atirando']=False
@@ -887,28 +885,37 @@ while True:
     #Vamos printar as armas que o jogador tem:
     if  (estado['arma1']==True):
         if (estado['equipado']==1):
-            texto=fonte1.render("[1: Revólver]",0,PRETO)
+            im=pygame.image.load('imagens/a1p.png')
+            ret=im.get_rect()
+            ret.topleft=(10,10)
+            screen.blit(im,ret)
         else:
-            texto=fonte1.render("1: Revólver",0,PRETO)
-        textoret=texto.get_rect()
-        textoret.topleft=(10,10)
-        screen.blit(texto,textoret)
+            im=pygame.image.load('imagens/a1b.png')
+            ret=im.get_rect()
+            ret.topleft=(10,10)
+            screen.blit(im,ret)
     if  (estado['arma2']==True):
         if (estado['equipado']==2):
-            texto=fonte1.render("[2: Morteiro]",0,PRETO)
+            im=pygame.image.load('imagens/a2p.png')
+            ret=im.get_rect()
+            ret.topleft=(60,10)
+            screen.blit(im,ret)
         else:
-            texto=fonte1.render("2: Morteiro",0,PRETO)
-        textoret=texto.get_rect()
-        textoret.topleft=(10,30)
-        screen.blit(texto,textoret)
+            im=pygame.image.load('imagens/a2b.png')
+            ret=im.get_rect()
+            ret.topleft=(60,10)
+            screen.blit(im,ret)  
     if  (estado['arma3']==True):
         if (estado['equipado']==3):
-            texto=fonte1.render("[3: Taser]",0,PRETO)
+            im=pygame.image.load('imagens/a3p.png')
+            ret=im.get_rect()
+            ret.topleft=(110,10)
+            screen.blit(im,ret)
         else:
-            texto=fonte1.render("3: Taser",0,PRETO)
-        textoret=texto.get_rect()
-        textoret.topleft=(10,50)
-        screen.blit(texto,textoret)
+            im=pygame.image.load('imagens/a3b.png')
+            ret=im.get_rect()
+            ret.topleft=(110,10)
+            screen.blit(im,ret)
 
 
     # Atualiza a tela visivel ao usuario

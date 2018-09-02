@@ -12,7 +12,7 @@ options = {
 }
 
 setup(
-    name = "<any name>",
+    name = "Fantasminha CaArmada",
     options = options,
     version = "<any number>",
     description = '<any description>',
