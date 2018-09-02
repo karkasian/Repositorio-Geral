@@ -61,6 +61,7 @@ class objeto:
 class portas:
     porta1={'imagem':pygame.image.load('imagens/porta.png'),'ret':''}
     porta2={'imagem':pygame.image.load('imagens/porta.png'),'ret':''}
+    eletrica={'imagem':pygame.image.load('imagens/eletrica.png'),'ret':'','fechada':True}
     
 #Fundo
 fundo={'imagem':pygame.image.load('imagens/fundo.png'),'ret':''}
@@ -168,6 +169,9 @@ while True:
         portas.porta1['ret'].bottomleft=(365,490)
         portas.porta2['ret']=portas.porta2['imagem'].get_rect()
         portas.porta2['ret'].bottomleft=(750,490)
+        portas.eletrica['ret']=portas.eletrica['imagem'].get_rect()
+        portas.eletrica['ret'].bottomleft=(970,490)
+        portas.eletrica['fechada']=True
 
         inicio=False        #Desativamos a condição de inicio
 
@@ -258,6 +262,9 @@ while True:
             personagens.jogador['ret'].left=portas.porta1['ret'].right
         if(personagens.jogador['ret'].colliderect(portas.porta2['ret'])):
             personagens.jogador['ret'].right=portas.porta2['ret'].left
+    if(portas.eletrica['fechada']==True):
+        if(personagens.jogador['ret'].colliderect(portas.eletrica['ret'])):
+            personagens.jogador['ret'].right=portas.eletrica['ret'].left
 
     #Coleta de armas
     #ARMA 1
@@ -307,7 +314,7 @@ while True:
                      elim.append(projeteis[n])
                      if (objeto.barris['exterior']['ret'].colliderect(personagens.paulao['ret'])):
                         personagens.paulao['vivo']=False
-                        objeto.armas['arma3']['ret']=objeto.armas['arma3']['imagem'].get_rect()
+#                        objeto.armas['arma3']['ret']=objeto.armas['arma3']['imagem'].get_rect()
                         objeto.armas['arma3']['ret'].bottomleft=personagens.paulao['ret'].bottomleft
 
                 #Se derrubou o avião
@@ -320,6 +327,11 @@ while True:
                        elim.append(projeteis[n])
                     if(projeteis[n]['ret'].colliderect(portas.porta2['ret'])):
                        elim.append(projeteis[n])
+                #Elétrica
+                elif(portas.eletrica['fechada']==True):
+                    if(projeteis[n]['ret'].colliderect(portas.eletrica['ret'])):
+                       elim.append(projeteis[n])
+                    
                      
             elif (projeteis[n]['arma']=='arma2'):
                 projeteis[n]['ret']=projeteis[n]['img'].get_rect()                  #Pegamos o rect
@@ -343,6 +355,9 @@ while True:
                        elim.append(projeteis[n])
                     if(projeteis[n]['ret'].colliderect(portas.porta2['ret'])):
                        elim.append(projeteis[n])
+                elif(portas.eletrica['fechada']==True):
+                    if(projeteis[n]['ret'].colliderect(portas.eletrica['ret'])):
+                       elim.append(projeteis[n])
                     
             elif (projeteis[n]['arma']=='arma3'):
                 projeteis[n]['ret']=projeteis[n]['img'].get_rect()                  #Pegamos o rect
@@ -356,12 +371,17 @@ while True:
                     projeteis[n]['ret'].colliderect(solidos.fixos['parede2']['ret']) or
                     projeteis[n]['ret'].colliderect(solidos.fixos['parede3']['ret'])):
                     elim.append(projeteis[n])
-                                #Portas internas
+                #Portas internas
                 elif(personagens.jorjao1['vivo']==True or personagens.jorjao1['vivo']==True):
                     if(projeteis[n]['ret'].colliderect(portas.porta1['ret'])):
                        elim.append(projeteis[n])
                     if(projeteis[n]['ret'].colliderect(portas.porta2['ret'])):
                        elim.append(projeteis[n])
+                elif(portas.eletrica['fechada']==True):
+                    if(projeteis[n]['ret'].colliderect(portas.eletrica['ret'])):
+                       elim.append(projeteis[n])
+                       portas.eletrica['fechada']=False
+
 
         for item in elim:
             projeteis.remove(item)
@@ -492,83 +512,88 @@ while True:
                         personagens.paulao['movendo']=False
                         personagens.paulao['assistindo']=True
                         
-        if(personagens.pedrao1['vivo']==True):
-            if (personagens.pedrao1['atirando']==False):
-                if(personagens.pedrao1['ret'].colliderect(personagens.jogador['ret']) and estado['agacha']==False):
-                    personagens.pedrao1['atirando']=True
-                    if (personagens.jogador['ret'].left-100<personagens.pedrao1['ret'].left):
-                        
-                        inicio=personagens.pedrao1['ret'].left+75
-                        fim=inicio-300
-                        pos=[]
-                        for x in range(inicio,fim,-20):
-                            pos.append(x)
-                        img=pygame.image.load('imagens/tiro_inimigo.png')
-                        ret=img.get_rect()
-                        ret.top=personagens.pedrao1['ret'].top
-                        personagens.pedrao1['tiro']={'img':img,'ret':ret,'x':pos}
-                    else:
-                        inicio=personagens.pedrao1['ret'].right-75
-                        fim=inicio+300
-                        pos=[]
-                        for x in range(inicio,fim,20):
-                            pos.append(x)
-                        img=pygame.image.load('imagens/tiro_inimigo.png')
-                        ret=img.get_rect()
-                        ret.top=personagens.pedrao1['ret'].top
-                        personagens.pedrao1['tiro']={'img':img,'ret':ret,'x':pos}
-                        
-        if(personagens.pedrao1['atirando']==True):
-            personagens.pedrao1['tiro']['ret'].left=personagens.pedrao1['tiro']['x'][0]
-            personagens.pedrao1['tiro']['x'].pop(0)
-            if(len(personagens.pedrao1['tiro']['x'])==0):
-                personagens.pedrao1['atirando']=False
-                
-            elif(personagens.pedrao1['tiro']['ret'].colliderect(solidos.fixos['parede3']['ret'])):
-                personagens.pedrao1['atirando']=False
-
-            elif (personagens.pedrao1['tiro']['ret'].right>=personagens.pedrao2['ret'].left+75 and personagens.pedrao2['vivo']==True):
-                personagens.pedrao2['vivo']=False
-                personagens.pedrao1['atirando']=False
+    if(personagens.pedrao1['vivo']==True):
+        if (personagens.pedrao1['atirando']==False):
+            if(personagens.pedrao1['ret'].colliderect(personagens.jogador['ret']) and estado['agacha']==False):
+                personagens.pedrao1['atirando']=True
+                if (personagens.jogador['ret'].left-100<personagens.pedrao1['ret'].left):
                     
-        if(personagens.pedrao2['vivo']==True):                    
-            if (personagens.pedrao2['atirando']==False):
-                if(personagens.pedrao2['ret'].colliderect(personagens.jogador['ret']) and estado['agacha']==False):
-                    personagens.pedrao2['atirando']=True
-                    if (personagens.jogador['ret'].left-100<personagens.pedrao2['ret'].left):
-                        
-                        inicio=personagens.pedrao2['ret'].left+75
-                        fim=inicio-300
-                        pos=[]
-                        for x in range(inicio,fim,-10):
-                            pos.append(x)
-                        img=pygame.image.load('imagens/tiro_inimigo.png')
-                        ret=img.get_rect()
-                        ret.top=personagens.pedrao2['ret'].top
-                        personagens.pedrao2['tiro']={'img':img,'ret':ret,'x':pos}
-                    else:
-                        inicio=personagens.pedrao2['ret'].right-75
-                        fim=inicio+300
-                        pos=[]
-                        for x in range(inicio,fim,10):
-                            pos.append(x)
-                        img=pygame.image.load('imagens/tiro_inimigo.png')
-                        ret=img.get_rect()
-                        ret.top=personagens.pedrao2['ret'].top
-                        personagens.pedrao2['tiro']={'img':img,'ret':ret,'x':pos}
-                        
-        if (personagens.pedrao2['atirando']==True):
-            personagens.pedrao2['tiro']['ret'].left=personagens.pedrao2['tiro']['x'][0]
-            personagens.pedrao2['tiro']['x'].pop(0)
-            if(len(personagens.pedrao2['tiro']['x'])==0):
-                personagens.pedrao2['atirando']=False
-                
-            elif(personagens.pedrao2['tiro']['ret'].colliderect(solidos.fixos['parede3']['ret'])):
-                personagens.pedrao2['atirando']=False
+                    inicio=personagens.pedrao1['ret'].left+75
+                    fim=inicio-300
+                    pos=[]
+                    for x in range(inicio,fim,-20):
+                        pos.append(x)
+                    img=pygame.image.load('imagens/tiro_inimigo.png')
+                    ret=img.get_rect()
+                    ret.top=personagens.pedrao1['ret'].top
+                    personagens.pedrao1['tiro']={'img':img,'ret':ret,'x':pos}
+                else:
+                    inicio=personagens.pedrao1['ret'].right-75
+                    fim=inicio+300
+                    pos=[]
+                    for x in range(inicio,fim,20):
+                        pos.append(x)
+                    img=pygame.image.load('imagens/tiro_inimigo.png')
+                    ret=img.get_rect()
+                    ret.top=personagens.pedrao1['ret'].top
+                    personagens.pedrao1['tiro']={'img':img,'ret':ret,'x':pos}
+                    
+    if(personagens.pedrao1['atirando']==True):
+        personagens.pedrao1['tiro']['ret'].left=personagens.pedrao1['tiro']['x'][0]
+        personagens.pedrao1['tiro']['x'].pop(0)
+        if(len(personagens.pedrao1['tiro']['x'])==0):
+            personagens.pedrao1['atirando']=False
+            
+        elif(personagens.pedrao1['tiro']['ret'].colliderect(solidos.fixos['parede3']['ret'])):
+            personagens.pedrao1['atirando']=False
 
-            elif (personagens.pedrao2['tiro']['ret'].left<=personagens.pedrao1['ret'].right-75 and personagens.pedrao1['vivo']==True):
-                personagens.pedrao1['vivo']=False
-                personagens.pedrao2['atirando']=False
+        elif (personagens.pedrao1['tiro']['ret'].right>=personagens.pedrao2['ret'].left+75 and personagens.pedrao2['vivo']==True):
+            personagens.pedrao2['vivo']=False
+            personagens.pedrao1['atirando']=False
+
+        #Elétrica
+        elif(portas.eletrica['fechada']==True):
+            if(personagens.pedrao1['tiro']['ret'].colliderect(portas.eletrica['ret'])):
+                personagens.pedrao1['atirando']=False
+                
+    if(personagens.pedrao2['vivo']==True):                    
+        if (personagens.pedrao2['atirando']==False):
+            if(personagens.pedrao2['ret'].colliderect(personagens.jogador['ret']) and estado['agacha']==False):
+                personagens.pedrao2['atirando']=True
+                if (personagens.jogador['ret'].left-100<personagens.pedrao2['ret'].left):
+                    
+                    inicio=personagens.pedrao2['ret'].left+75
+                    fim=inicio-300
+                    pos=[]
+                    for x in range(inicio,fim,-10):
+                        pos.append(x)
+                    img=pygame.image.load('imagens/tiro_inimigo.png')
+                    ret=img.get_rect()
+                    ret.top=personagens.pedrao2['ret'].top
+                    personagens.pedrao2['tiro']={'img':img,'ret':ret,'x':pos}
+                else:
+                    inicio=personagens.pedrao2['ret'].right-75
+                    fim=inicio+300
+                    pos=[]
+                    for x in range(inicio,fim,10):
+                        pos.append(x)
+                    img=pygame.image.load('imagens/tiro_inimigo.png')
+                    ret=img.get_rect()
+                    ret.top=personagens.pedrao2['ret'].top
+                    personagens.pedrao2['tiro']={'img':img,'ret':ret,'x':pos}
+                    
+    if (personagens.pedrao2['atirando']==True):
+        personagens.pedrao2['tiro']['ret'].left=personagens.pedrao2['tiro']['x'][0]
+        personagens.pedrao2['tiro']['x'].pop(0)
+        if(len(personagens.pedrao2['tiro']['x'])==0):
+            personagens.pedrao2['atirando']=False
+            
+        elif(personagens.pedrao2['tiro']['ret'].colliderect(solidos.fixos['parede3']['ret'])):
+            personagens.pedrao2['atirando']=False
+
+        elif (personagens.pedrao2['tiro']['ret'].left<=personagens.pedrao1['ret'].right-75 and personagens.pedrao1['vivo']==True):
+            personagens.pedrao1['vivo']=False
+            personagens.pedrao2['atirando']=False
 
     #TIRO-----------------------------------------------------------------------------------------
     if (estado['atirando']==True):
@@ -635,7 +660,7 @@ while True:
                 pos=[]
                 for x in range(inicial,final,10):
                     pos.append(x)
-                tiro={'arma':'arma3','x':pos,'y':personagens.jogador['ret'].top,'img':pygame.image.load('imagens/tiro_taser.png'),'ret':''}
+                tiro={'arma':'arma3','x':pos,'y':personagens.jogador['ret'].top+25,'img':pygame.image.load('imagens/tiro_taser.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
             if (estado['lado']=='esquerda'):
@@ -729,6 +754,8 @@ while True:
     if (personagens.jorjao1['vivo']==True or personagens.jorjao1['vivo']==True):
         screen.blit(portas.porta1['imagem'],portas.porta1['ret'])
         screen.blit(portas.porta2['imagem'],portas.porta2['ret'])
+    if( portas.eletrica['fechada']==True):
+        screen.blit(portas.eletrica['imagem'],portas.eletrica['ret'])
 
     #Vamos printar as armas que o jogador tem:
     if  (estado['arma1']==True):
