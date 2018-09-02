@@ -130,7 +130,7 @@ Como o jogo tem uma única tela, onde o jogador controla o personagem principal,
 ## Inteligência artificial
 
 **Inimigos**:
-- Os inimigos detectarão o jogador quando <s>estiver dentro de um raio definido como 200 pixeis, de pé apenas (fantasmas agachados não dão calafrios)</s> estiver muito próximo deles com algumas peculariedades e disparando a ação equivalente:
+- Os inimigos detectarão o jogador quando <s>estiver dentro de um raio definido como 200 pixeis, de pé apenas (fantasmas agachados não dão calafrios)</s> estiver muito próximo deles com algumas peculiaridades e disparando a ação equivalente:
     - Jorjão: Corre para o lado oposto quando você cruza dentro dele.
     - Pedrão: Percebe com um raio maior, somente se você está de pé e então atira na direção indicada.
 - Os inimigos permanecerão <s>normalmente</s> parados.<s>, com exceção do Pedrão que se manterá se movendo de forma repetitiva.</s>
@@ -143,8 +143,9 @@ Temos é a detecção de colisão que é baseado em sobreposição das imagens d
 - Tiro dos Pedrões e os pedrões.
 - Revolver e avião ou barril.
 - <s>Morteiro e lixo</s> Granada e objeto inflamável.
+
 No momento da explosão do primeiro barril, o Jorjão apenas de desloca até a escada e desce pro próximo andar.
-E no momento que o objeto inflamável pega fogo <s>da explosão do lixo</s>, o Paulão se dirige até um ponto fixo perto da plataforma.
+E no momento <s>da explosão do lixo</s> que o objeto inflamável pega fogo, o Paulão se dirige até um ponto fixo perto da plataforma.
 
 ## Aspectos Técnicos
 
@@ -178,4 +179,4 @@ Sobre o jogo:
   - As granadas atravessam algumas paredes e outras não.
  
 Sobre o GDD:
-- Itens riscados foram removidos entre o produto final e estipulado no início.
+- Itens riscados foram removidos entre o produto final e estipulado no início e a parte imediatamente posterior quando conflitante, é a que substituiu.
