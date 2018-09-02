@@ -11,6 +11,7 @@ Cada projeto está em uma pasta diferente e para mais informações:
 - _ANOVA_: Dessa vez nosso objetivo é partirmos da estatística básica até chegarmos na técnica ANOVA e então respondermos algumas questões sobre o Overwatch. Por exemplo: New York Excelsior piorou depois de confirmar a vaga nos playoffs?
 - _Arquitetura_: Códigos desenvolvidos para a disciplina de arquitetura de computadores.
 - _Darwin_: É melhor investir pontos em força ou constituição? Frequentemente nos deparamos com esta questão em jogos de RPG,e isso nos leva a uma questão mais geral: como distribuir os pontos da melhor forma possível? Para encontrar essa resposta, construímos um algoritmo genético linha a linha do zero.
+_ GM TK Game Jam 2018_: Jogo desenvolvido para a game jam de 48h Game Maker's Toolkit Jam 2018.
 - _Gestor Pokémon_: O desafio de um mestre Pokémon também é o desafio de gerir bem sua equipe, por isso vamos construir um conjunto de dados sobre o universo pokémon e transformá-lo em informações úteis. E ainda como bônus, estaremos prontos para responder: é possível identificar o tipo de um Pokémon olhando apenas para até um par de atributos?
 - _Introdução ao Hacking e Pentest_: Estas são as anotações das partes práticas do curso Introdução ao Hacking e Pentest oferecido pela Solyd.
 - _J_: Desenvolvimento de uma 'linguagem de alto nível' para o IAS.
