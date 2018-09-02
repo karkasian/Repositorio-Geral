@@ -40,11 +40,11 @@ class solidos:
 
 class personagens:
     jogador={'imagem':pygame.image.load('imagens/jd.png'),'ret':''}
-    jorjao1={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'movx':'','movy':'','descendo':False}
-    jorjao2={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'mov':''}
+    jorjao1={'imagem':pygame.image.load('imagens/jorjaod.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'movx':'','movy':'','descendo':False}
+    jorjao2={'imagem':pygame.image.load('imagens/jorjaoe.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'mov':''}
     paulao={'imagem':pygame.image.load('imagens/paulao.png'),'ret':'','movendo':False,'vivo':True,'mov':'','assistindo':False}
-    pedrao1={'imagem':pygame.image.load('imagens/pedrao.png'),'ret':'','atirando':False,'vivo':True,'tiro':''}
-    pedrao2={'imagem':pygame.image.load('imagens/pedrao.png'),'ret':'','atirando':False,'vivo':True,'tiro':''}
+    pedrao1={'imagem':pygame.image.load('imagens/pedraod.png'),'ret':'','atirando':False,'vivo':True,'tiro':''}
+    pedrao2={'imagem':pygame.image.load('imagens/pedraoe.png'),'ret':'','atirando':False,'vivo':True,'tiro':''}
 
 class objeto:
     escada={'imagem':pygame.image.load('imagens/escada.png'),'ret':''}
@@ -110,7 +110,7 @@ while True:
         personagens.jorjao1['movendo']=False
         personagens.jorjao1['vivo']=True
         personagens.jorjao1['ret']=personagens.jorjao1['imagem'].get_rect()
-        personagens.jorjao1['ret'].bottomleft=(660,160)
+        personagens.jorjao1['ret'].bottomleft=(660,166)
         personagens.jorjao1['movx']=''
         personagens.jorjao1['movy']=''
         personagens.jorjao1['descendo']=False
@@ -127,7 +127,7 @@ while True:
         personagens.paulao['assistindo']=False
         personagens.paulao['mov']=''
         personagens.paulao['ret']= personagens.paulao['imagem'].get_rect()
-        personagens.paulao['ret'].bottomright=(355,485)
+        personagens.paulao['ret'].bottomright=(380,490)
 
         personagens.pedrao1['vivo']=True
         personagens.pedrao1['ret']= personagens.pedrao1['imagem'].get_rect()
@@ -435,15 +435,29 @@ while True:
             elif (personagens.jorjao1['movendo']==True):
                 if (personagens.jorjao1['posicao']=='esquerda'):
                     personagens.jorjao1['ret'].left=personagens.jorjao1['movx'][0]
+                    if (contador%5==0):
+                        if (contador%10==0):
+                            personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaoe1.png')
+                        else:
+                            personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaoe2.png')
                 else:
                     personagens.jorjao1['ret'].right=personagens.jorjao1['movx'][0]
+                    if (contador%5==0):
+                        if (contador%10==0):
+                            personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaod1.png')
+                        else:
+                            personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaod2.png')
                 personagens.jorjao1['movx'].pop(0)
                 if(len(personagens.jorjao1['movx'])==0):
                     personagens.jorjao1['movendo']=False
+                    if (personagens.jorjao1['posicao']=='esquerda'):
+                        personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaoe.png')
+                    else:
+                        personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaod.png')
         else:           
             if (personagens.jorjao1['movendo']==False):
-                inicio=personagens.jorjao1['ret'].right
-                fim=733
+                inicio=personagens.jorjao1['ret'].left
+                fim=650
                 movx=[]
                 movy=[]
                 
@@ -455,20 +469,41 @@ while True:
                 fim=490
                 
                 for x in range(inicio,fim,10):
-                    movx.append(733)
+                    movx.append(650)
                     movy.append(x)
-                    
+
+                movx.append(650)
+                movy.append(490)
+                
                 personagens.jorjao1['movx']=movx
                 personagens.jorjao1['movy']=movy
                 personagens.jorjao1['posicao']='direita'
                 personagens.jorjao1['movendo']=True
             else:
-                personagens.jorjao1['ret'].bottomright=(personagens.jorjao1['movx'][0],personagens.jorjao1['movy'][0])
+                personagens.jorjao1['ret'].bottomleft=(personagens.jorjao1['movx'][0],personagens.jorjao1['movy'][0])
+                if(len(personagens.jorjao1['movy'])>=2):
+                    if(personagens.jorjao1['movy'][0]==personagens.jorjao1['movy'][1]):
+                        if (contador%5==0):
+                            if (contador%10==0):
+                                personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaod1.png')
+                            else:
+                                personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaod2.png')
+                    else:
+                        if (contador%5==0):
+                            if (contador%10==0):
+                                personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaoesc1.png')
+                            else:
+                                personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaoesc2.png')
+                else:
+                    personagens.jorjao1['imagem']=pygame.image.load('imagens/jorjaoe.png')
+                            
                 personagens.jorjao1['movx'].pop(0)
                 personagens.jorjao1['movy'].pop(0)
                 if(len(personagens.jorjao1['movx'])==0):
                     personagens.jorjao1['movendo']=False
                     personagens.jorjao1['descendo']=False
+                    
+
 
     if(personagens.jorjao2['vivo']==True):
         if (personagens.jorjao2['movendo']==False):
@@ -498,11 +533,27 @@ while True:
         elif (personagens.jorjao2['movendo']==True):
             if (personagens.jorjao2['posicao']=='esquerda'):
                 personagens.jorjao2['ret'].left=personagens.jorjao2['mov'][0]
+                if (contador%5==0):
+                    if (contador%10==0):
+                        personagens.jorjao2['imagem']=pygame.image.load('imagens/jorjaoe1.png')
+                    else:
+                        personagens.jorjao2['imagem']=pygame.image.load('imagens/jorjaoe2.png')
+
             else:
                 personagens.jorjao2['ret'].right=personagens.jorjao2['mov'][0]
+                if (contador%5==0):
+                    if (contador%10==0):
+                        personagens.jorjao2['imagem']=pygame.image.load('imagens/jorjaod1.png')
+                    else:
+                        personagens.jorjao2['imagem']=pygame.image.load('imagens/jorjaod2.png')
+
             personagens.jorjao2['mov'].pop(0)
             if(len(personagens.jorjao2['mov'])==0):
                 personagens.jorjao2['movendo']=False
+                if (personagens.jorjao2['posicao']=='esquerda'):
+                    personagens.jorjao2['imagem']=pygame.image.load('imagens/jorjaoe.png')
+                else:
+                    personagens.jorjao2['imagem']=pygame.image.load('imagens/jorjaod.png')
 
     if(personagens.paulao['vivo']==True):
         if (objeto.lixo['queimando']==True):
@@ -517,34 +568,41 @@ while True:
                 else:
                     personagens.paulao['ret'].left=personagens.paulao['mov'][0]
                     personagens.paulao['mov'].pop(0)
+                    if (contador%5==0):
+                        if(contador%10==0):
+                            personagens.paulao['imagem']=pygame.image.load('imagens/paulaoa1.png')
+                        else:
+                            personagens.paulao['imagem']=pygame.image.load('imagens/paulaoa2.png')
                     if(len(personagens.paulao['mov'])==0):
                         personagens.paulao['movendo']=False
                         personagens.paulao['assistindo']=True
+                        personagens.paulao['imagem']=pygame.image.load('imagens/paulao.png')
                         
     if(personagens.pedrao1['vivo']==True):
         if (personagens.pedrao1['atirando']==False):
             if(personagens.pedrao1['ret'].colliderect(personagens.jogador['ret']) and estado['agacha']==False):
                 personagens.pedrao1['atirando']=True
                 if (personagens.jogador['ret'].left-100<personagens.pedrao1['ret'].left):
-                    
-                    inicio=personagens.pedrao1['ret'].left+75
+                    personagens.pedrao1['imagem']=pygame.image.load('imagens/pedraoe.png')
+                    inicio=personagens.pedrao1['ret'].left+40
                     fim=inicio-300
                     pos=[]
                     for x in range(inicio,fim,-20):
                         pos.append(x)
                     img=pygame.image.load('imagens/tiro_inimigo.png')
                     ret=img.get_rect()
-                    ret.top=personagens.pedrao1['ret'].top
+                    ret.top=personagens.pedrao1['ret'].top+70
                     personagens.pedrao1['tiro']={'img':img,'ret':ret,'x':pos}
                 else:
-                    inicio=personagens.pedrao1['ret'].right-75
+                    personagens.pedrao1['imagem']=pygame.image.load('imagens/pedraod.png')
+                    inicio=personagens.pedrao1['ret'].right-40
                     fim=inicio+300
                     pos=[]
                     for x in range(inicio,fim,20):
                         pos.append(x)
                     img=pygame.image.load('imagens/tiro_inimigo.png')
                     ret=img.get_rect()
-                    ret.top=personagens.pedrao1['ret'].top
+                    ret.top=personagens.pedrao1['ret'].top+70
                     personagens.pedrao1['tiro']={'img':img,'ret':ret,'x':pos}
                     
     if(personagens.pedrao1['atirando']==True):
@@ -570,25 +628,26 @@ while True:
             if(personagens.pedrao2['ret'].colliderect(personagens.jogador['ret']) and estado['agacha']==False):
                 personagens.pedrao2['atirando']=True
                 if (personagens.jogador['ret'].left-100<personagens.pedrao2['ret'].left):
-                    
-                    inicio=personagens.pedrao2['ret'].left+75
+                    personagens.pedrao2['imagem']=pygame.image.load('imagens/pedraoe.png')
+                    inicio=personagens.pedrao2['ret'].left+40
                     fim=inicio-300
                     pos=[]
                     for x in range(inicio,fim,-10):
                         pos.append(x)
                     img=pygame.image.load('imagens/tiro_inimigo.png')
                     ret=img.get_rect()
-                    ret.top=personagens.pedrao2['ret'].top
+                    ret.top=personagens.pedrao2['ret'].top+70
                     personagens.pedrao2['tiro']={'img':img,'ret':ret,'x':pos}
                 else:
-                    inicio=personagens.pedrao2['ret'].right-75
+                    personagens.pedrao2['imagem']=pygame.image.load('imagens/pedraod.png')
+                    inicio=personagens.pedrao2['ret'].right-40
                     fim=inicio+300
                     pos=[]
                     for x in range(inicio,fim,10):
                         pos.append(x)
                     img=pygame.image.load('imagens/tiro_inimigo.png')
                     ret=img.get_rect()
-                    ret.top=personagens.pedrao2['ret'].top
+                    ret.top=personagens.pedrao2['ret'].top+70
                     personagens.pedrao2['tiro']={'img':img,'ret':ret,'x':pos}
                     
     if (personagens.pedrao2['atirando']==True):
@@ -743,8 +802,6 @@ while True:
                         personagens.jogador['imagem']=pygame.image.load('imagens/jec2.png')
             else:
                 personagens.jogador['imagem']=pygame.image.load('imagens/je.png')
-                 
-        screen.blit(personagens.jogador['imagem'],personagens.jogador['ret'])
     else:
         if(estado['lado']=='direita'):
             if(estado['direita']==True):
@@ -764,8 +821,10 @@ while True:
                         personagens.jogador['imagem']=pygame.image.load('imagens/jea2.png')
             else:
                 personagens.jogador['imagem']=pygame.image.load('imagens/jea1.png')
-                    
-        screen.blit(personagens.jogador['imagem'],personagens.jogador['ret'])
+
+    #Se estamos subindo ou descendo as escadas
+                     
+    screen.blit(personagens.jogador['imagem'],personagens.jogador['ret'])
 
     #O Jorjão1
     if (personagens.jorjao1['vivo']==True):
