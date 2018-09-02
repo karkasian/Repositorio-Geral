@@ -1,4 +1,4 @@
-﻿# GDD
+# GDD
 
 A estrutura desse GDD é feita baseado no [GDD Maker](http://www.gddmaker.com/), e o jogo por sua vez, foi feito para uma [game jam](https://itch.io/jam/gmtk-2018) de 48h.
 
@@ -23,7 +23,7 @@ Jogadores casuais, e principalmente, participantes da Game Jam em questão.
 **Resumo do fluxo**: A princípio, o jogo todo vai ter somente uma tela, um único ambiente. Quando você morre, esta tela e todos os elementos do jogo são simplesmente reiniciados.
 
 **Aparência e clima**:
-O visual todo do jogo é construído em cima de uma mistura de visual pixelado como terraria e Metal Slug.
+O visual todo do jogo é construído em cima <s>de uma mistura de visual pixelado como terraria e Metal Slug</s> do que pode ser encontrado livremente na internet.
 
 ## Gameplay
 
@@ -46,7 +46,7 @@ O visual todo do jogo é construído em cima de uma mistura de visual pixelado c
 
 **Objetos**: Os únicos objetos que o jogador pode pegar são as armas, e elas são coletadas apenas passando por elas. Temos 3 armas:
   1. Revólver: Atira em linha reta e interage de forma mecânica. Por exemplo fazendo barulho na parede, quebrando lâmpada ou estourando um barril.
-  2. Morteiro: Lançado de forma oblíqua também interage de forma mecânica, mas devido a sua física diferente, permite que alcance alvos abaixo, ou acima da linha de visão do jogador.
+  2. <s>Morteiro</s>Granada: Lançado de forma oblíqua também interage de forma mecânica, mas devido a sua física diferente, permite que alcance alvos abaixo, ou acima da linha de visão do jogador.
   3. Taser: Uma arma de choque, diferente das anteriores, interage de maneira elétrica, por exemplo, dando curto-circuito em dispositivos elétricos.
 
 **Ações**: Toda a ação e a interação entre o jogador e qualquer outro componente no cenário é feito através das armas.
@@ -88,8 +88,8 @@ Então, nosso herói morto volta como um fantasma, e com a compreensão de que p
   Temos 4 personagens diferentes, 3 inimigos e nosso jogador principal.
   1. Rogérinho: Jogador principal, sua história é a própria história principal do jogo, não precisa ser discutido. Suas habilidades são aquelas fornecidas pelas armas que podem ser pegadas pelo mapa, discutidas na sessão dos objetos.
   2. Soldado Jorjões: Soldados de baixa patente, sem nenhuma habilidade especial, apenas se movem para qualquer local diferente quando o jogador passa por ele porque sentem calafrios.
-  3. Soldados Pedrões: Soldados de patente mais alta, possuem uma arma especial em que a arma é capaz de atingir os fantasmas, e o tiro percorre 300px.
-  4. Soldado Paulão: Um soldado inensível ao Rogérinho, não ataca nem foge, mas com um gosto peculiar para fogo.
+  3. Soldados Pedrões: Soldados de patente mais alta, possuem uma arma <s>especial em que a arma é capaz de atingir os fantasmas, e o tiro percorre 300px</s> e não tem medo de usar.
+  4. Soldado Paulão: Um soldado insensível ao Rogérinho, não ataca nem foge, mas com um gosto peculiar para fogo.
 
 ## Fases
 
@@ -97,7 +97,7 @@ Então, nosso herói morto volta como um fantasma, e com a compreensão de que p
 
 Aqui o jogador deve eliminar os dois soldados Jorjões que estão um em cada andar. Na sub-área 1.i contém um revolver. Na área 1.ii temos um barril que pode ser explodido pelo revolver, e um avião preso no teto por cordas (incrível isso) que podem ser partidas por um tiro. A ideia é que o jogador utilize o barril para explodir o soldado na sub-área 1.ii, então isto faz o soldado da área 1.i descer e então pode ser eliminado derrubando o avião.
 
-Após isto, é liberada as portas para área 2 e a sub-área 3.i. a sub área 3.ii esta fechada por uma porta eletrônica. Em cada sub-área 3 temos um Pedrão, e o Paulão está na 2. Na 3.i também tempos o morteiro. Na 2 temos uma plataforma com bastante lixo que pode pegar fogo com o morteiro e um barril que pode ser explodido em baixo. A ideia é pegar o morteiro e atirar no lixo, que pega fogo e o Paulão se aproxima do barril, então o mesmo pode ser eliminado. Este por sua vez, sendo eliminado, libera a taser, que pode ser usada para abrir a porta eletrônica.
+Após isto, é liberada as portas para área 2 e a sub-área 3.i. a sub área 3.ii esta fechada por uma porta eletrônica. Em cada sub-área 3 temos um Pedrão, e o Paulão está na 2. Na 3.i também tempos <s>o morteiro</s> a granada. Na 2 temos uma plataforma com <s>bastante lixo que pode pegar fogo com o morteiro</s> um objeto inflamável que pode ser incendiado pela granada e um barril que pode ser explodido em baixo. A ideia é pegar <s>o morteiro</s> a granada e <s>atirar no lixo</s> acertar o objeto inflamável, que pega fogo e o Paulão se aproxima do barril, então o mesmo pode ser eliminado. Este por sua vez, sendo eliminado, libera a taser, que pode ser usada para abrir a porta eletrônica.
 
 Com a porta eletrônica aberta, então nossa ideia é fazer os Paulões atirarem entre si, já que eles podem se acertar.
 
@@ -108,7 +108,7 @@ Com a porta eletrônica aberta, então nossa ideia é fazer os Paulões atirarem
 
 ## Interface
 
-**Sistema visual**: O jogo é em plataforma, então a câmera é de lado, 2D equivalente. Na tela, além do jogo, vamos exibir apenas a quantidade de inimigos vivos e as teclas de acesso às armas.
+**Sistema visual**: O jogo é em plataforma, então a câmera é de lado, 2D equivalente. Na tela, além do jogo, vamos exibir apenas <s>a quantidade de inimigos vivos e </s>as teclas de acesso às armas.
 
 ![HUD](imagens/hud.png)
 
@@ -123,18 +123,17 @@ Como o jogo tem uma única tela, onde o jogador controla o personagem principal,
 - Esc: sai do jogo.
 - R: reinicia o jogo.
 
-**Audio**: A princípio, não se aplica.
+**Audio**: <s>A princípio, não se aplica</s> Desenvolvido pelo Alexandre.
 
 **Sistema de ajuda**: Não possui.
 
 ## Inteligência artificial
 
 **Inimigos**:
-- Os inimigos detectarão o jogador quando estiver dentro de um raio definido como 200 pixeis, de pé apenas (fantasmas agachados não dão calafrios). Disparando a ação equivalente:
-    - Jorjão: Corre para o lado oposto.
-    - Pedrão: atira na direção indicada.
-- Os inimigos permanecerão normalmente parados, com exceção do Pedrão que se manterá se movendo de forma repetitiva.
-
+- Os inimigos detectarão o jogador quando <s>estiver dentro de um raio definido como 200 pixeis, de pé apenas (fantasmas agachados não dão calafrios)</s> estiver muito próximo deles com algumas peculariedades e disparando a ação equivalente:
+    - Jorjão: Corre para o lado oposto quando você cruza dentro dele.
+    - Pedrão: Percebe com um raio maior, somente se você está de pé e então atira na direção indicada.
+- Os inimigos permanecerão <s>normalmente</s> parados.<s>, com exceção do Pedrão que se manterá se movendo de forma repetitiva.</s>
 
 **Personagens neutros**: Não possui.
 
@@ -143,9 +142,9 @@ Temos é a detecção de colisão que é baseado em sobreposição das imagens d
 - Porta eletrônica e taser.
 - Tiro dos Pedrões e os pedrões.
 - Revolver e avião ou barril.
-- Morteiro e lixo.
+- <s>Morteiro e lixo</s> Granada e objeto inflamável.
 No momento da explosão do primeiro barril, o Jorjão apenas de desloca até a escada e desce pro próximo andar.
-E no momento da explosão do lixo, o Paulão se dirige até um ponto fixo perto da plataforma.
+E no momento que o objeto inflamável pega fogo <s>da explosão do lixo</s>, o Paulão se dirige até um ponto fixo perto da plataforma.
 
 ## Aspectos Técnicos
 
@@ -168,3 +167,15 @@ E no momento da explosão do lixo, o Paulão se dirige até um ponto fixo perto 
 - https://creativemarket.com/hassekf/234122-Flame-Game-FX-Animation
 - https://kenney.nl/assets/weapon-pack
 - https://www.gameart2d.com/the-soldiers---game-sprites.html
+
+# Extras:
+
+Sobre o jogo:
+
+- Colocar uma tela de vitória.
+- Colocar uma tela inicial contando a história.
+- Bugs:
+  - As granadas atravessam algumas paredes e outras não.
+ 
+Sobre o GDD:
+- Itens riscados foram removidos entre o produto final e estipulado no início.
