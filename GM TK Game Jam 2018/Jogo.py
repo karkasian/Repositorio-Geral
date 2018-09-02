@@ -42,6 +42,7 @@ class personagens:
     jogador={'imagem':pygame.image.load('imagens/jogador.png'),'agacha':pygame.image.load('imagens/agacha.png'),'ret':''}
     jorjao1={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'movx':'','movy':'','descendo':False}
     jorjao2={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'mov':''}
+    paulao={'imagem':pygame.image.load('imagens/paulao.png'),'ret':'','movendo':False,'vivo':True,'mov':'','assistindo':False}
 
 class objeto:
     escada={'imagem':pygame.image.load('imagens/escada.png'),'ret':''}
@@ -114,6 +115,13 @@ while True:
         personagens.jorjao2['ret'].bottomleft=(660,490)
         personagens.jorjao2['mov']=''
 
+        personagens.paulao['movendo']=False
+        personagens.paulao['vivo']=True
+        personagens.paulao['assistindo']=False
+        personagens.paulao['mov']=''
+        personagens.paulao['ret']= personagens.paulao['imagem'].get_rect()
+        personagens.paulao['ret'].bottomright=(355,485)
+
         objeto.escada['ret']=objeto.escada['imagem'].get_rect()
         objeto.escada['ret'].topleft=(674,170)
         objeto.armas['arma1']['ret']=objeto.armas['arma1']['imagem'].get_rect()
@@ -121,8 +129,7 @@ while True:
         objeto.armas['arma2']['ret']=objeto.armas['arma2']['imagem'].get_rect()
         objeto.armas['arma2']['ret'].topleft=(840,460)
         objeto.armas['arma3']['ret']=objeto.armas['arma3']['imagem'].get_rect()
-        
-        objeto.armas['arma3']['ret'].topleft=(200,450)
+        objeto.armas['arma3']['ret'].right=0
 
         objeto.barris['interior']['vivo']=True
         objeto.barris['interior']['ret']=objeto.barris['interior']['imagem'].get_rect()
@@ -268,6 +275,11 @@ while True:
                 elif (projeteis[n]['ret'].colliderect(objeto.barris['exterior']['ret']) and objeto.barris['exterior']['vivo']==True):
                      objeto.barris['exterior']['vivo']=False
                      elim.append(projeteis[n])
+                     if (objeto.barris['exterior']['ret'].colliderect(personagens.paulao['ret'])):
+                        personagens.paulao['vivo']=False
+                        objeto.armas['arma3']['ret']=objeto.armas['arma3']['imagem'].get_rect()
+                        objeto.armas['arma3']['ret'].bottomleft=personagens.paulao['ret'].bottomleft
+
                 #Se derrubou o avião
                 elif (projeteis[n]['ret'].colliderect(objeto.aviao['ret']) and objeto.aviao['caindo']==False):
                      objeto.aviao['caindo']=True
@@ -354,7 +366,6 @@ while True:
                     personagens.jorjao1['movendo']=False
         else:           
             if (personagens.jorjao1['movendo']==False):
-             #   print('!')
                 inicio=personagens.jorjao1['ret'].right
                 fim=733
                 movx=[]
@@ -376,7 +387,6 @@ while True:
                 personagens.jorjao1['posicao']='direita'
                 personagens.jorjao1['movendo']=True
             else:
-                print('!')
                 personagens.jorjao1['ret'].bottomright=(personagens.jorjao1['movx'][0],personagens.jorjao1['movy'][0])
                 personagens.jorjao1['movx'].pop(0)
                 personagens.jorjao1['movy'].pop(0)
@@ -384,7 +394,6 @@ while True:
                     personagens.jorjao1['movendo']=False
                     personagens.jorjao1['descendo']=False
 
-    #DETECÇÃO DE COLISÂO COM INIMIGOS
     if(personagens.jorjao2['vivo']==True):
         if (personagens.jorjao2['movendo']==False):
             if(personagens.jorjao2['ret'].colliderect(personagens.jogador['ret'])):
@@ -419,11 +428,23 @@ while True:
             if(len(personagens.jorjao2['mov'])==0):
                 personagens.jorjao2['movendo']=False
 
+    if(personagens.paulao['vivo']==True):
+        if (objeto.lixo['queimando']==True):
+            if (personagens.paulao['assistindo']==False):
+                if(personagens.paulao['movendo']==False):
+                    inicio=personagens.paulao['ret'].left
+                    fim=170
+                    for x in range(inicio,fim,-10):
+                        pos.append(x)
+                    personagens.paulao['mov']=pos
+                    personagens.paulao['movendo']=True
+                else:
+                    personagens.paulao['ret'].left=personagens.paulao['mov'][0]
+                    personagens.paulao['mov'].pop(0)
+                    if(len(personagens.paulao['mov'])==0):
+                        personagens.paulao['movendo']=False
+                        personagens.paulao['assistindo']=True
 
-    #Movimentação de fato
-        
-        
-#projeteis.pop(0)
     #TIRO-----------------------------------------------------------------------------------------
     if (estado['atirando']==True):
         if (estado['equipado']==1):
@@ -551,6 +572,10 @@ while True:
     #O Jorjão2
     if (personagens.jorjao2['vivo']==True):
         screen.blit(personagens.jorjao2['imagem'],personagens.jorjao2['ret'])
+
+    #O Paulão
+    if (personagens.paulao['vivo']==True):
+        screen.blit(personagens.paulao['imagem'],personagens.paulao['ret'])
 
     #Printar os projeteis
     if (len(projeteis)>0):
