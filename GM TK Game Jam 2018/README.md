@@ -159,11 +159,12 @@ E no momento da explosão do lixo, o Paulão se dirige até um ponto fixo perto 
 
 ## Game Art
 
-**Estilo de arte**: Própria (feia, muito feia).
-https://chrislenz.itch.io/platformer-pack
-https://zzverot.itch.io/4-color-generic
-https://opengameart.org/content/opp2017-village-and-room
-https://minichimera.wordpress.com/2016/05/18/learning-to-draw-2/comment-page-1/
-https://creativemarket.com/hassekf/234122-Flame-Game-FX-Animation
-https://kenney.nl/assets/weapon-pack
-https://piclet.itch.io/char-fireman/download/eyJleHBpcmVzIjoxNTM1ODc0ODQ1LCJpZCI6Mjk3OTc2fQ%3d%3d.2eYJLNk75Hz4pxVb4D4x5rR9dig%3d
+**Estilo de arte**: Vários game assets distribuídos na internet:
+
+- https://chrislenz.itch.io/platformer-pack
+- https://zzverot.itch.io/4-color-generic
+- https://opengameart.org/content/opp2017-village-and-room
+- https://minichimera.wordpress.com/2016/05/18/learning-to-draw-2/comment-page-1/
+- https://creativemarket.com/hassekf/234122-Flame-Game-FX-Animation
+- https://kenney.nl/assets/weapon-pack
+- https://www.gameart2d.com/the-soldiers---game-sprites.html

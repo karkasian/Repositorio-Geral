@@ -39,7 +39,7 @@ class solidos:
         }
 
 class personagens:
-    jogador={'imagem':pygame.image.load('imagens/jd.png'),'agacha':pygame.image.load('imagens/agacha.png'),'ret':''}
+    jogador={'imagem':pygame.image.load('imagens/jd.png'),'ret':''}
     jorjao1={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'movx':'','movy':'','descendo':False}
     jorjao2={'imagem':pygame.image.load('imagens/jorjao.png'),'ret':'','posicao':'esquerda','movendo':False,'vivo':True,'mov':''}
     paulao={'imagem':pygame.image.load('imagens/paulao.png'),'ret':'','movendo':False,'vivo':True,'mov':'','assistindo':False}
