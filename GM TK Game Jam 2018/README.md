@@ -173,7 +173,7 @@ E no momento <s>da explosão do lixo</s> que o objeto inflamável pega fogo, o P
 
 Sobre o jogo:
 
-- O resultado final (em .exe convertido pelo cx_Freeze está no [itch.io](https://sapo-itchio.itch.io/fantasminha-caarmado)).
+- O resultado final (em .exe convertido pelo cx_Freeze) está no [itch.io](https://sapo-itchio.itch.io/fantasminha-caarmado).
 - Colocar uma tela de vitória.
 - Colocar uma tela inicial contando a história.
 - Bugs:
