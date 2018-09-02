@@ -101,7 +101,7 @@ while True:
         solidos.fixos['parede3']['ret']=solidos.fixos['parede3']['imagem'].get_rect()
         solidos.fixos['parede3']['ret'].bottomleft=(1171,533)
         solidos.fixos['andar']['ret']=solidos.fixos['andar']['imagem'].get_rect()
-        solidos.fixos['andar']['ret'].topright=(673,165)
+        solidos.fixos['andar']['ret'].topright=(670,165)
 
         personagens.jogador['ret']=personagens.jogador['imagem'].get_rect()
         personagens.jogador['ret'].bottomleft=(600,160)
@@ -698,12 +698,13 @@ while True:
                     posx.append(x)
                 #EiXO Y
                 inicial=personagens.jogador['ret'].top
-                meio=inicial-150
+   #             meio=inicial-150
                 posy=[]
-                for x in range(inicial,meio,-3):
-                    posy.append(x)
-                for x in range(meio,inicial,3):
-                    posy.append(x)
+                for x in range(0,100,1):
+                    soma=-1*x*x
+                    posy.append(inicio+soma)
+  #             for x in range(m,inicial,3):
+  #                  posy.append(x)
                 tiro={'arma':'arma2','x':posx,'y':posy,'img':pygame.image.load('imagens/tiro_morteiro.png'),'ret':''}
                 projeteis.append(tiro)
                 estado['atirando']=False
@@ -783,46 +784,61 @@ while True:
 
 
     #Desenhar o jogador
-    if (estado['agacha']==False):
-        if(estado['lado']=='direita'):
-            if(estado['direita']==True):
-                if(contador%5==0):
-                    if(contador%10==0):
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jdc1.png')
-                    else:
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jdc2.png')
-            else:
-                personagens.jogador['imagem']=pygame.image.load('imagens/jd.png')
+        #Mas se estamos nas escadas
+    if (personagens.jogador['ret'].colliderect(objeto.escada['ret'])):
+        if (estado['esquerda']==True or estado['direita']==True or estado['agacha']==True or estado['sobe']==True):
+            if(contador%5==0):
+                if(contador%10==0):
+                    personagens.jogador['imagem']=pygame.image.load('imagens/jesc1.png')
+                else:
+                    personagens.jogador['imagem']=pygame.image.load('imagens/jesc2.png')
         else:
-            if(estado['esquerda']==True):
-                if(contador%5==0):
-                    if(contador%10==0):
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jec1.png')
-                    else:
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jec2.png')
+            if (estado['lado']=='direita'):
+                personagens.jogador['imagem']=pygame.image.load('imagens/jd.png')
             else:
                 personagens.jogador['imagem']=pygame.image.load('imagens/je.png')
-    else:
-        if(estado['lado']=='direita'):
-            if(estado['direita']==True):
-                if(contador%5==0):
-                    if(contador%10==0):
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jda1.png')
-                    else:
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jda2.png')
-            else:
-                personagens.jogador['imagem']=pygame.image.load('imagens/jda1.png')
-        else:
-            if(estado['esquerda']==True):
-                if(contador%5==0):
-                    if(contador%10==0):
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jea1.png')
-                    else:
-                        personagens.jogador['imagem']=pygame.image.load('imagens/jea2.png')
-            else:
-                personagens.jogador['imagem']=pygame.image.load('imagens/jea1.png')
 
-    #Se estamos subindo ou descendo as escadas
+    else:
+        if (estado['agacha']==False):
+            if(estado['lado']=='direita'):
+                if(estado['direita']==True):
+                    if(contador%5==0):
+                        if(contador%10==0):
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jdc1.png')
+                        else:
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jdc2.png')
+                else:
+                    personagens.jogador['imagem']=pygame.image.load('imagens/jd.png')
+            else:
+                if(estado['esquerda']==True):
+                    if(contador%5==0):
+                        if(contador%10==0):
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jec1.png')
+                        else:
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jec2.png')
+                else:
+                    personagens.jogador['imagem']=pygame.image.load('imagens/je.png')
+        else:
+            if(estado['lado']=='direita'):
+                if(estado['direita']==True):
+                    if(contador%5==0):
+                        if(contador%10==0):
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jda1.png')
+                        else:
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jda2.png')
+                else:
+                    personagens.jogador['imagem']=pygame.image.load('imagens/jda1.png')
+            else:
+                if(estado['esquerda']==True):
+                    if(contador%5==0):
+                        if(contador%10==0):
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jea1.png')
+                        else:
+                            personagens.jogador['imagem']=pygame.image.load('imagens/jea2.png')
+                else:
+                    personagens.jogador['imagem']=pygame.image.load('imagens/jea1.png')
+
+
                      
     screen.blit(personagens.jogador['imagem'],personagens.jogador['ret'])
 
